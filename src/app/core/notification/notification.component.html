@@ -1,0 +1,30 @@
+<div class="notifications">
+  <div *ngFor="let notification of notifications"
+       class="bg-white notification flex justify-between shadow-lg mb-3 gap-2 p-2 mr-3">
+    <ng-container *ngTemplateOutlet="notificationTpl; context:{notification: notification}"></ng-container>
+  </div>
+</div>
+
+<ng-template #notificationTpl let-notification="notification">
+  <div class="flex flex-col justify-center">
+    <div [ngClass]="setClassName(notification)" class="line rounded-lg h-full"></div>
+  </div>
+
+  <div class="icon flex flex-col justify-center"
+       [ngClass]="setClassName(notification)">
+    <mat-icon *ngIf="setClassName(notification) === 'success'">check_circle</mat-icon>
+    <mat-icon *ngIf="setClassName(notification) !== 'success'">{{setClassName(notification)}}</mat-icon>
+  </div>
+
+  <div class="flex flex-col flex-grow justify-center">
+    <div class="title">{{notification?.title}}</div>
+    <div class="message text-gray-500">{{notification?.message}}</div>
+  </div>
+
+  <div class="flex flex-col justify-center">
+    <button mat-icon-button
+            (click)="close(notification)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</ng-template>

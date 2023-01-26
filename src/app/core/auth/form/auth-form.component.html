@@ -1,0 +1,77 @@
+<form [formGroup]="authForm" #form="ngForm" class="w-72 flex flex-col">
+  <span class="font-medium text-2xl w-full mb-5">
+    {{isRegistryFormDisplayed ? 'Rejestracja' : 'Logowanie'}}
+  </span>
+
+  <mat-form-field *ngIf="isRegistryFormDisplayed"
+                  appearance="outline"
+                  class="w-full">
+    <mat-label>Nazwa użytkownika</mat-label>
+    <input matInput
+           formControlName="name"
+           autocomplete="name"
+           placeholder="np. John Doe"/>
+    <mat-error *ngIf="form.submitted && authForm?.controls?.['name']?.invalid">
+      {{getErrorMessage(authForm?.controls?.['name']?.errors)}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline"
+                  class="w-full">
+    <mat-label>E-mail</mat-label>
+    <input matInput
+           formControlName="email"
+           autocomplete="email"
+           placeholder="np. johndoe@example.com"/>
+    <mat-error *ngIf="form.submitted && authForm?.controls?.['email']?.invalid">
+      {{getErrorMessage(authForm?.controls?.['email']?.errors)}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline"
+                  class="w-full">
+    <mat-label>Hasło</mat-label>
+    <input matInput
+           formControlName="password"
+           autocomplete="current-password"
+           [type]="showPassword ? 'text' : 'password'"/>
+    <mat-icon (click)="$event.stopPropagation(); showPassword = !showPassword"
+              matSuffix class="cursor-pointer">
+      {{showPassword ? 'visibility_off' : 'visibility'}}
+    </mat-icon>
+    <mat-error *ngIf="form.submitted && authForm?.controls?.['password']?.invalid">
+      {{getErrorMessage(authForm?.controls?.['password'].errors)}}
+    </mat-error>
+  </mat-form-field>
+
+  <button (click)="submit()"
+          [disabled]="isRequestPending"
+          mat-raised-button color="primary"
+          class="w-full py-7 mb-2">
+      <span class="text-base" *ngIf="!isRequestPending">
+        {{isRegistryFormDisplayed ? 'Zarejestruj' : 'Zaloguj'}}
+      </span>
+    <mat-spinner [diameter]="20" *ngIf="isRequestPending"></mat-spinner>
+  </button>
+
+  <div class="flex justify-center" *ngIf="!isRegistryFormDisplayed">
+    <span class="text-gray-400">Nie pamiętasz hasła?</span>
+  </div>
+
+  <div class="flex justify-center mb-2 mt-4">
+    <span class="text-base">
+      {{isRegistryFormDisplayed ? 'Posiadasz już konto?' : 'Nie posiadasz jeszcze konta?'}}
+    </span>
+  </div>
+
+  <button (click)="changeFormType()"
+          [disabled]="isRequestPending"
+          type="button"
+          mat-raised-button color="accent"
+          class="w-full py-7">
+      <span class="text-base" *ngIf="!isRequestPending">
+        {{isRegistryFormDisplayed ? 'Przejdź do logowania' : 'Utwórz nowe konto'}}
+      </span>
+    <mat-spinner [diameter]="20" *ngIf="isRequestPending"></mat-spinner>
+  </button>
+</form>
