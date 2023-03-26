@@ -7,6 +7,11 @@ const routes: Routes = [
     path: '',
     canActivate: [AuthGuard],
     loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule)
+  },
+  {
+    path: 'events',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./events/events.module').then(m => m.EventsModule)
   }
 ];
 

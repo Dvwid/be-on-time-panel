@@ -12,7 +12,7 @@ import {MaterialModule} from "../core/material/material.module";
     MaterialModule
   ],
   declarations: [
-    HomepageComponent
+    HomepageComponent,
   ],
   exports: [
     MaterialModule

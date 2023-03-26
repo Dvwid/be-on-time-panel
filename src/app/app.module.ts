@@ -5,6 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CoreModule} from "./core/core.module";
+import {MenuElementComponent} from "./core/menu-element/menu-element.component";
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import {CoreModule} from "./core/core.module";
     CoreModule
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    MenuElementComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
