@@ -1,0 +1,20 @@
+<div class="flex py-20 px-10 min-h-screen">
+  <div class="flex flex-col gap-4">
+    <div>
+      <h1>Dzisiaj</h1>
+      <app-event-list [events]="todayEvents"></app-event-list>
+    </div>
+
+    <div>
+      <h1>Jutro</h1>
+      <app-event-list [events]="[]"></app-event-list>
+    </div>
+
+    <div>
+      <h1>Pozostałe wydarzenia</h1>
+      <app-event-list [events]="[]"></app-event-list>
+    </div>
+  </div>
+</div>
+
+

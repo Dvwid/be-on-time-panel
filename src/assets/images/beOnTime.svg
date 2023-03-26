@@ -1,0 +1,11 @@
+<svg id="Component_1_1" data-name="Component 1 – 1" xmlns="http://www.w3.org/2000/svg" width="1169" height="259.5" viewBox="0 0 1169 259.5">
+  <g id="Path_1" data-name="Path 1" transform="translate(0 23.5)" fill="none">
+    <path d="M65,0H165a65,65,0,0,1,65,65v89a65,65,0,0,1-65,65H65A65,65,0,0,1,0,154V65A65,65,0,0,1,65,0Z" stroke="none"/>
+    <path d="M 65 18 C 39.0841064453125 18 18 39.0841064453125 18 65 L 18 154 C 18 179.9158935546875 39.0841064453125 201 65 201 L 165 201 C 190.9158935546875 201 212 179.9158935546875 212 154 L 212 65 C 212 39.0841064453125 190.9158935546875 18 165 18 L 65 18 M 65 0 L 165 0 C 200.8984985351563 0 230 29.10150146484375 230 65 L 230 154 C 230 189.8984985351563 200.8984985351563 219 165 219 L 65 219 C 29.10150146484375 219 0 189.8984985351563 0 154 L 0 65 C 0 29.10150146484375 29.10150146484375 0 65 0 Z" stroke="none" fill="#fff"/>
+  </g>
+  <text id="beOnTime" transform="translate(278 208.5)" fill="#fff" font-size="218" font-family="TwCenMT-Regular, Tw Cen MT"><tspan x="0" y="0">beOnTime</tspan></text>
+  <line id="Line_1" data-name="Line 1" y2="68" transform="translate(78.5)" fill="none" stroke="#fff" stroke-width="21"/>
+  <line id="Line_2" data-name="Line 2" y2="68" transform="translate(154.5)" fill="none" stroke="#fff" stroke-width="21"/>
+  <path id="Path_2" data-name="Path 2" d="M0,0V43.47" transform="translate(591.5 105)" fill="none" stroke="#fff" stroke-width="12"/>
+  <path id="Path_3" data-name="Path 3" d="M-.075-.026H32.017" transform="translate(585.5 145)" fill="none" stroke="#fff" stroke-width="12"/>
+</svg>
