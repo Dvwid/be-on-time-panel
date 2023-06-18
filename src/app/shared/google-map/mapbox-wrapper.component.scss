@@ -1,0 +1,18 @@
+.places-input {
+  border: 1px solid rgb(59, 130, 246);
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.map-wrapper {
+  width: 500px !important;
+  height: 500px !important;
+  border-radius: 1rem;
+}
+
+.geocoder {
+  margin: 1rem;
+}
+

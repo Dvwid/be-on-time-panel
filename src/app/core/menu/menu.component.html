@@ -1,0 +1,20 @@
+<div class="flex flex-col gap-1 justify-center flex-grow text-gray-500">
+  <span class="font-bold menu-section-label">GŁÓWNE MENU</span>
+  <app-menu-element *ngFor="let item of mainMenuItems"
+                    [label]="item.label"
+                    [icon]="item.icon"
+                    [routerLink]="item.routerLink"
+                    routerLinkActive="active-menu-item"
+                    class="rounded-lg">
+  </app-menu-element>
+
+
+  <span class="font-bold menu-section-label mt-5">PREFERENCJE</span>
+  <app-menu-element *ngFor="let item of preferencesMenuItems"
+                    [label]="item.label"
+                    [icon]="item.icon"
+                    [routerLink]="item.routerLink"
+                    routerLinkActive="active-menu-item"
+                    class="rounded-lg">
+  </app-menu-element>
+</div>

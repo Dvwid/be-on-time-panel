@@ -1,20 +1,13 @@
-<div class="flex bg-primary text-white">
-  <div class="w-72 min-h-screen flex justify-center bg-primary-light" *ngIf="!isLoginPage">
+<div class="flex">
+  <div class="w-72 min-h-screen flex justify-center shadow-lg" *ngIf="!isLoginPage">
     <div class="flex flex-col gap-2 py-10">
-      <img src="assets/images/beOnTime.svg" width="200"/>
-      <div class="mt-5">
-        <app-menu-element label="Wydarzenia" icon="star" routerLink="events"></app-menu-element>
-        <app-menu-element label="Klasy / Semestry" icon="home" routerLink="grade"></app-menu-element>
-        <app-menu-element label="Przedmioty" icon="subject"></app-menu-element>
-        <app-menu-element label="Działy" icon="layers"></app-menu-element>
-        <app-menu-element label="Baza pytań" icon="psychology_alt"></app-menu-element>
-        <app-menu-element label="Baza egzaminów" icon="quiz"></app-menu-element>
-        <app-menu-element label="Ustawienia" icon="settings"></app-menu-element>
-      </div>
+      <img src="assets/images/beOnTime.svg" width="200" />
+      <app-menu class="mt-12"></app-menu>
     </div>
   </div>
-  <div>
+  <div class="flex-grow bg-main-section">
     <router-outlet></router-outlet>
   </div>
 </div>
+
 <exam-testing-notification></exam-testing-notification>

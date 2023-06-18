@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {EventDto} from "../../core/dtos/EventDto";
 
 @Component({
   selector: 'app-event-list',
@@ -7,6 +8,6 @@ import {Component, Input} from '@angular/core';
 })
 export class EventListComponent {
 
-  @Input() events: any;
+  @Input() events: EventDto[];
 
 }

@@ -1,0 +1,12 @@
+@import 'src/assets/styles/variables';
+
+.menu-section-label {
+  font-size: .6rem;
+  letter-spacing: 1px;
+  color: #b7b7b7;
+}
+
+.active-menu-item {
+  background-color: $primary-color;
+  color: $secondary-color;
+}

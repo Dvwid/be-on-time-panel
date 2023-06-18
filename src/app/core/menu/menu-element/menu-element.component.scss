@@ -1,0 +1,7 @@
+@import 'src/assets/styles/variables';
+
+.menu-element:hover {
+  transition: .5s;
+  background-color: $primary-color;
+  color: $secondary-color;
+}
