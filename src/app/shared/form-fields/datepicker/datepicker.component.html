@@ -1,0 +1,19 @@
+<div [formGroup]="formGroup"
+     class="w-full">
+  <mat-form-field appearance="outline"
+                  class="w-full">
+    <mat-label>{{label}}</mat-label>
+
+    <input matInput
+           (focus)="picker.open()"
+           [formControlName]="formControlName"
+           [matDatepicker]="picker">
+
+    <mat-datepicker-toggle matIconSuffix
+                           [for]="picker">
+    </mat-datepicker-toggle>
+
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>
+

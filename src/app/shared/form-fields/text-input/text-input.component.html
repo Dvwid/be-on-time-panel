@@ -1,0 +1,16 @@
+<div [formGroup]="formGroup"
+     class="w-full">
+  <mat-form-field appearance="outline"
+                  class="w-full">
+    <mat-label>{{label}}</mat-label>
+
+    <input matInput
+           [formControlName]="formControlName"
+           [autocomplete]="formControlName"
+           [placeholder]="placeholder">
+
+  <!-- <mat-error *ngIf="form.submitted && authForm?.controls?.['name']?.invalid">
+    {{getErrorMessage(authForm?.controls?.['name']?.errors)}}
+  </mat-error> -->
+  </mat-form-field>
+</div>
