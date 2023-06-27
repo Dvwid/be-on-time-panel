@@ -1,13 +1,28 @@
-<div class="flex">
-  <div class="w-72 min-h-screen flex justify-center shadow-lg" *ngIf="!isLoginPage">
-    <div class="flex flex-col gap-2 py-10">
+<mat-drawer-container autosize class="min-h-screen">
+  <mat-drawer *ngIf="!isLoginPage"
+              #drawer
+              (closed)="opened = false"
+              [mode]="sidenavMode"
+              [opened]="opened">
+    <div class="flex flex-col gap-2 py-10 px-10">
       <img src="assets/images/beOnTime.svg" width="200" />
       <app-menu class="mt-12"></app-menu>
     </div>
+  </mat-drawer>
+
+  <div>
+    <div class="flex-grow bg-main-section relative">
+      <button *ngIf="isMobileView"
+              mat-mini-fab
+              color="primary"
+              class="menu-btn"
+              (click)="opened = !opened">
+        <i class="material-icons">menu</i>
+      </button>
+
+      <router-outlet></router-outlet>
+    </div>
   </div>
-  <div class="flex-grow bg-main-section">
-    <router-outlet></router-outlet>
-  </div>
-</div>
+</mat-drawer-container>
 
 <exam-testing-notification></exam-testing-notification>

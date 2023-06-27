@@ -4,6 +4,7 @@ export interface EventDto {
   dateFrom: Date,
   timeFrom: string,
   dateTo?: Date,
+  timeTo?: string;
   place: string,
   description: string,
   price: number,

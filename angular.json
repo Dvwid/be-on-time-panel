@@ -37,6 +37,10 @@
             ],
             "scripts": [
               "node_modules/mapbox-gl/dist/mapbox-gl.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "@mapbox/mapbox-gl-geocoder",
+              "mapbox-gl"
             ]
           },
           "configurations": {

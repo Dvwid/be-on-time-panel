@@ -1,18 +1,18 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
-import {fromEvent, map} from "rxjs";
+import { fromEvent, map } from "rxjs";
 
 interface GeocoderResult {
   center: [number, number];
 }
 
 @Component({
-  selector: 'app-google-map-wrapper',
-  templateUrl: 'google-map-wrapper.component.html',
-  styleUrls: ['./google-map-wrapper.component.scss']
+  selector: 'app-mapbox-wrapper',
+  templateUrl: 'mapbox-wrapper.component.html',
+  styleUrls: ['./mapbox-wrapper.component.scss']
 })
-export class GoogleMapWrapperComponent implements AfterViewInit {
+export class MapboxWrapperComponent implements AfterViewInit {
 
   @ViewChild('mapContainer') mapContainer: ElementRef;
 
