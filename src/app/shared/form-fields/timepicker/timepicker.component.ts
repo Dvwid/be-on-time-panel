@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MaterialModule } from 'src/app/core/material/material.module';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Observable, map, startWith } from 'rxjs';
+import {Component, Input, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {MaterialModule} from 'src/app/core/material/material.module';
+import {FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {map, Observable, startWith} from 'rxjs';
 
 @Component({
   selector: 'app-timepicker',
@@ -15,10 +15,11 @@ import { Observable, map, startWith } from 'rxjs';
   templateUrl: './timepicker.component.html',
   styleUrls: ['./timepicker.component.scss']
 })
-export class TimepickerComponent {
+export class TimepickerComponent implements OnInit {
 
-  hourControl = new FormControl('');
-  minuteControl = new FormControl('');
+  @Input() hourControlName: string;
+  @Input() minutesControlName: string;
+  @Input() formGroup: FormGroup;
 
   hourOptions: string[] = [];
   minuteOptions: string[] = [];
@@ -32,15 +33,21 @@ export class TimepickerComponent {
   }
 
   private listenOnFilterChange() {
-    this.hourFilteredOptions = this.hourControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(this.hourOptions, value || '')),
-    );
+    this.hourFilteredOptions = this.formGroup
+      .controls[this.hourControlName]
+      .valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(this.hourOptions, value || '')),
+      );
 
-    this.minuteFilteredOptions = this.minuteControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(this.minuteOptions, value || '')),
-    );
+    this.minuteFilteredOptions = this.formGroup
+      .controls[this.minutesControlName]
+      .valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(this.minuteOptions, value || '')),
+      );
   }
 
   private setOptions() {

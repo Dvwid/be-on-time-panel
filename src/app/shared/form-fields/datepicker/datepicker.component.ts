@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MaterialModule } from 'src/app/core/material/material.module';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatNativeDateModule } from '@angular/material/core';
+import {Component, Input} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {MaterialModule} from 'src/app/core/material/material.module';
+import {FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {MatNativeDateModule} from '@angular/material/core';
 
 @Component({
   selector: 'app-datepicker',
@@ -18,7 +18,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 })
 export class DatepickerComponent {
 
-  @Input() formControlName: string;
+  @Input() controlName: string;
   @Input() formGroup: FormGroup;
   @Input() label: string;
   @Input() placeholder: string;

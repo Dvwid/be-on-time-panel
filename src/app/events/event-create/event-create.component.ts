@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import {Component} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-event-create',
@@ -9,7 +9,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class EventCreateComponent {
 
   eventForm = new FormGroup({
-    name: new FormControl<string>(''),
+    name: new FormControl<string | null>(null),
     dateFrom: new FormControl<Date>(new Date()),
     hourFrom: new FormControl<string | null>(null),
     minuteFrom: new FormControl<string | null>(null),
@@ -20,4 +20,5 @@ export class EventCreateComponent {
     description: new FormControl<string | null>(null),
     price: new FormControl<number | null>(null),
   });
+
 }

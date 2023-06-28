@@ -16,9 +16,10 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class TextInputComponent {
 
-  @Input() formControlName: string;
+  @Input() controlName: string;
+  @Input() formGroup: FormGroup;
   @Input() label: string;
   @Input() placeholder: string;
-  @Input() formGroup: FormGroup;
+  @Input() required: boolean;
 
 }

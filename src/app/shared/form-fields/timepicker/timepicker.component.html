@@ -1,7 +1,9 @@
-<div class="flex gap-2 w-full">
+<div class="flex gap-2 w-full"
+     [formGroup]="formGroup">
   <mat-form-field appearance="outline" class="flex-grow">
     <mat-label class="flex items-center gap-2">
-      <mat-icon>schedule</mat-icon> HH
+      <mat-icon>schedule</mat-icon>
+      HH
     </mat-label>
 
     <input type="text"
@@ -9,7 +11,7 @@
            name="hour"
            class="text-center"
            matInput
-           [formControl]="hourControl"
+           [formControlName]="hourControlName"
            [matAutocomplete]="hourAuto">
     <mat-autocomplete autoActiveFirstOption #hourAuto="matAutocomplete">
       <mat-option *ngFor="let option of hourFilteredOptions | async"
@@ -24,7 +26,8 @@
 
   <mat-form-field appearance="outline" class="flex-grow">
     <mat-label class="flex items-center gap-2">
-      <mat-icon>schedule</mat-icon> MM
+      <mat-icon>schedule</mat-icon>
+      MM
     </mat-label>
 
     <input type="text"
@@ -32,7 +35,7 @@
            name="minutes"
            class="text-center"
            matInput
-           [formControl]="minuteControl"
+           [formControlName]="minutesControlName"
            [matAutocomplete]="minuteAuto">
     <mat-autocomplete autoActiveFirstOption #minuteAuto="matAutocomplete">
       <mat-option *ngFor="let option of minuteFilteredOptions | async"

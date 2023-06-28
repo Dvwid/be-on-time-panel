@@ -1,34 +1,43 @@
 <div class="flex flex-col py-20 px-10 min-h-screen">
   <h1>Tworzenie nowego wydarzenia</h1>
 
-  <form formGroupName="eventForm"
+  <form [formGroup]="eventForm"
         class="w-12/12 xl:w-6/12">
-    <app-text-input formControlName="name"
+    <app-text-input controlName="name"
                     [formGroup]="eventForm"
+                    [required]="true"
                     label="Nazwa wydarzenia">
     </app-text-input>
 
-    <app-textarea formControlName="description"
+    <app-textarea controlName="description"
                   [formGroup]="eventForm"
                   label="Opis wydarzenia">
     </app-textarea>
 
     <div class="flex flex-col sm:flex-row sm:gap-3 w-full">
-      <app-datepicker formControlName="dateFrom"
+      <app-datepicker controlName="dateFrom"
                       [formGroup]="eventForm"
                       class="w-full sm:w-8/12"
                       label="Data rozpoczęcia">
       </app-datepicker>
-      <app-timepicker class="w-full sm:w-4/12"></app-timepicker>
+      <app-timepicker class="w-full sm:w-4/12"
+                      hourControlName="hourFrom"
+                      minutesControlName="minuteFrom"
+                      [formGroup]="eventForm">
+      </app-timepicker>
     </div>
 
     <div class="flex flex-col sm:flex-row sm:gap-3 w-full">
-      <app-datepicker formControlName="dateTo"
+      <app-datepicker controlName="dateTo"
                       [formGroup]="eventForm"
                       class="w-full sm:w-8/12"
                       label="Data zakończenia">
       </app-datepicker>
-      <app-timepicker class="w-full sm:w-4/12"></app-timepicker>
+      <app-timepicker class="w-full sm:w-4/12"
+                      hourControlName="hourTo"
+                      minutesControlName="minuteTo"
+                      [formGroup]="eventForm">
+      </app-timepicker>
     </div>
   </form>
 </div>

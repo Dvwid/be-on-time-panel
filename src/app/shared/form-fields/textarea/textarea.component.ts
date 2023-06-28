@@ -16,7 +16,7 @@ import { MaterialModule } from 'src/app/core/material/material.module';
 })
 export class TextareaComponent {
 
-  @Input() formControlName: string;
+  @Input() controlName: string;
   @Input() label: string;
   @Input() placeholder: string;
   @Input() formGroup: FormGroup;
