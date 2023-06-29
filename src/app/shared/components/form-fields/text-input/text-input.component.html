@@ -9,8 +9,8 @@
            [autocomplete]="controlName"
            [placeholder]="placeholder">
 
-    <!-- <mat-error *ngIf="form.submitted && authForm?.controls?.['name']?.invalid">
-      {{getErrorMessage(authForm?.controls?.['name']?.errors)}}
-    </mat-error> -->
+    <mat-error *ngIf="form.submitted && formGroup?.controls?.[controlName]?.invalid">
+      {{showError()}}
+    </mat-error>
   </mat-form-field>
 </div>

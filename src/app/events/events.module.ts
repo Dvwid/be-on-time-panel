@@ -6,13 +6,14 @@ import {EventsComponent} from './events.component';
 import {MaterialModule} from "../core/material/material.module";
 import {EventListComponent} from './event-list/event-list.component';
 import {EventPreviewComponent} from './event-preview/event-preview.component';
-import {GoogleMapWrapperModule} from "../shared/google-map/mapbox-wrapper.module";
+import {GoogleMapWrapperModule} from "../shared/components/mapbox-wrapper/mapbox-wrapper.module";
 import {EventCreateComponent} from './event-create/event-create.component';
-import {TextInputComponent} from "../shared/form-fields/text-input/text-input.component";
-import {TextareaComponent} from "../shared/form-fields/textarea/textarea.component";
-import {DatepickerComponent} from "../shared/form-fields/datepicker/datepicker.component";
-import {TimepickerComponent} from "../shared/form-fields/timepicker/timepicker.component";
+import {TextInputComponent} from "../shared/components/form-fields/text-input/text-input.component";
+import {TextareaComponent} from "../shared/components/form-fields/textarea/textarea.component";
+import {DatepickerComponent} from "../shared/components/form-fields/datepicker/datepicker.component";
+import {TimepickerComponent} from "../shared/components/form-fields/timepicker/timepicker.component";
 import {ReactiveFormsModule} from "@angular/forms";
+import {ImagePickerComponent} from "../shared/components/image-picker/image-picker.component";
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     TextareaComponent,
     DatepickerComponent,
     TimepickerComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ImagePickerComponent
   ]
 })
 export class EventsModule {

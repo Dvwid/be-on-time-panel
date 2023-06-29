@@ -1,10 +1,11 @@
-<div class="flex flex-col py-20 px-10 min-h-screen">
+<form #form="ngForm" [formGroup]="eventForm"
+     class="flex flex-col py-20 px-10 min-h-screen">
   <h1>Tworzenie nowego wydarzenia</h1>
 
-  <form [formGroup]="eventForm"
-        class="w-12/12 xl:w-6/12">
+  <div class="w-12/12 xl:w-6/12">
     <app-text-input controlName="name"
                     [formGroup]="eventForm"
+                    [form]="form"
                     [required]="true"
                     label="Nazwa wydarzenia">
     </app-text-input>
@@ -33,11 +34,16 @@
                       class="w-full sm:w-8/12"
                       label="Data zakończenia">
       </app-datepicker>
+
       <app-timepicker class="w-full sm:w-4/12"
                       hourControlName="hourTo"
                       minutesControlName="minuteTo"
                       [formGroup]="eventForm">
       </app-timepicker>
     </div>
-  </form>
-</div>
+
+    <app-image-picker>
+
+    </app-image-picker>
+  </div>
+</form>
