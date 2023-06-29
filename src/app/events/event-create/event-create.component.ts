@@ -3,8 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-event-create',
-  templateUrl: './event-create.component.html',
-  styleUrls: ['./event-create.component.scss']
+  templateUrl: './event-create.component.html'
 })
 export class EventCreateComponent {
 

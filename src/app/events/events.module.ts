@@ -14,15 +14,11 @@ import {DatepickerComponent} from "../shared/components/form-fields/datepicker/d
 import {TimepickerComponent} from "../shared/components/form-fields/timepicker/timepicker.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ImagePickerComponent} from "../shared/components/image-picker/image-picker.component";
+import {EventFormComponent} from './event-form/event-form.component';
+import {EventEditComponent} from "./event-edit/event-edit.component";
 
 
 @NgModule({
-  declarations: [
-    EventsComponent,
-    EventListComponent,
-    EventPreviewComponent,
-    EventCreateComponent,
-  ],
   imports: [
     CommonModule,
     MaterialModule,
@@ -34,7 +30,15 @@ import {ImagePickerComponent} from "../shared/components/image-picker/image-pick
     TimepickerComponent,
     ReactiveFormsModule,
     ImagePickerComponent
-  ]
+  ],
+  declarations: [
+    EventsComponent,
+    EventListComponent,
+    EventPreviewComponent,
+    EventCreateComponent,
+    EventEditComponent,
+    EventFormComponent,
+  ],
 })
 export class EventsModule {
 }
