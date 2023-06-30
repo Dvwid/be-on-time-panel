@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MaterialModule} from 'src/app/core/material/material.module';
-import {FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {ControlContainer, FormGroup, FormGroupDirective, ReactiveFormsModule} from '@angular/forms';
 import {map, Observable, startWith} from 'rxjs';
 
 @Component({
@@ -13,7 +13,8 @@ import {map, Observable, startWith} from 'rxjs';
     ReactiveFormsModule
   ],
   templateUrl: './timepicker.component.html',
-  styleUrls: ['./timepicker.component.scss']
+  styleUrls: ['./timepicker.component.scss'],
+  viewProviders: [{provide: ControlContainer, useExisting: FormGroupDirective}]
 })
 export class TimepickerComponent implements OnInit {
 

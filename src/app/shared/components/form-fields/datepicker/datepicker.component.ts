@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MaterialModule} from 'src/app/core/material/material.module';
-import {ReactiveFormsModule} from '@angular/forms';
+import {ControlContainer, FormGroupDirective, ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
 import {FormFieldAbstractComponent} from "../form-field-abstract.component";
 
@@ -15,7 +15,8 @@ import {FormFieldAbstractComponent} from "../form-field-abstract.component";
     MatNativeDateModule
   ],
   templateUrl: './datepicker.component.html',
-  styleUrls: ['./datepicker.component.scss']
+  styleUrls: ['./datepicker.component.scss'],
+  viewProviders: [{provide: ControlContainer, useExisting: FormGroupDirective}]
 })
 export class DatepickerComponent extends FormFieldAbstractComponent {
 

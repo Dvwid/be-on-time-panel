@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {FormGroup} from "@angular/forms";
+import {EventForm} from "../../core/dtos/EventForm";
 
 @Component({
   selector: 'app-event-details',
@@ -7,6 +8,6 @@ import {FormGroup} from "@angular/forms";
 })
 export class EventEditComponent {
 
-  eventForm: FormGroup;
+  eventForm: FormGroup<EventForm>;
 
 }

@@ -1,3 +1,11 @@
-<div id="map-wrapper" class="map-wrapper">
+<div class="w-full flex flex-col relative">
+  <div id="map-wrapper"
+       class="map-wrapper"
+       [style.height.px]="height">
+  </div>
+
+  <div class="w-full absolute top-5 left-5">
+    <div id="geocoder"></div>
+  </div>
 </div>
-<div id="geocoder" class="geocoder"></div>
+

@@ -7,12 +7,31 @@
 }
 
 .map-wrapper {
-  width: 500px !important;
-  height: 500px !important;
+  width: 100% !important;
+  //height: 300px !important;
   border-radius: 1rem;
 }
 
-.geocoder {
-  margin: 1rem;
+
+::ng-deep {
+  .mapboxgl-ctrl-geocoder {
+    width: 100% !important;
+    border-radius: 20px !important;
+  }
+
+  .mapboxgl-ctrl-geocoder--input {
+    outline: none !important;
+  }
+
+  #geocoder {
+    width: 100% !important;
+  }
+
+  .suggestions-wrapper {
+    z-index: 2;
+  }
+
 }
+
+
 

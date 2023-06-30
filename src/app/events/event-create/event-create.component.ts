@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {EventForm} from "../../core/dtos/EventForm";
+import {setFormGroupTouched} from "../../core/utilities";
 
 @Component({
   selector: 'app-event-create',
@@ -7,7 +9,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class EventCreateComponent {
 
-  eventForm = new FormGroup({
+  eventForm = new FormGroup<EventForm>({
     name: new FormControl<string | null>(null, Validators.required),
     dateFrom: new FormControl<Date>(new Date(), Validators.required),
     hourFrom: new FormControl<string | null>(null),
@@ -17,7 +19,11 @@ export class EventCreateComponent {
     minuteTo: new FormControl<string | null>(null),
     place: new FormControl<string | null>(null),
     description: new FormControl<string | null>(null, Validators.required),
-    price: new FormControl<number | null>(null),
+    additionalInfo: new FormControl<string | null>(null),
   });
 
+  submit() {
+    setFormGroupTouched(this.eventForm);
+    console.log(this.eventForm);
+  }
 }

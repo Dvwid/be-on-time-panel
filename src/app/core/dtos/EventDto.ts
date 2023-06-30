@@ -1,5 +1,5 @@
 export interface EventDto {
-  id: string,
+  id?: string,
   name: string,
   dateFrom: Date,
   timeFrom: string,
@@ -7,8 +7,10 @@ export interface EventDto {
   timeTo?: string;
   place: string,
   description: string,
-  price: number,
   interested: string[],
   rate: number;
   imageUrl?: string;
+  additionalInfo?: string;
+  lat?: number;
+  lng?: number;
 }

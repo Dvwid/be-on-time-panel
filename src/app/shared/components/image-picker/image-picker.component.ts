@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {DragAndDropFileDirective} from "../../directives/drag-and-drop-file.directive";
 
@@ -11,6 +11,9 @@ import {DragAndDropFileDirective} from "../../directives/drag-and-drop-file.dire
 })
 export class ImagePickerComponent {
 
+  @ViewChild('dragAndDropRef') dragAndDropRef: ElementRef;
+  @ViewChild('imagesWrapperRef') imagesWrapperRef: ElementRef;
+
   file: File | undefined;
 
   onFileDropped(file: File) {
@@ -19,5 +22,15 @@ export class ImagePickerComponent {
 
   fileBrowseHandler(event: any) {
     this.file = event?.target?.files?.[0];
+  }
+
+  addClassOnOver() {
+    this.dragAndDropRef.nativeElement.classList.add('dragover');
+    this.imagesWrapperRef.nativeElement.classList.add('dragover');
+  }
+
+  removeClassAfterLeave() {
+    this.dragAndDropRef.nativeElement.classList.remove('dragover');
+    this.imagesWrapperRef.nativeElement.classList.remove('dragover');
   }
 }

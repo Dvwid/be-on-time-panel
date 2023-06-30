@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MaterialModule} from 'src/app/core/material/material.module';
-import {ReactiveFormsModule} from '@angular/forms';
+import {ControlContainer, FormGroupDirective, ReactiveFormsModule} from '@angular/forms';
 import {FormFieldAbstractComponent} from "../form-field-abstract.component";
 
 @Component({
@@ -13,7 +13,8 @@ import {FormFieldAbstractComponent} from "../form-field-abstract.component";
     ReactiveFormsModule
   ],
   templateUrl: './text-input.component.html',
-  styleUrls: ['./text-input.component.scss']
+  styleUrls: ['./text-input.component.scss'],
+  viewProviders: [{provide: ControlContainer, useExisting: FormGroupDirective}]
 })
 export class TextInputComponent extends FormFieldAbstractComponent {
 
