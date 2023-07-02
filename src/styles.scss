@@ -45,3 +45,11 @@ body {
     color: $primary-color !important;
   }
 }
+
+.bg-primary {
+  background-color: $primary-color;
+}
+
+.text-secondary {
+  color: $secondary-color;
+}

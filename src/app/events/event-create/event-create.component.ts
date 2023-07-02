@@ -34,7 +34,13 @@ export class EventCreateComponent {
         }),
       eventLocation: this._formBuilder
         .group({
-          place: new FormControl<string | null>(null)
+          placeName: new FormControl<string | null>(null),
+          postCode: new FormControl<string | null>(null),
+          city: new FormControl<string | null>(null),
+          address: new FormControl<string | null>(null),
+          country: new FormControl<string | null>(null),
+          lng: new FormControl<number | null>(null),
+          lat: new FormControl<number | null>(null),
         }),
       additionalInfo: this._formBuilder
         .group({
@@ -73,7 +79,13 @@ export class EventCreateComponent {
 
   private prepareEventLocationDto(): EventLocationDto {
     return {
-      place: this.eventForm?.controls?.eventLocation?.controls?.place?.value
+      placeName: this.eventForm?.controls?.eventLocation?.controls?.placeName?.value,
+      city: this.eventForm?.controls?.eventLocation?.controls?.city?.value,
+      country: this.eventForm?.controls?.eventLocation?.controls?.country?.value,
+      address: this.eventForm?.controls?.eventLocation?.controls?.address?.value,
+      postCode: this.eventForm?.controls?.eventLocation?.controls?.postCode?.value,
+      lng: this.eventForm?.controls?.eventLocation?.controls?.lng?.value,
+      lat: this.eventForm?.controls?.eventLocation?.controls?.lat?.value,
     };
   }
 

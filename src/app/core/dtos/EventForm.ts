@@ -2,7 +2,13 @@ import {FormControl, FormGroup} from "@angular/forms";
 
 
 export type EventLocationFormGroup = {
-  place: FormControl<string | null>;
+  placeName: FormControl<string | null>;
+  postCode: FormControl<string | null>;
+  address: FormControl<string | null>;
+  country: FormControl<string | null>;
+  city: FormControl<string | null>;
+  lng: FormControl<number>;
+  lat: FormControl<number>;
 }
 
 export type EventImageFormGroup = {

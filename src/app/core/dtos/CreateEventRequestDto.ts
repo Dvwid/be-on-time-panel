@@ -10,7 +10,13 @@ export interface EventDetailsDto {
 }
 
 export interface EventLocationDto {
-  place: string;
+  placeName: string;
+  postCode: string;
+  address: string;
+  country: string;
+  city: string;
+  lng: number;
+  lat: number;
 }
 
 export interface EventAdditionalInfoDto {

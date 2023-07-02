@@ -1,10 +1,56 @@
-<app-mapbox-wrapper (geocoderSelectResult)="setSelectedResult($event)">
-</app-mapbox-wrapper>
+<div class="flex w-full mt-3 gap-3">
+  <div class="w-1/2 gradient-test">
+    <app-mapbox-wrapper (geocoderSelectResult)="setSelectedResult($event)"
+                        (changePointerPosition)="setPointer($event)"
+                        (deleteMarker)="removePointer()"
+                        [height]="450"
+                        class="shadow-2xl">
+    </app-mapbox-wrapper>
+  </div>
 
-<div class="flex flex-col w-full mt-3">
-  <app-text-input controlName="place"
-                  [formGroup]="formGroup"
-                  [form]="form"
-                  label="Adres wydarzenia">
-  </app-text-input>
+  <div class="flex flex-col justify-between w-1/2 ">
+    <div class="flex flex-col px-3 w-full">
+      <div class="bg-primary text-secondary px-3 py-3 rounded-md mb-3">
+        <div class="flex gap-3">
+          <i class="material-icons">info_outlined</i>
+          <div>Wyszukaj lokalizację na mapie lub wprowadź dane ręcznie poniżej.</div>
+        </div>
+      </div>
+
+      <app-text-input controlName="placeName"
+                      [formGroup]="formGroup"
+                      [form]="form"
+                      label="Nazwa">
+      </app-text-input>
+
+      <div class="flex gap-3 w-full">
+        <app-text-input controlName="postCode"
+                        [formGroup]="formGroup"
+                        [form]="form"
+                        label="Kod pocztowy">
+        </app-text-input>
+
+
+        <app-text-input controlName="city"
+                        class="flex-grow"
+                        [formGroup]="formGroup"
+                        [form]="form"
+                        label="Miasto">
+        </app-text-input>
+      </div>
+
+
+      <app-text-input controlName="address"
+                      [formGroup]="formGroup"
+                      [form]="form"
+                      label="Ulica i numer">
+      </app-text-input>
+    </div>
+
+    <div class="flex justify-end mt-2">
+      <app-stepper-previous-button></app-stepper-previous-button>
+      <div class="border-l-2 border-l-sky-700 opacity-20"></div>
+      <app-stepper-next-button></app-stepper-next-button>
+    </div>
+  </div>
 </div>
