@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {AjaxService} from "../../core/ajax.service";
 import {Observable, of} from "rxjs";
 import {EventDto} from "../../core/dtos/EventDto";
+import {CreateEventRequestDto} from "../../core/dtos/CreateEventRequestDto";
 
 export const mockedEvents: EventDto[] = [
   {
@@ -34,10 +35,16 @@ export const mockedEvents: EventDto[] = [
 })
 export class EventService {
 
+  #baseUrl = 'events';
+
   constructor(private ajaxService: AjaxService) {
   }
 
   getEventById(id: string): Observable<EventDto> {
     return of(mockedEvents?.find(event => event?.id === id));
+  }
+
+  create(req: CreateEventRequestDto): Observable<EventDto> {
+    return this.ajaxService.doPost(`${this.#baseUrl}`, req);
   }
 }

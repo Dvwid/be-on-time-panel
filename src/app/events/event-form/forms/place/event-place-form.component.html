@@ -1,0 +1,10 @@
+<app-mapbox-wrapper (geocoderSelectResult)="setSelectedResult($event)">
+</app-mapbox-wrapper>
+
+<div class="flex flex-col w-full mt-3">
+  <app-text-input controlName="place"
+                  [formGroup]="formGroup"
+                  [form]="form"
+                  label="Adres wydarzenia">
+  </app-text-input>
+</div>

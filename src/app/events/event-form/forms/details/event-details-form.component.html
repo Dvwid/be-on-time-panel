@@ -1,0 +1,57 @@
+<div class="w-full flex gap-5 pt-1 items-center"
+     [formGroup]="formGroup">
+  <div class="flex items-center w-1/2">
+    <img src="assets/images/event_plan.jpg"
+         [style.width.rem]="40"
+         alt="Event plan"/>
+  </div>
+
+  <div class="w-1/2 form-sm flex-grow">
+    <app-text-input controlName="name"
+                    [formGroup]="formGroup"
+                    [form]="form"
+                    [required]="true"
+                    label="Nazwa wydarzenia">
+    </app-text-input>
+
+    <div class="flex flex-col sm:flex-row sm:gap-3 w-full">
+      <app-datepicker controlName="dateFrom"
+                      [formGroup]="formGroup"
+                      class="w-full sm:w-8/12"
+                      label="Data rozpoczęcia">
+      </app-datepicker>
+
+      <app-timepicker class="w-full sm:w-4/12"
+                      hourControlName="hourFrom"
+                      minutesControlName="minuteFrom"
+                      [formGroup]="formGroup">
+      </app-timepicker>
+    </div>
+
+    <div class="flex flex-col sm:flex-row sm:gap-3 w-full">
+      <app-datepicker controlName="dateTo"
+                      [formGroup]="formGroup"
+                      class="w-full sm:w-8/12"
+                      label="Data zakończenia">
+      </app-datepicker>
+
+      <app-timepicker class="w-full sm:w-4/12"
+                      hourControlName="hourTo"
+                      minutesControlName="minuteTo"
+                      [formGroup]="formGroup">
+      </app-timepicker>
+    </div>
+
+    <app-textarea controlName="description"
+                  [formGroup]="formGroup"
+                  [rows]="9"
+                  label="Opis wydarzenia">
+    </app-textarea>
+
+    <div class="flex justify-end">
+      <div class="border-l-2 border-l-sky-700 opacity-20"></div>
+      <app-stepper-next-button></app-stepper-next-button>
+    </div>
+
+  </div>
+</div>

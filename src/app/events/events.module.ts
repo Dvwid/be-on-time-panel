@@ -16,6 +16,19 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {ImagePickerComponent} from "../shared/components/image-picker/image-picker.component";
 import {EventFormComponent} from './event-form/event-form.component';
 import {EventEditComponent} from "./event-edit/event-edit.component";
+import {EventDetailsFormComponent} from './event-form/forms/details/event-details-form.component';
+import {EventFormAbstractComponent} from "./event-form/event-form-abstract.component";
+import {EventImageFormComponent} from './event-form/forms/image/event-image-form.component';
+import {
+  EventAdditionalInformationFormComponent
+} from './event-form/forms/additional-information/event-additional-information-form.component';
+import {EventPlaceFormComponent} from './event-form/forms/place/event-place-form.component';
+import {
+  StepperNextButtonComponent
+} from "../shared/components/form-fields/stepper-next-button/stepper-next-button.component";
+import {
+  StepperPreviousButtonComponent
+} from "../shared/components/form-fields/stepper-previous-button/stepper-previous-button.component";
 
 
 @NgModule({
@@ -29,7 +42,9 @@ import {EventEditComponent} from "./event-edit/event-edit.component";
     DatepickerComponent,
     TimepickerComponent,
     ReactiveFormsModule,
-    ImagePickerComponent
+    ImagePickerComponent,
+    StepperNextButtonComponent,
+    StepperPreviousButtonComponent
   ],
   declarations: [
     EventsComponent,
@@ -37,7 +52,12 @@ import {EventEditComponent} from "./event-edit/event-edit.component";
     EventPreviewComponent,
     EventCreateComponent,
     EventEditComponent,
+    EventFormAbstractComponent,
     EventFormComponent,
+    EventDetailsFormComponent,
+    EventImageFormComponent,
+    EventAdditionalInformationFormComponent,
+    EventPlaceFormComponent,
   ],
 })
 export class EventsModule {
