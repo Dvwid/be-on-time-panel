@@ -23,8 +23,13 @@ export interface EventAdditionalInfoDto {
   additionalInfo: string;
 }
 
+export interface EventImageInfoDto {
+  imageId: string;
+}
+
 export interface CreateEventRequestDto {
   eventDetails: EventDetailsDto;
   eventLocation: EventLocationDto;
   additionalInfo: EventAdditionalInfoDto;
+  imageInfo: EventImageInfoDto;
 }

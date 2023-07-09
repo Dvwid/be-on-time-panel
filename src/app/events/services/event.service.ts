@@ -37,7 +37,7 @@ export class EventService {
 
   #baseUrl = 'events';
 
-  constructor(private ajaxService: AjaxService) {
+  constructor(private _ajaxService: AjaxService) {
   }
 
   getEventById(id: string): Observable<EventDto> {
@@ -45,6 +45,6 @@ export class EventService {
   }
 
   create(req: CreateEventRequestDto): Observable<EventDto> {
-    return this.ajaxService.doPost(`${this.#baseUrl}`, req);
+    return this._ajaxService.doPost(`${this.#baseUrl}`, req);
   }
 }

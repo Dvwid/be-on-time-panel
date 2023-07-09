@@ -10,13 +10,13 @@
     <app-text-input controlName="name"
                     [formGroup]="formGroup"
                     [form]="form"
-                    [required]="true"
                     label="Nazwa wydarzenia">
     </app-text-input>
 
     <div class="flex flex-col sm:flex-row sm:gap-3 w-full">
       <app-datepicker controlName="dateFrom"
                       [formGroup]="formGroup"
+                      [form]="form"
                       class="w-full sm:w-8/12"
                       label="Data rozpoczęcia">
       </app-datepicker>
@@ -31,6 +31,7 @@
     <div class="flex flex-col sm:flex-row sm:gap-3 w-full">
       <app-datepicker controlName="dateTo"
                       [formGroup]="formGroup"
+                      [form]="form"
                       class="w-full sm:w-8/12"
                       label="Data zakończenia">
       </app-datepicker>
@@ -44,6 +45,7 @@
 
     <app-textarea controlName="description"
                   [formGroup]="formGroup"
+                  [form]="form"
                   [rows]="9"
                   label="Opis wydarzenia">
     </app-textarea>

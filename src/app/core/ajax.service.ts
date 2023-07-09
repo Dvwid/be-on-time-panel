@@ -31,6 +31,17 @@ export class AjaxService {
       );
   }
 
+  postFileStream(url: string, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('files', file);
+
+    return this.http
+      .post<string>(this.baseApiUrl + url, formData)
+      .pipe(
+        catchError(this.exceptionService.handleError)
+      );
+  }
+
   doPut<T>(urlPath: string, data: any = {}): Observable<T> {
     return this.http
       .put(this.baseApiUrl + urlPath, data, this.buildRequestOptions())

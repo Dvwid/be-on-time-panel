@@ -1,33 +1,41 @@
 <mat-stepper orientation="horizontal" [linear]="false" #stepper>
   <mat-step [stepControl]="formGroup.controls.eventDetails">
     <ng-template matStepLabel>Dane podstawowe</ng-template>
+    <ng-template matStepContent>
+      <app-event-details-form [formGroup]="formGroup.controls.eventDetails"
+                              [form]="form">
+      </app-event-details-form>
+    </ng-template>
 
-    <app-event-details-form [formGroup]="formGroup.controls.eventDetails"
-                            [form]="form">
-    </app-event-details-form>
   </mat-step>
 
   <mat-step [stepControl]="formGroup.controls.eventLocation">
     <ng-template matStepLabel>Miejsce wydarzenia</ng-template>
 
-    <app-event-place-form [formGroup]="formGroup.controls.eventLocation"
-                          [form]="form">
-    </app-event-place-form>
+    <ng-template matStepContent>
+      <app-event-place-form [formGroup]="formGroup.controls.eventLocation"
+                            [form]="form">
+      </app-event-place-form>
+    </ng-template>
   </mat-step>
 
   <mat-step [stepControl]="formGroup.controls.eventImage">
     <ng-template matStepLabel>Zdjęcie wydarzenia</ng-template>
 
-    <app-event-image-form [formGroup]="formGroup.controls.eventImage"
-                          [form]="form">
-    </app-event-image-form>
+    <ng-template matStepContent>
+      <app-event-image-form [formGroup]="formGroup.controls.eventImage"
+                            [form]="form">
+      </app-event-image-form>
+    </ng-template>
   </mat-step>
 
   <mat-step [stepControl]="formGroup.controls.additionalInfo">
     <ng-template matStepLabel>Dodatkowe informacje</ng-template>
 
-    <app-event-additional-information-form [formGroup]="formGroup.controls.additionalInfo"
-                                           [form]="form">
-    </app-event-additional-information-form>
+    <ng-template matStepContent>
+      <app-event-additional-information-form [formGroup]="formGroup.controls.additionalInfo"
+                                             [form]="form">
+      </app-event-additional-information-form>
+    </ng-template>
   </mat-step>
 </mat-stepper>

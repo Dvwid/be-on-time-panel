@@ -1,3 +1,27 @@
-<app-image-picker>
+<div class="flex flex-col gap-3">
+  <span class="font-bold text-gray-500">Dodaj nowe zdjęcie</span>
+  <app-image-picker (fileChange)="uploadFile($event)"
+                    [isFileUploading]="isImageUploading$ | async">
+  </app-image-picker>
+  <span class="font-bold text-gray-500">Dostępne zdjęcia</span>
 
-</app-image-picker>
+  <div *ngIf="areImagesLoading$ | async"
+       class="flex gap-3 rounded-xl w-full">
+    <app-skeleton-loader class="w-1/5"></app-skeleton-loader>
+    <app-skeleton-loader class="w-1/5"></app-skeleton-loader>
+    <app-skeleton-loader class="w-1/5"></app-skeleton-loader>
+    <app-skeleton-loader class="w-1/5"></app-skeleton-loader>
+    <app-skeleton-loader class="w-1/5"></app-skeleton-loader>
+  </div>
+
+  <div *ngIf="!(areImagesLoading$ | async)"
+       id="image-wrapper"
+       class="w-full flex flex-row rounded-xl overflow-hidden">
+  </div>
+</div>
+
+<div class="flex justify-end mt-2">
+  <app-stepper-previous-button></app-stepper-previous-button>
+  <div class="border-l-2 border-l-sky-700 opacity-20"></div>
+  <app-stepper-next-button></app-stepper-next-button>
+</div>

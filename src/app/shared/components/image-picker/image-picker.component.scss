@@ -45,3 +45,22 @@
     transform: rotate(20deg) translateY(0%) translateX(30%);
   }
 }
+
+
+.uploader {
+  transition: .4s;
+  top: -100%;
+
+  &.show {
+    top: 0;
+  }
+}
+
+.progress {
+  transition: .4s;
+  top: 100%;
+
+  &.show {
+    top: 0;
+  }
+}

@@ -11,19 +11,19 @@ export class AuthService {
 
   private readonly baseUrl = 'auth';
 
-  constructor(private ajaxService: AjaxService) {
+  constructor(private _ajaxService: AjaxService) {
   }
 
   login(req: Pick<UserDto, 'email' | 'password'>): Observable<UserCredentialsDto> {
-    return this.ajaxService.doPost<UserCredentialsDto>(`${this.baseUrl}/login`, req);
+    return this._ajaxService.doPost<UserCredentialsDto>(`${this.baseUrl}/login`, req);
   }
 
   register(req: Omit<UserDto, 'id'>): Observable<UserDto> {
-    return this.ajaxService.doPost<UserDto>(`${this.baseUrl}/register`, req);
+    return this._ajaxService.doPost<UserDto>(`${this.baseUrl}/register`, req);
   }
 
   verifyToken(token: string) {
-    return this.ajaxService.doPost<UserDto>(`${this.baseUrl}/verify`, {token});
+    return this._ajaxService.doPost<UserDto>(`${this.baseUrl}/verify`, {token});
   }
 
 }

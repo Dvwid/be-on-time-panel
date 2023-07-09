@@ -29,6 +29,10 @@ import {
 import {
   StepperPreviousButtonComponent
 } from "../shared/components/form-fields/stepper-previous-button/stepper-previous-button.component";
+import {SkeletonLoaderComponent} from "../shared/components/skeleton-loader/skeleton-loader.component";
+import {
+  MiniFabSpinnerButtonComponent
+} from "../shared/components/mini-fab-spinner-button/mini-fab-spinner-button.component";
 
 
 @NgModule({
@@ -44,7 +48,9 @@ import {
     ReactiveFormsModule,
     ImagePickerComponent,
     StepperNextButtonComponent,
-    StepperPreviousButtonComponent
+    StepperPreviousButtonComponent,
+    SkeletonLoaderComponent,
+    MiniFabSpinnerButtonComponent
   ],
   declarations: [
     EventsComponent,

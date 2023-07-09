@@ -8,5 +8,9 @@
               [formControlName]="controlName"
               [placeholder]="placeholder">
     </textarea>
+
+    <mat-error *ngIf="form.submitted && formGroup?.controls?.[controlName]?.invalid">
+      {{showError()}}
+    </mat-error>
   </mat-form-field>
 </div>

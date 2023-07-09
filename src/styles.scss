@@ -53,3 +53,33 @@ body {
 .text-secondary {
   color: $secondary-color;
 }
+
+
+.event-image {
+  height: 250px;
+  width: 20%;
+  object-fit: cover;
+  flex-grow: 0;
+  transition: width .4s;
+  cursor: pointer;
+
+  &:not(:last-of-type) {
+    border-right: 6px solid white;
+  }
+
+  &.selected {
+    border: 3px dashed $primary-color;
+    margin-right: .5rem;
+    position: relative;
+  }
+
+  &:not(.selected) {
+    opacity: .7;
+  }
+
+  &:hover {
+    width: 30% !important;
+    flex-grow: 1;
+    opacity: 1;
+  }
+}

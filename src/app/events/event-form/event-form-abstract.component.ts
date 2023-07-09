@@ -1,8 +1,9 @@
 import {Component, Input} from "@angular/core";
-import {FormGroup, FormGroupDirective} from "@angular/forms";
+import {ControlContainer, FormGroup, FormGroupDirective} from "@angular/forms";
 import {
   EventAdditionalInfoFormGroup,
-  EventDetailsFormGroup, EventImageFormGroup,
+  EventDetailsFormGroup,
+  EventImageFormGroup,
   EventLocationFormGroup,
 } from "../../core/dtos/EventForm";
 
@@ -14,7 +15,8 @@ type EventFormTypes = EventDetailsFormGroup
 
 @Component({
   selector: '',
-  template: ''
+  template: '',
+  viewProviders: [{provide: ControlContainer, useExisting: FormGroupDirective}]
 })
 export class EventFormAbstractComponent<T extends EventFormTypes> {
 

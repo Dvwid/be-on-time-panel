@@ -1,0 +1,14 @@
+<button mat-mini-fab
+        (click)="btnClick.emit()"
+        [matTooltip]="label"
+        color="primary"
+        [type]="type">
+  <mat-spinner *ngIf="isSpinnerVisible"
+               color="accent"
+               diameter="20">
+  </mat-spinner>
+  <i *ngIf="!isSpinnerVisible"
+     class="material-icons">
+    {{icon}}
+  </i>
+</button>
