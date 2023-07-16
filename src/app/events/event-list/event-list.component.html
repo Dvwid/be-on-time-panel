@@ -1,29 +1,107 @@
-<div class="flex flex-col gap-2">
-  <ng-container *ngIf="events?.length > 0">
-    <div *ngFor="let event of events"
-         [routerLink]="'/events/' + event?.id"
-         matRipple
-         class="flex gap-2 px-4 py-3 rounded-lg event-item text-gray-400 cursor-pointer transition ease-out">
-      <div class="flex items-center gap-1">
-        <mat-icon>schedule</mat-icon>
-        <span>{{event?.timeFrom}}</span>
-      </div>
+<div class="mb-2">
+  <button class="rounded-md border flex items-center px-3 py-2 gap-2 font-medium"
+          matRipple>
+    <i class="material-icons text-md">add</i>
+    <span class="text-sm">Dodaj filtr</span>
+  </button>
+</div>
 
-      <div class="flex items-center gap-1">
-        <mat-icon>star</mat-icon>
-        <span>{{event?.name}}</span>
-      </div>
 
+<div class="min-w-full overflow-x-auto rounded-md border">
+  <table class="border-collapse table-fixed min-w-full rounded-md">
+    <thead>
+    <tr class="bg-gray-100">
+      <th>
+        <app-list-header icon="star" label="Nazwa wydarzenia"></app-list-header>
+      </th>
+
+      <th>
+        <app-list-header icon="place" label="Miejsce"></app-list-header>
+      </th>
+
+      <th>
+        <app-list-header icon="event" label="Data rozpoczęcia"></app-list-header>
+      </th>
+
+      <th>
+        <app-list-header icon="schedule" label="Godzina rozpoczęcia"></app-list-header>
+      </th>
+
+      <th>
+        <app-list-header icon="event" label="Data zakończenia"></app-list-header>
+      </th>
+
+      <th>
+        <app-list-header icon="schedule" label="Godzina zakończenia"></app-list-header>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngIf="events?.length > 0">
+      <tr *ngFor="let event of events"
+          [routerLink]="'details/' + event?.id"
+          class="event-item text-left">
+        <th>
+          <app-list-cell [value]="event?.eventDetails?.name">
+          </app-list-cell>
+        </th>
+        <th>
+          <app-list-cell [value]="event?.eventLocation?.placeName">
+          </app-list-cell>
+        </th>
+        <th>
+          <app-list-cell [value]="event?.eventDetails?.dateFrom | date">
+          </app-list-cell>
+        </th>
+        <th>
+          <app-list-cell [value]="event?.eventDetails?.hourFrom + ' : ' + event?.eventDetails?.minuteFrom">
+          </app-list-cell>
+        </th>
+        <th>
+          <app-list-cell [value]="event?.eventDetails?.dateTo | date">
+          </app-list-cell>
+        </th>
+        <th>
+          <app-list-cell [value]="event?.eventDetails?.hourTo + ' : ' + event?.eventDetails?.minuteTo">
+          </app-list-cell>
+        </th>
+      </tr>
+    </ng-container>
+
+    <tr *ngIf="events?.length === 0 && !(areEventsLoading$ | async)">
+      <td colspan="6">
+        <div class="flex p-3 items-center">
+          Obecnie nie istnieje żadne wydarzenie.
+        </div>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+
+  <div class="flex justify-between items-center px-3 py-1 text-xs border-t text-gray-400">
+    <div>Liczba wszystkich wydarzeń: {{pagination?.total}}</div>
+
+    <div class="flex">
       <div class="flex items-center gap-1">
-        <mat-icon>place</mat-icon>
-        <span>{{event?.place}}</span>
+        Liczba elementów na stronie: {{pagination?.pageSize}}
+        <button mat-icon-button>
+          <i class="material-icons">
+            chevron_left
+          </i>
+        </button>
+
+        <span>Strona</span>
+        <span>{{pagination?.page}}</span>
+        <span>z</span>
+        <span>0</span>
+
+        <button mat-icon-button>
+          <i class="material-icons">
+            chevron_right
+          </i>
+        </button>
       </div>
     </div>
-  </ng-container>
-
-  <ng-container *ngIf="events?.length === 0">
-    <div class="flex gap-2 px-4 py-3 rounded-full">
-      <span>Brak wydarzeń</span>
-    </div>
-  </ng-container>
+  </div>
 </div>

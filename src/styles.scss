@@ -29,7 +29,7 @@ body {
 }
 
 .bg-main-section {
-  background-color: #f6f8fa;
+  background-color: white;
 }
 
 .gmnoprint {
@@ -82,4 +82,9 @@ body {
     flex-grow: 1;
     opacity: 1;
   }
+}
+
+
+.mat-drawer-inner-container {
+  background-color: #f6f8fa !important;
 }

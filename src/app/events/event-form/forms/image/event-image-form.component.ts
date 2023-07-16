@@ -44,6 +44,9 @@ export class EventImageFormComponent extends EventFormAbstractComponent<EventIma
   }
 
   convertBase64ToImage(image: ImageDto): void {
+    if (!image?.base64) {
+      return;
+    }
     const img = new Image();
     img.src = 'data:image/png;base64,' + image?.base64;
     img.alt = image?.name;
@@ -61,6 +64,9 @@ export class EventImageFormComponent extends EventFormAbstractComponent<EventIma
       .pipe(finalize(() => this.areImagesLoading$.next(false)))
       .subscribe(data => {
         this.images = data || [];
+        if (!data) {
+          return;
+        }
         setTimeout(() => data?.forEach((img) => this.convertBase64ToImage(img)));
       });
   }

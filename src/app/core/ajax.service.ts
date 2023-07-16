@@ -2,6 +2,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {catchError, map, Observable} from "rxjs";
 import {ExceptionService} from "./exception.service";
+import {convertObjectToParams} from "./utilities";
 
 @Injectable({
   providedIn: 'root'
@@ -52,9 +53,11 @@ export class AjaxService {
       );
   }
 
-  doGet<T>(url: string, urlParams?: HttpParams): Observable<T> {
+  doGet<T>(url: string, urlParams?: Object): Observable<T> {
+    const httpParams = convertObjectToParams(urlParams);
+
     return this.http
-      .get(this.baseApiUrl + url, this.buildRequestOptions(urlParams))
+      .get(this.baseApiUrl + url, this.buildRequestOptions(httpParams))
       .pipe(
         map(AjaxService.assertSuccess),
         map(d => d as T),

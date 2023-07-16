@@ -4,11 +4,11 @@ import {EventService} from "../services/event.service";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
-  selector: 'app-event-preview',
-  templateUrl: './event-preview.component.html',
-  styleUrls: ['./event-preview.component.scss']
+  selector: 'app-event-details',
+  templateUrl: './event-details.component.html',
+  styleUrls: ['./event-details.component.scss']
 })
-export class EventPreviewComponent implements OnInit {
+export class EventDetailsComponent implements OnInit {
 
   eventId = this.activatedRoute.snapshot.paramMap.get('eventId');
   event: EventDto;
@@ -16,7 +16,7 @@ export class EventPreviewComponent implements OnInit {
   defaultImage = 'https://www.baltimoreseventsolutions.com/wp-content/uploads/2019/10/BES_Corporate_Hero.jpg';
 
   get imageUrl(): string {
-    return this.event?.imageUrl || this.defaultImage;
+    return this.event?.imageInfo.imageId || this.defaultImage;
   }
 
   constructor(private eventService: EventService,

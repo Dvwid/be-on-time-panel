@@ -1,21 +1,17 @@
 <div class="flex py-20 px-10 min-h-screen w-full">
-  <div class="flex flex-col xl:flex-row gap-4 w-full">
-    <div class="flex flex-col gap-4 w-full xl:w-1/2">
-      <div class="bg-white p-7 rounded-lg shadow-md">
-        <h1>Dzisiaj</h1>
-        <app-event-list [events]="todayEvents"></app-event-list>
-      </div>
+  <div class="flex flex-col gap-4 w-full">
+    <div class="flex justify-between">
+      <h1>Lista nadchodzących wydarzeń</h1>
 
-      <div class="bg-white p-7 rounded-lg shadow-md">
-        <h1>Jutro</h1>
-        <app-event-list [events]="[]"></app-event-list>
-      </div>
+      <app-icon-button icon="add"
+                       label="Utwórz nowe"
+                       routerLink="/events/create">
+      </app-icon-button>
     </div>
 
-    <div class="d-flex w-full xl:w-1/2">
-      <div class="bg-white p-7 rounded-lg shadow-md">
-        <h1>Nadchodzące wydarzenia</h1>
-        <app-event-list [events]="[]"></app-event-list>
+    <div class="flex flex-col gap-4 w-full">
+      <div>
+        <app-event-list></app-event-list>
       </div>
     </div>
   </div>

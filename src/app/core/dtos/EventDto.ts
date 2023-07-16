@@ -1,16 +1,36 @@
+export interface EventDetailsDto {
+  name: string;
+  description: string;
+  dateFrom: number;
+  hourFrom: string;
+  minuteFrom: string;
+  dateTo: number;
+  hourTo: string;
+  minuteTo: string;
+}
+
+export interface EventLocationDto {
+  placeName: string;
+  postCode: string;
+  address: string;
+  country: string;
+  city: string;
+  lng: number;
+  lat: number;
+}
+
+export interface EventAdditionalInfoDto {
+  additionalInfo: string;
+}
+
+export interface EventImageInfoDto {
+  imageId: string;
+}
+
 export interface EventDto {
-  id?: string,
-  name: string,
-  dateFrom: Date,
-  timeFrom: string,
-  dateTo?: Date,
-  timeTo?: string;
-  place: string,
-  description: string,
-  interested: string[],
-  rate: number;
-  imageUrl?: string;
-  additionalInfo?: string;
-  lat?: number;
-  lng?: number;
+  id?: string;
+  eventDetails: EventDetailsDto;
+  eventLocation: EventLocationDto;
+  additionalInfo: EventAdditionalInfoDto;
+  imageInfo: EventImageInfoDto;
 }

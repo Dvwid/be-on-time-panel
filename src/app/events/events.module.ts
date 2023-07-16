@@ -5,7 +5,7 @@ import {EventsRoutingModule} from './events-routing.module';
 import {EventsComponent} from './events.component';
 import {MaterialModule} from "../core/material/material.module";
 import {EventListComponent} from './event-list/event-list.component';
-import {EventPreviewComponent} from './event-preview/event-preview.component';
+import {EventDetailsComponent} from './event-preview/event-details.component';
 import {GoogleMapWrapperModule} from "../shared/components/mapbox-wrapper/mapbox-wrapper.module";
 import {EventCreateComponent} from './event-create/event-create.component';
 import {TextInputComponent} from "../shared/components/form-fields/text-input/text-input.component";
@@ -33,29 +33,33 @@ import {SkeletonLoaderComponent} from "../shared/components/skeleton-loader/skel
 import {
   MiniFabSpinnerButtonComponent
 } from "../shared/components/mini-fab-spinner-button/mini-fab-spinner-button.component";
+import { ListHeaderComponent } from './event-list/list-header/list-header.component';
+import { ListCellComponent } from './event-list/list-cell/list-cell.component';
+import {IconButtonComponent} from "../shared/components/icon-button/icon-button.component";
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MaterialModule,
-    EventsRoutingModule,
-    GoogleMapWrapperModule,
-    TextInputComponent,
-    TextareaComponent,
-    DatepickerComponent,
-    TimepickerComponent,
-    ReactiveFormsModule,
-    ImagePickerComponent,
-    StepperNextButtonComponent,
-    StepperPreviousButtonComponent,
-    SkeletonLoaderComponent,
-    MiniFabSpinnerButtonComponent
-  ],
+    imports: [
+        CommonModule,
+        MaterialModule,
+        EventsRoutingModule,
+        GoogleMapWrapperModule,
+        TextInputComponent,
+        TextareaComponent,
+        DatepickerComponent,
+        TimepickerComponent,
+        ReactiveFormsModule,
+        ImagePickerComponent,
+        StepperNextButtonComponent,
+        StepperPreviousButtonComponent,
+        SkeletonLoaderComponent,
+        MiniFabSpinnerButtonComponent,
+        IconButtonComponent
+    ],
   declarations: [
     EventsComponent,
     EventListComponent,
-    EventPreviewComponent,
+    EventDetailsComponent,
     EventCreateComponent,
     EventEditComponent,
     EventFormAbstractComponent,
@@ -64,6 +68,8 @@ import {
     EventImageFormComponent,
     EventAdditionalInformationFormComponent,
     EventPlaceFormComponent,
+    ListHeaderComponent,
+    ListCellComponent,
   ],
 })
 export class EventsModule {

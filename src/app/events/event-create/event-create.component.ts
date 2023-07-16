@@ -1,17 +1,17 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {EventForm} from "../../core/dtos/EventForm";
 import {EventService} from "../services/event.service";
 import {
-  CreateEventRequestDto,
   EventAdditionalInfoDto,
   EventDetailsDto,
+  EventDto,
   EventImageInfoDto,
   EventLocationDto
-} from "../../core/dtos/CreateEventRequestDto";
+} from "../../core/dtos/EventDto";
 import {BehaviorSubject, finalize} from "rxjs";
-import {EventDto} from "../../core/dtos/EventDto";
 import {NotificationService} from "../../core/notification/services/notification.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-event-create',
@@ -19,9 +19,14 @@ import {NotificationService} from "../../core/notification/services/notification
 })
 export class EventCreateComponent {
 
-  eventForm: FormGroup<EventForm> = this._formBuilder
+  #eventService = inject(EventService);
+  #formBuilder = inject(FormBuilder);
+  #notificationService = inject(NotificationService);
+  #router = inject(Router);
+
+  eventForm: FormGroup<EventForm> = this.#formBuilder
     .group({
-      eventDetails: this._formBuilder
+      eventDetails: this.#formBuilder
         .group({
           name: new FormControl<string | null>('', Validators.required),
           description: new FormControl<string | null>('', Validators.required),
@@ -32,7 +37,7 @@ export class EventCreateComponent {
           hourTo: new FormControl<string | null>(null),
           minuteTo: new FormControl<string | null>(null)
         }),
-      eventLocation: this._formBuilder
+      eventLocation: this.#formBuilder
         .group({
           placeName: new FormControl<string | null>(null, Validators.required),
           postCode: new FormControl<string | null>(null),
@@ -42,11 +47,11 @@ export class EventCreateComponent {
           lng: new FormControl<number | null>(null),
           lat: new FormControl<number | null>(null),
         }),
-      additionalInfo: this._formBuilder
+      additionalInfo: this.#formBuilder
         .group({
           additionalInfo: new FormControl<string | null>(null)
         }),
-      eventImage: this._formBuilder
+      eventImage: this.#formBuilder
         .group({
           imageId: new FormControl<string | null>(null)
         }),
@@ -54,23 +59,21 @@ export class EventCreateComponent {
 
   isEventCreating$ = new BehaviorSubject<boolean>(false);
 
-  constructor(private _eventService: EventService,
-              private _formBuilder: FormBuilder,
-              private _notificationService: NotificationService) {
+  constructor() {
   }
 
   submit() {
     this.eventForm.markAllAsTouched();
 
     if (!this.eventForm?.valid) {
-      this._notificationService.warning('Ostrzeżenie', 'Uzupełnij wszystkie wymagane pola formularza.');
+      this.#notificationService.warning('Ostrzeżenie', 'Uzupełnij wszystkie wymagane pola formularza.');
       return;
     }
 
     this.createEvent();
   }
 
-  private prepareCreateEventRequest(): CreateEventRequestDto {
+  private prepareCreateEventRequest(): EventDto {
     return {
       eventLocation: this.prepareEventLocationDto(),
       eventDetails: this.prepareEventDetailsDto(),
@@ -95,8 +98,8 @@ export class EventCreateComponent {
     return {
       name: this.eventForm?.controls?.eventDetails?.controls?.name?.value,
       description: this.eventForm?.controls?.eventDetails?.controls?.description?.value,
-      dateFrom: this.eventForm?.controls?.eventDetails?.controls?.dateFrom?.value,
-      dateTo: this.eventForm?.controls?.eventDetails?.controls?.dateTo?.value,
+      dateFrom: this.eventForm?.controls?.eventDetails?.controls?.dateFrom?.value?.getTime(),
+      dateTo: this.eventForm?.controls?.eventDetails?.controls?.dateTo?.value?.getTime(),
       hourFrom: this.eventForm?.controls?.eventDetails?.controls?.hourFrom?.value,
       hourTo: this.eventForm?.controls?.eventDetails?.controls?.hourTo?.value,
       minuteFrom: this.eventForm?.controls?.eventDetails?.controls?.minuteFrom?.value,
@@ -114,14 +117,15 @@ export class EventCreateComponent {
     const req = this.prepareCreateEventRequest();
     this.isEventCreating$.next(true)
 
-    this._eventService
+    this.#eventService
       .create(req)
       .pipe(finalize(() => this.isEventCreating$.next(false)))
       .subscribe((data) => this.doAfterCreateEvent(data));
   }
 
   private doAfterCreateEvent(event: EventDto) {
-    this._notificationService.success('Sukces!', 'Utworzono nowe wydarzenie');
+    this.#notificationService.success('Sukces!', 'Utworzono nowe wydarzenie');
+    this.#router.navigate([`/details/${event?.id}`]);
   }
 
   private prepareEventImageInfoDto(): EventImageInfoDto {
