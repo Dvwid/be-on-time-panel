@@ -4,13 +4,13 @@
        [style.height.px]="height">
   </div>
 
-  <div class="w-full absolute top-5 left-5">
+  <div class="w-full absolute top-5 left-5" *ngIf="!readonly">
     <div id="geocoder"></div>
   </div>
 
   <div class="w-full"
        (click)="removeMarker()"
-       *ngIf="marker"
+       *ngIf="marker && !readonly"
        [style.z-index]="5">
     <div class="flex items-center absolute top-5 right-2 rounded-full bg-white px-3 py-1.5
                 text-xs cursor-pointer shadow-md" matRipple>

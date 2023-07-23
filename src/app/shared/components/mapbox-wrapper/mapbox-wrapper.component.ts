@@ -36,7 +36,9 @@ export class MapboxWrapperComponent implements AfterViewInit {
   @Output() changePointerPosition = new Subject<LngLat>();
   @Output() deleteMarker = new EventEmitter();
 
+  @Input() readonly: boolean;
   @Input() height = 270;
+  @Input() lngLat: [number, number];
 
   @ViewChild('mapContainer') mapContainer: ElementRef;
 
@@ -54,6 +56,35 @@ export class MapboxWrapperComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.setMapboxToken();
 
+    if (this.readonly) {
+      this.initializePreviewMap();
+      return;
+    }
+
+    this.initializeEditableMap();
+
+  }
+
+  private setMapboxToken() {
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZGF3aWQ5NyIsImEiOiJjbDIzZWcybTgwMTFnM2NwczdkZmxwd29yIn0.Esvl7FuiZQipP7JMiaFTvw';
+  }
+
+  private initializePreviewMap() {
+    const mapbox = new mapboxgl.Map({
+      container: 'map-wrapper',
+      style: 'mapbox://styles/mapbox/light-v11',
+      zoom: 17,
+      center: this.lngLat
+    });
+
+    this.marker = new mapboxgl.Marker({
+      color: "#3f51b5",
+      draggable: false,
+    }).setLngLat(this.lngLat)
+      .addTo(mapbox);
+  }
+
+  private initializeEditableMap() {
     const mapbox = new mapboxgl.Map({
       container: 'map-wrapper',
       style: 'mapbox://styles/mapbox/light-v11',
@@ -109,9 +140,4 @@ export class MapboxWrapperComponent implements AfterViewInit {
           .addTo(mapbox);
       });
   }
-
-  private setMapboxToken() {
-    mapboxgl.accessToken = 'pk.eyJ1IjoiZGF3aWQ5NyIsImEiOiJjbDIzZWcybTgwMTFnM2NwczdkZmxwd29yIn0.Esvl7FuiZQipP7JMiaFTvw';
-  }
-
 }

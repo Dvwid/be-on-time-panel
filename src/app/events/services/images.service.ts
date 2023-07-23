@@ -20,4 +20,8 @@ export class ImagesService {
   getImages(): Observable<ImageDto[]> {
     return this._ajaxService.doGet(`${this.#baseUrl}`);
   }
+
+  getImage(id: string): Observable<ImageDto> {
+    return this._ajaxService.doGet(`${this.#baseUrl}/${id}`);
+  }
 }

@@ -5,6 +5,7 @@ import {ImagesService} from "../../../services/images.service";
 import {ImageDto} from "../../../../core/dtos/ImageDto";
 import {NotificationService} from "../../../../core/notification/services/notification.service";
 import {BehaviorSubject, finalize} from "rxjs";
+import {convertBase64ToImage} from "../../../../core/utilities";
 
 @Component({
   selector: 'app-event-image-form',
@@ -43,19 +44,6 @@ export class EventImageFormComponent extends EventFormAbstractComponent<EventIma
       .subscribe(data => this.doAfterUploadImage(data));
   }
 
-  convertBase64ToImage(image: ImageDto): void {
-    if (!image?.base64) {
-      return;
-    }
-    const img = new Image();
-    img.src = 'data:image/png;base64,' + image?.base64;
-    img.alt = image?.name;
-    img.title = image?.id;
-    img.className = 'event-image';
-    const wrapper = document.getElementById('image-wrapper');
-    wrapper.prepend(img);
-  }
-
   private getImages() {
     this.areImagesLoading$.next(true);
 
@@ -67,7 +55,7 @@ export class EventImageFormComponent extends EventFormAbstractComponent<EventIma
         if (!data) {
           return;
         }
-        setTimeout(() => data?.forEach((img) => this.convertBase64ToImage(img)));
+        setTimeout(() => data?.forEach((img) => convertBase64ToImage(img, 'event-image')));
       });
   }
 
@@ -75,7 +63,7 @@ export class EventImageFormComponent extends EventFormAbstractComponent<EventIma
     if (this.images.length === 5) {
       this.images.splice(4, 1);
     }
-    this.convertBase64ToImage(image);
+    convertBase64ToImage(image, 'event-image');
     this._notificationService.success('Sukces!', 'Dodano nowe zdjęcie');
   }
 

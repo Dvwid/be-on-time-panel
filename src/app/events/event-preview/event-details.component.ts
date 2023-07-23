@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {EventDto} from 'src/app/core/dtos/EventDto';
 import {EventService} from "../services/event.service";
 import {ActivatedRoute} from "@angular/router";
+import {ImagesService} from "../services/images.service";
+import {convertBase64ToImage} from "../../core/utilities";
 
 @Component({
   selector: 'app-event-details',
@@ -10,14 +12,10 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class EventDetailsComponent implements OnInit {
 
+  #imagesService = inject(ImagesService);
+
   eventId = this.activatedRoute.snapshot.paramMap.get('eventId');
   event: EventDto;
-
-  defaultImage = 'https://www.baltimoreseventsolutions.com/wp-content/uploads/2019/10/BES_Corporate_Hero.jpg';
-
-  get imageUrl(): string {
-    return this.event?.imageInfo.imageId || this.defaultImage;
-  }
 
   constructor(private eventService: EventService,
               private activatedRoute: ActivatedRoute) {
@@ -30,7 +28,20 @@ export class EventDetailsComponent implements OnInit {
   private getEventDetails() {
     this.eventService
       .getEventById(this.eventId)
-      .subscribe((data) => this.event = data);
+      .subscribe((data) => {
+        console.log(data);
+        this.event = data;
+        if (data?.imageInfo?.imageId) {
+          this.getImage(data?.imageInfo?.imageId);
+        }
+      });
   }
+
+  private getImage(imageId: string | undefined) {
+    this.#imagesService
+      .getImage(imageId)
+      .subscribe(data => convertBase64ToImage(data, 'preview-event-image'));
+  }
+
 
 }

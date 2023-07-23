@@ -1,6 +1,7 @@
 import {ValidationErrors} from "@angular/forms";
 import {HttpParams} from "@angular/common/http";
 import {PageInfoDto} from "./dtos/PageInfoDto";
+import {ImageDto} from "./dtos/ImageDto";
 
 export function getErrorMessage(errors: ValidationErrors): string {
   if (errors?.['required']) {
@@ -42,3 +43,18 @@ export function initializePagination(): PageInfoDto {
     total: 0
   }
 }
+
+export function convertBase64ToImage(image: ImageDto, imageClass: string): void {
+  if (!image?.base64) {
+    return;
+  }
+  const img = new Image();
+  img.src = 'data:image/png;base64,' + image?.base64;
+  img.alt = image?.name;
+  img.title = image?.id;
+  img.className = imageClass;
+  const wrapper = document.getElementById('image-wrapper');
+  wrapper.prepend(img);
+}
+
+
