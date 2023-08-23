@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AjaxService} from "../../ajax.service";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {UserDto} from "../../dtos/UserDto";
 import {UserCredentialsDto} from "../../dtos/UserCredentialsDto";
 
@@ -10,6 +10,8 @@ import {UserCredentialsDto} from "../../dtos/UserCredentialsDto";
 export class AuthService {
 
   private readonly baseUrl = 'auth';
+
+  currentUser$ = new BehaviorSubject<UserDto>(undefined);
 
   constructor(private _ajaxService: AjaxService) {
   }

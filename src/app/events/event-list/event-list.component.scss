@@ -7,3 +7,23 @@
     cursor: pointer;
   }
 }
+
+.event-wrapper {
+  transition: .4s;
+
+  &:hover {
+    background-color: #E6F4F1;
+    cursor: pointer;
+  }
+}
+
+.default-image-wrapper {
+  img {
+    width: 100%;
+    height: 175px;
+    transform: scaleX(110%);
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 1rem;
+  }
+}

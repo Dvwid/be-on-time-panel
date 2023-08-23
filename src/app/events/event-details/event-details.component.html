@@ -1,0 +1,92 @@
+<div class="w-full">
+  <div class="flex justify-between px-10 py-8 w-full">
+    <span class="text-xl font-medium">{{event?.eventDetails?.name}}</span>
+    <app-icon-button *ngIf="!currentUserJoinedToEvent"
+                     (click)="joinToEvent()"
+                     [showSpinner]="isJoining$ | async"
+                     icon="check"
+                     label="Dołącz do wydarzenia">
+    </app-icon-button>
+
+    <app-icon-button *ngIf="currentUserJoinedToEvent"
+                     (click)="leaveEvent()"
+                     [showSpinner]="isJoining$ | async"
+                     icon="close"
+                     label="Zrezygnuj z wydarzenia">
+    </app-icon-button>
+  </div>
+</div>
+
+<div class="flex w-full gap-20 px-10 relative">
+  <div *ngIf="event?.imageInfo?.imageId"
+       id="image-wrapper"
+       class="w-1/2 z-10"
+       [style.min-height.vh]="30">
+  </div>
+  <div class="w-1/2 absolute top-0 left-0 px-10 z-0">
+    <div class="skeleton w-full rounded-2xl" [style.min-height.vh]="30"></div>
+  </div>
+  <div *ngIf="!event?.imageInfo?.imageId" class="w-1/2 z-10">
+    <img src="assets/images/event-default.jpg" alt="default-image" class="preview-event-image">
+  </div>
+  <div class="flex flex-col gap-3 w-1/2">
+    <div class="w-full">
+      <span class="font-bold menu-section-label">ORGANIZATOR</span>
+      <app-event-initiator [initiatorInfo]="event?.initiatorInfo"></app-event-initiator>
+    </div>
+
+    <div class="w-full">
+      <span class="font-bold menu-section-label">ZAINTERESOWANI</span>
+      <div class="flex flex-wrap gap-3 items-center">
+        <img src="assets/images/user-icon.png"
+             alt="participant"
+             *ngFor="let participant of event?.participantsInfo?.participants"
+             [matTooltip]="participant.participantName"
+             [style.width.px]="30"
+             [style.height.px]="30"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="flex flex-col gap-5 px-10 py-12">
+  <div class="flex gap-20 w-full">
+    <div class="flex flex-col gap-1 w-1/2">
+      <span class="font-bold menu-section-label">OPIS WYDARZENIA</span>
+      <span class="whitespace-pre-wrap text-xs">{{event?.eventDetails?.description}}</span>
+    </div>
+    <div class="flex flex-col gap-1 w-1/2">
+      <span class="font-bold menu-section-label">TERMIN</span>
+      <app-event-time [event]="event"></app-event-time>
+    </div>
+  </div>
+</div>
+
+<div class="flex w-full gap-20 px-10 pb-10">
+  <div class="w-1/2">
+    <span class="font-bold menu-section-label">MIEJSCE NA MAPIE</span>
+    <app-mapbox-wrapper *ngIf="event?.eventLocation?.lat && event?.eventLocation?.lng"
+                        [lngLat]="[event?.eventLocation?.lng, event?.eventLocation?.lat]"
+                        [readonly]="true">
+    </app-mapbox-wrapper>
+
+    <div *ngIf="!event?.eventLocation?.lat || !event?.eventLocation?.lng"
+         [style.height.px]="240"
+         class="flex flex-col items-center gap-3 rounded-2xl py-3 border border-sky-500">
+      <img src="assets/images/no-location.jpg"
+           alt="no-location"
+           [style.height.px]="150"/>
+      <span class="w-3/4 text-center">
+        Podgląd na mapie jest obecnie niedostępny.
+      </span>
+    </div>
+  </div>
+
+  <div class="w-1/2">
+    <span class="font-bold menu-section-label">ADRES WYDARZENIA</span>
+    <app-event-place [eventLocation]="event?.eventLocation"></app-event-place>
+  </div>
+</div>
+
+

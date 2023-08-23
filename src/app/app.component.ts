@@ -1,7 +1,7 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from "@angular/router";
-import { Subject, takeUntil } from 'rxjs';
-import { GlobalService } from './core/global.service';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
+import {NavigationEnd, Router} from "@angular/router";
+import {Subject, takeUntil} from 'rxjs';
+import {GlobalService} from './core/global.service';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.setInnerWidth();
   }
 
-  get isMobileView():boolean {
+  get isMobileView(): boolean {
     return this.globalService.mobileViewActive$.value;
   }
 

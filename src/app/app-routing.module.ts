@@ -4,7 +4,7 @@ import {AuthGuard} from "./core/auth/auth.guard";
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     canActivate: [AuthGuard],
     loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule)
   },
@@ -12,6 +12,11 @@ const routes: Routes = [
     path: 'events',
     canActivate: [AuthGuard],
     loadChildren: () => import('./events/events.module').then(m => m.EventsModule)
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'home'
   }
 ];
 

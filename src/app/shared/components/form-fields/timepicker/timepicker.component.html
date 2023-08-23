@@ -1,48 +1,73 @@
-<div class="flex gap-2 w-full"
+<div class="flex items-center gap-2 w-full border rounded-md px-3 py-2 border-gray-400"
      [formGroup]="formGroup">
-  <mat-form-field appearance="outline" class="flex-grow">
-    <mat-label class="flex items-center gap-2">
-      <mat-icon>schedule</mat-icon>
-      HH
-    </mat-label>
+  <mat-icon>schedule</mat-icon>
+  <input [style.width.rem]="2"
+         [maxLength]="2"
+         name="hour"
+         type="number"
+         [formControlName]="hourControlName"
+         [style.outline]="'none'"
+         [style.-webkit-appearance]="'none'"
+         [max]="24"
+         placeholder="Godz."
+         [min]="0"
+         class="py-1 flex-grow text-right"/>
+  <div>:</div>
+  <input [style.width.rem]="2"
+         [maxLength]="2"
+         type="number"
+         name="minutes"
+         [style.outline]="'none'"
+         [style.-webkit-appearance]="'none'"
+         [formControlName]="minutesControlName"
+         placeholder="Min"
+         [max]="60"
+         [min]="0"
+         class="py-1 flex-grow"/>
 
-    <input type="text"
-           aria-label="Godzina"
-           name="hour"
-           class="text-center"
-           matInput
-           [formControlName]="hourControlName"
-           [matAutocomplete]="hourAuto">
-    <mat-autocomplete autoActiveFirstOption #hourAuto="matAutocomplete">
-      <mat-option *ngFor="let option of hourFilteredOptions | async"
-                  class="text-center"
-                  [value]="option">
-        {{option}}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
+  <!--  <mat-form-field appearance="outline" class="flex-grow">-->
+  <!--    <mat-label class="flex items-center gap-2">-->
+  <!--      <mat-icon>schedule</mat-icon>-->
+  <!--      HH-->
+  <!--    </mat-label>-->
 
-  <div class="mt-3">:</div>
+  <!--    <input type="text"-->
+  <!--           aria-label="Godzina"-->
+  <!--           name="hour"-->
+  <!--           class="text-center"-->
+  <!--           matInput-->
+  <!--           [formControlName]="hourControlName"-->
+  <!--           [matAutocomplete]="hourAuto">-->
+  <!--    <mat-autocomplete autoActiveFirstOption #hourAuto="matAutocomplete">-->
+  <!--      <mat-option *ngFor="let option of hourFilteredOptions | async"-->
+  <!--                  class="text-center"-->
+  <!--                  [value]="option">-->
+  <!--        {{option}}-->
+  <!--      </mat-option>-->
+  <!--    </mat-autocomplete>-->
+  <!--  </mat-form-field>-->
 
-  <mat-form-field appearance="outline" class="flex-grow">
-    <mat-label class="flex items-center gap-2">
-      <mat-icon>schedule</mat-icon>
-      MM
-    </mat-label>
+  <!--  <div class="mt-3">:</div>-->
 
-    <input type="text"
-           aria-label="Minuta"
-           name="minutes"
-           class="text-center"
-           matInput
-           [formControlName]="minutesControlName"
-           [matAutocomplete]="minuteAuto">
-    <mat-autocomplete autoActiveFirstOption #minuteAuto="matAutocomplete">
-      <mat-option *ngFor="let option of minuteFilteredOptions | async"
-                  class="text-center"
-                  [value]="option">
-        {{option}}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
+  <!--  <mat-form-field appearance="outline" class="flex-grow">-->
+  <!--    <mat-label class="flex items-center gap-2">-->
+  <!--      <mat-icon>schedule</mat-icon>-->
+  <!--      MM-->
+  <!--    </mat-label>-->
+
+  <!--    <input type="text"-->
+  <!--           aria-label="Minuta"-->
+  <!--           name="minutes"-->
+  <!--           class="text-center"-->
+  <!--           matInput-->
+  <!--           [formControlName]="minutesControlName"-->
+  <!--           [matAutocomplete]="minuteAuto">-->
+  <!--    <mat-autocomplete autoActiveFirstOption #minuteAuto="matAutocomplete">-->
+  <!--      <mat-option *ngFor="let option of minuteFilteredOptions | async"-->
+  <!--                  class="text-center"-->
+  <!--                  [value]="option">-->
+  <!--        {{option}}-->
+  <!--      </mat-option>-->
+  <!--    </mat-autocomplete>-->
+  <!--  </mat-form-field>-->
 </div>

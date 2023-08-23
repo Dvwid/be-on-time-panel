@@ -1,28 +1,32 @@
-<mat-drawer-container autosize class="min-h-screen" [style.background-color]="'#f6f8fa'">
-  <mat-drawer *ngIf="!isLoginPage"
-              #drawer
-              (closed)="opened = false"
-              [mode]="sidenavMode"
-              [opened]="opened">
-    <div class="flex flex-col gap-2 py-10 px-10">
-      <img src="assets/images/beOnTime.svg" alt="logo" width="200" />
-      <app-menu class="mt-12"></app-menu>
+<mat-sidenav-container>
+  <mat-sidenav *ngIf="!isLoginPage"
+               #drawer
+               [mode]="sidenavMode"
+               [opened]="opened"
+               [fixedInViewport]="true"
+               [fixedTopGap]="0"
+               [fixedBottomGap]="0">
+    <div class="flex flex-col gap-2 py-10 px-10 h-screen">
+      <img src="assets/images/beOnTime.svg" alt="logo" width="200"/>
+      <app-menu class="mt-12 h-full"></app-menu>
     </div>
-  </mat-drawer>
+  </mat-sidenav>
 
-  <div>
-    <div class="flex-grow bg-main-section relative">
-      <button *ngIf="isMobileView"
-              mat-mini-fab
-              color="primary"
-              class="menu-btn"
-              (click)="opened = !opened">
-        <i class="material-icons">menu</i>
-      </button>
+  <mat-sidenav-content>
+    <div>
+      <div class="flex-grow bg-main-section relative">
+        <button *ngIf="isMobileView && !isLoginPage"
+                mat-mini-fab
+                color="primary"
+                class="menu-btn"
+                (click)="opened = !opened">
+          <i class="material-icons">menu</i>
+        </button>
 
-      <router-outlet></router-outlet>
+        <router-outlet></router-outlet>
+      </div>
     </div>
-  </div>
-</mat-drawer-container>
+  </mat-sidenav-content>
+</mat-sidenav-container>
 
 <exam-testing-notification></exam-testing-notification>

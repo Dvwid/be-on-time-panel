@@ -7,11 +7,13 @@ import {
   EventDetailsDto,
   EventDto,
   EventImageInfoDto,
-  EventLocationDto
+  EventLocationDto,
+  InitiatorInfoDto
 } from "../../core/dtos/EventDto";
 import {BehaviorSubject, finalize} from "rxjs";
 import {NotificationService} from "../../core/notification/services/notification.service";
 import {Router} from "@angular/router";
+import {AuthService} from "../../core/auth/services/auth.service";
 
 @Component({
   selector: 'app-event-create',
@@ -23,6 +25,8 @@ export class EventCreateComponent {
   #formBuilder = inject(FormBuilder);
   #notificationService = inject(NotificationService);
   #router = inject(Router);
+  #authService = inject(AuthService);
+
 
   eventForm: FormGroup<EventForm> = this.#formBuilder
     .group({
@@ -78,7 +82,8 @@ export class EventCreateComponent {
       eventLocation: this.prepareEventLocationDto(),
       eventDetails: this.prepareEventDetailsDto(),
       additionalInfo: this.prepareEventAdditionalInfoDto(),
-      imageInfo: this.prepareEventImageInfoDto()
+      imageInfo: this.prepareEventImageInfoDto(),
+      initiatorInfo: this.prepareInitiatorInfo()
     }
   }
 
@@ -131,6 +136,13 @@ export class EventCreateComponent {
   private prepareEventImageInfoDto(): EventImageInfoDto {
     return {
       imageId: this.eventForm?.controls?.eventImage?.controls?.imageId?.value
+    };
+  }
+
+  private prepareInitiatorInfo(): InitiatorInfoDto {
+    return {
+      initiatorId: this.#authService.currentUser$.value.id,
+      initiatorName: this.#authService.currentUser$.value.name,
     };
   }
 }

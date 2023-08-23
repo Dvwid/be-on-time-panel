@@ -44,7 +44,7 @@ export function initializePagination(): PageInfoDto {
   }
 }
 
-export function convertBase64ToImage(image: ImageDto, imageClass: string): void {
+export function convertBase64ToImage(image: ImageDto, imageClass: string, wrapperId: string): void {
   if (!image?.base64) {
     return;
   }
@@ -53,7 +53,7 @@ export function convertBase64ToImage(image: ImageDto, imageClass: string): void 
   img.alt = image?.name;
   img.title = image?.id;
   img.className = imageClass;
-  const wrapper = document.getElementById('image-wrapper');
+  const wrapper = document.getElementById(wrapperId);
   wrapper.prepend(img);
 }
 

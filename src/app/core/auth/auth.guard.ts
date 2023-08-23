@@ -16,16 +16,17 @@ export class AuthGuard implements CanActivate, OnInit {
   }
 
   async canActivate() {
-    return true;
     const token = localStorage.getItem('EXAM-JWT');
 
     if (token) {
       const user = await firstValueFrom(this.verifyToken(token));
+
       if (!user) {
         this.router.navigate(['auth']);
         return false
       }
       if (user) {
+        this.authService.currentUser$.next(user);
         return true;
       }
     }

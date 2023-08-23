@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {Observable, throwError} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {NotificationService} from "./notification/services/notification.service";
@@ -9,8 +9,10 @@ import {Router} from "@angular/router";
 })
 export class ExceptionService {
 
-  constructor(private notificationService: NotificationService,
-              private router: Router) {
+  #notificationService = inject(NotificationService);
+  #router = inject(Router);
+
+  constructor() {
   }
 
 
@@ -53,12 +55,12 @@ export class ExceptionService {
   }
 
   private showError(msg: string): void {
-    this.notificationService.error('Wystąpił błąd.', msg, 6000);
+    this.#notificationService.error('Wystąpił błąd.', msg, 6000);
     console.error(msg);
   }
 
   private logout() {
     localStorage.removeItem('EXAM-JWT');
-    this.router.navigate(['/auth']);
+    this.#router.navigate(['/auth']);
   }
 }

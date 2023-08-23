@@ -5,7 +5,7 @@ import {EventsRoutingModule} from './events-routing.module';
 import {EventsComponent} from './events.component';
 import {MaterialModule} from "../core/material/material.module";
 import {EventListComponent} from './event-list/event-list.component';
-import {EventDetailsComponent} from './event-preview/event-details.component';
+import {EventDetailsComponent} from './event-details/event-details.component';
 import {GoogleMapWrapperModule} from "../shared/components/mapbox-wrapper/mapbox-wrapper.module";
 import {EventCreateComponent} from './event-create/event-create.component';
 import {TextInputComponent} from "../shared/components/form-fields/text-input/text-input.component";
@@ -36,6 +36,9 @@ import {
 import { ListHeaderComponent } from './event-list/list-header/list-header.component';
 import { ListCellComponent } from './event-list/list-cell/list-cell.component';
 import {IconButtonComponent} from "../shared/components/icon-button/icon-button.component";
+import { EventTimeComponent } from './event-details/event-time/event-time.component';
+import { EventInitiatorComponent } from './event-details/event-initiator/event-initiator.component';
+import { EventPlaceComponent } from './event-details/event-place/event-place.component';
 
 
 @NgModule({
@@ -70,6 +73,9 @@ import {IconButtonComponent} from "../shared/components/icon-button/icon-button.
     EventPlaceFormComponent,
     ListHeaderComponent,
     ListCellComponent,
+    EventTimeComponent,
+    EventInitiatorComponent,
+    EventPlaceComponent,
   ],
 })
 export class EventsModule {

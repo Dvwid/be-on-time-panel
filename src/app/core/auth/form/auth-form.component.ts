@@ -14,7 +14,7 @@ enum FormTypeEnum {
 
 @Component({
   selector: 'exam-testing-auth-form',
-  templateUrl: './auth-form.component.html',
+  templateUrl: './auth-form.component.html'
 })
 export class AuthFormComponent implements OnInit, OnDestroy {
 

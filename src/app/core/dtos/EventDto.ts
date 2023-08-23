@@ -27,10 +27,27 @@ export interface EventImageInfoDto {
   imageId: string;
 }
 
+export interface InitiatorInfoDto {
+  initiatorId: string;
+  initiatorName: string;
+}
+
+export interface ParticipantInfoDto {
+  participantName: string;
+  participantId: string;
+  participantImageId: string;
+}
+
+export interface ParticipantsInfoDto {
+  participants: ParticipantInfoDto[];
+}
+
 export interface EventDto {
   id?: string;
   eventDetails: EventDetailsDto;
   eventLocation: EventLocationDto;
   additionalInfo: EventAdditionalInfoDto;
   imageInfo: EventImageInfoDto;
+  initiatorInfo: InitiatorInfoDto;
+  participantsInfo?: ParticipantsInfoDto;
 }

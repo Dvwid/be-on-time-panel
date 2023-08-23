@@ -1,12 +1,6 @@
-<div class="w-full flex gap-5 pt-1 items-center"
+<div class="w-full flex gap-5 pt-1 items-center justify-center"
      [formGroup]="formGroup">
-  <div class="flex items-center w-1/2">
-    <img src="assets/images/event_plan.jpg"
-         [style.width.rem]="40"
-         alt="Event plan"/>
-  </div>
-
-  <div class="w-1/2 form-sm flex-grow">
+  <div class="w-full md:w-3/4 2xl:w-1/2 form-sm">
     <app-text-input controlName="name"
                     [formGroup]="formGroup"
                     [form]="form"
@@ -49,11 +43,10 @@
                   [rows]="9"
                   label="Opis wydarzenia">
     </app-textarea>
-
-    <div class="flex justify-end">
-      <div class="border-l-2 border-l-sky-700 opacity-20"></div>
-      <app-stepper-next-button></app-stepper-next-button>
-    </div>
-
   </div>
+</div>
+
+<div class="flex justify-end w-full">
+  <div class="border-l-2 border-l-sky-700 opacity-20"></div>
+  <app-stepper-next-button></app-stepper-next-button>
 </div>

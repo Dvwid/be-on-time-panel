@@ -1,0 +1,43 @@
+<!--<div class="flex items-center gap-1 w-full text-xs">-->
+<!--  <i class="material-icons text-gray-600 text-xl">event</i>-->
+<!--  <span>{{event?.eventDetails?.dateFrom | date}}</span>-->
+<!--  <span>o godz.</span>-->
+<!--  <span>{{event?.eventDetails?.hourFrom}}:{{event?.eventDetails?.minuteFrom}}</span>-->
+<!--</div>-->
+
+<!--<div class="flex whitespace-pre-wrap justify-between w-full xl:w-1/2 text-xs">-->
+<!--  <span>Koniec:</span>-->
+<!--  <span>{{event?.eventDetails?.dateTo | date}}-->
+<!--    {{event?.eventDetails?.hourTo}}:{{event?.eventDetails?.minuteTo}}-->
+<!--  </span>-->
+<!--</div>-->
+
+
+<table class="w-full">
+  <tr class="w-full">
+    <td class="w-1/3">
+      <div class="flex items-center gap-1">
+        <i class="material-icons text-gray-600 text-xl">event</i>
+        <span>Początek</span>
+      </div>
+
+    </td>
+    <td class="w-2/3">
+      <span>{{event?.eventDetails?.dateFrom | date}}</span>
+      <span>{{event?.eventDetails?.hourFrom}}:{{event?.eventDetails?.minuteFrom}}</span>
+    </td>
+  </tr>
+
+  <tr class="w-full">
+    <td class="w-1/3">
+      <div class="flex items-center gap-1">
+        <i class="material-icons text-gray-600 text-xl">event</i>
+        <span>Koniec</span>
+      </div>
+    </td>
+    <td class="w-2/3">
+      <span>{{event?.eventDetails?.dateTo | date}}</span>
+      <span>{{event?.eventDetails?.hourTo}}:{{event?.eventDetails?.minuteTo}}</span>
+    </td>
+  </tr>
+</table>

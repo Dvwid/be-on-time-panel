@@ -1,20 +1,54 @@
-<div class="flex flex-col gap-1 justify-center flex-grow text-gray-500">
-  <span class="font-bold menu-section-label">GŁÓWNE MENU</span>
-  <app-menu-element *ngFor="let item of mainMenuItems"
-                    [label]="item.label"
-                    [icon]="item.icon"
-                    [routerLink]="item.routerLink"
-                    routerLinkActive="active-menu-item"
-                    class="rounded-lg">
-  </app-menu-element>
+<div class="flex flex-col justify-between h-full">
+  <div class="flex flex-col gap-1 flex-grow text-gray-500">
+    <span class="font-bold menu-section-label">GŁÓWNE MENU</span>
+    <app-menu-element *ngFor="let item of mainMenuItems"
+                      [label]="item.label"
+                      [icon]="item.icon"
+                      [routerLink]="item.routerLink"
+                      routerLinkActive="active-menu-item"
+                      class="rounded-lg">
+    </app-menu-element>
+
+    <span class="font-bold menu-section-label">WYDARZENIA</span>
+    <app-menu-element *ngFor="let item of eventMenuItems"
+                      [label]="item.label"
+                      [icon]="item.icon"
+                      [routerLink]="item.routerLink"
+                      routerLinkActive="active-menu-item"
+                      class="rounded-lg">
+    </app-menu-element>
 
 
-  <span class="font-bold menu-section-label mt-5">PREFERENCJE</span>
-  <app-menu-element *ngFor="let item of preferencesMenuItems"
-                    [label]="item.label"
-                    [icon]="item.icon"
-                    [routerLink]="item.routerLink"
-                    routerLinkActive="active-menu-item"
-                    class="rounded-lg">
-  </app-menu-element>
+    <span class="font-bold menu-section-label mt-5">PREFERENCJE</span>
+    <app-menu-element *ngFor="let item of preferencesMenuItems"
+                      [label]="item.label"
+                      [icon]="item.icon"
+                      [routerLink]="item.routerLink"
+                      routerLinkActive="active-menu-item"
+                      class="rounded-lg">
+    </app-menu-element>
+  </div>
+
+  <div class="flex flex-col gap-3">
+    <span class="font-bold menu-section-label mt-5">ZALOGOWANY UŻYTKOWNIK</span>
+    <div class="flex gap-3 items-center justify-between w-full">
+      <div class="flex gap-3 items-center">
+        <img src="assets/images/user-icon.png"
+             alt="user"
+             [style.width.px]="30"
+             [style.height.px]="30"/>
+        <span>{{user?.name}}</span>
+      </div>
+
+      <mat-icon matTooltip="Wyloguj"
+                class="cursor-pointer hover:text-sky-700"
+                (click)="logout()">
+        exit_to_app
+      </mat-icon>
+    </div>
+  </div>
+
 </div>
+
+
+

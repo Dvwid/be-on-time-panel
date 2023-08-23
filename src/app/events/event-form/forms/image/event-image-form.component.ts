@@ -55,7 +55,7 @@ export class EventImageFormComponent extends EventFormAbstractComponent<EventIma
         if (!data) {
           return;
         }
-        setTimeout(() => data?.forEach((img) => convertBase64ToImage(img, 'event-image')));
+        setTimeout(() => data?.forEach((img) => convertBase64ToImage(img, 'event-image', 'image-wrapper')));
       });
   }
 
@@ -63,7 +63,7 @@ export class EventImageFormComponent extends EventFormAbstractComponent<EventIma
     if (this.images.length === 5) {
       this.images.splice(4, 1);
     }
-    convertBase64ToImage(image, 'event-image');
+    convertBase64ToImage(image, 'event-image', 'image-wrapper');
     this._notificationService.success('Sukces!', 'Dodano nowe zdjęcie');
   }
 

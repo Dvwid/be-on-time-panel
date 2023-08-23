@@ -1,4 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
+import {AuthService} from "../auth/services/auth.service";
+import {UserDto} from "../dtos/UserDto";
+import {Subject, takeUntil} from "rxjs";
 
 interface MenuItem {
   label: string;
@@ -11,7 +14,11 @@ interface MenuItem {
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent {
+export class MenuComponent implements OnInit, OnDestroy {
+
+  #authService = inject(AuthService);
+
+  destroy$ = new Subject<boolean>();
 
   mainMenuItems: MenuItem[] = [
     {
@@ -19,10 +26,23 @@ export class MenuComponent {
       icon: 'home',
       routerLink: 'home'
     },
+  ];
+
+  eventMenuItems: MenuItem[] = [
     {
-      label: 'Wydarzenia',
-      icon: 'star',
+      label: 'Nadchodzące',
+      icon: 'event_note',
       routerLink: 'events'
+    },
+    {
+      label: 'W trakcie',
+      icon: 'pending_actions',
+      routerLink: 'events-in-progress'
+    },
+    {
+      label: 'Zakończone',
+      icon: 'event_available',
+      routerLink: 'event_available'
     }
   ]
 
@@ -33,4 +53,30 @@ export class MenuComponent {
       routerLink: 'settings'
     }
   ]
+
+  user: UserDto;
+
+  ngOnInit() {
+    this.listenOnUserChange();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.complete();
+  }
+
+  logout() {
+    this.#authService.currentUser$.next(undefined);
+    localStorage.removeItem('EXAM-JWT');
+    window.location.reload();
+  }
+
+  private listenOnUserChange() {
+    this.#authService
+      .currentUser$
+      .pipe(
+        takeUntil(this.destroy$)
+      )
+      .subscribe((user) => this.user = user);
+  }
 }

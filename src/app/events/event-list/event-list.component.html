@@ -1,107 +1,197 @@
-<div class="mb-2">
-  <button class="rounded-md border flex items-center px-3 py-2 gap-2 font-medium"
-          matRipple>
-    <i class="material-icons text-md">add</i>
-    <span class="text-sm">Dodaj filtr</span>
-  </button>
-</div>
+<!--<div class="mb-5">-->
+<!--  <button class="rounded-md border flex items-center px-3 py-2 gap-2 font-medium"-->
+<!--          matRipple>-->
+<!--    <i class="material-icons text-md">add</i>-->
+<!--    <span class="text-sm">Dodaj filtr</span>-->
+<!--  </button>-->
+<!--</div>-->
 
+<div class="flex gap-14 w-full flex-wrap">
+  <ng-container *ngIf="areEventsLoading$ | async">
+    <div *ngFor="let event of events"
+         class="flex flex-col rounded-md border event-wrapper"
+         [routerLink]="'details/' + event?.id"
+         [style.width.px]="250">
+      <div class="px-5 py-3 text-xs">
+        <app-skeleton-loader></app-skeleton-loader>
+      </div>
 
-<div class="min-w-full overflow-x-auto rounded-md border">
-  <table class="border-collapse table-fixed min-w-full rounded-md">
-    <thead>
-    <tr class="bg-gray-100">
-      <th>
-        <app-list-header icon="star" label="Nazwa wydarzenia"></app-list-header>
-      </th>
+      <div [id]="'image-wrapper-'+event?.id"
+           [style.height.px]="175"
+           [class.skeleton]="isImageLoaderVisible(event?.id)">
+      </div>
 
-      <th>
-        <app-list-header icon="place" label="Miejsce"></app-list-header>
-      </th>
-
-      <th>
-        <app-list-header icon="event" label="Data rozpoczęcia"></app-list-header>
-      </th>
-
-      <th>
-        <app-list-header icon="schedule" label="Godzina rozpoczęcia"></app-list-header>
-      </th>
-
-      <th>
-        <app-list-header icon="event" label="Data zakończenia"></app-list-header>
-      </th>
-
-      <th>
-        <app-list-header icon="schedule" label="Godzina zakończenia"></app-list-header>
-      </th>
-    </tr>
-    </thead>
-    <tbody>
-    <ng-container *ngIf="events?.length > 0">
-      <tr *ngFor="let event of events"
-          [routerLink]="'details/' + event?.id"
-          class="event-item text-left">
-        <th>
-          <app-list-cell [value]="event?.eventDetails?.name">
-          </app-list-cell>
-        </th>
-        <th>
-          <app-list-cell [value]="event?.eventLocation?.placeName">
-          </app-list-cell>
-        </th>
-        <th>
-          <app-list-cell [value]="event?.eventDetails?.dateFrom | date">
-          </app-list-cell>
-        </th>
-        <th>
-          <app-list-cell [value]="event?.eventDetails?.hourFrom + ' : ' + event?.eventDetails?.minuteFrom">
-          </app-list-cell>
-        </th>
-        <th>
-          <app-list-cell [value]="event?.eventDetails?.dateTo | date">
-          </app-list-cell>
-        </th>
-        <th>
-          <app-list-cell [value]="event?.eventDetails?.hourTo + ' : ' + event?.eventDetails?.minuteTo">
-          </app-list-cell>
-        </th>
-      </tr>
-    </ng-container>
-
-    <tr *ngIf="events?.length === 0 && !(areEventsLoading$ | async)">
-      <td colspan="6">
-        <div class="flex p-3 items-center">
-          Obecnie nie istnieje żadne wydarzenie.
-        </div>
-      </td>
-    </tr>
-
-    </tbody>
-  </table>
-
-  <div class="flex justify-between items-center px-3 py-1 text-xs border-t text-gray-400">
-    <div>Liczba wszystkich wydarzeń: {{pagination?.total}}</div>
-
-    <div class="flex">
-      <div class="flex items-center gap-1">
-        Liczba elementów na stronie: {{pagination?.pageSize}}
-        <button mat-icon-button>
-          <i class="material-icons">
-            chevron_left
-          </i>
-        </button>
-
-        <span>Strona</span>
-        <span>{{pagination?.page}}</span>
-        <span>z</span>
-        <span>0</span>
-
-        <button mat-icon-button>
-          <i class="material-icons">
-            chevron_right
-          </i>
-        </button>
+      <div class="p-5">
+      <span class="font-semibold">
+          {{event?.eventDetails?.name}}
+      </span>
       </div>
     </div>
-  </div>
+  </ng-container>
+
+  <ng-container *ngIf="areEventsLoading$ | async">
+    <div class="flex flex-col rounded-md border event-wrapper"
+         *ngFor="let _ of [].constructor(3)"
+         [style.width.px]="250">
+      <div class="flex px-5 py-3 text-xs w-full">
+        <span class="skeleton w-full rounded-md">&nbsp;</span>
+      </div>
+
+      <div [style.height.px]="175"
+           class="skeleton">
+      </div>
+
+      <div class="p-5 w-full flex">
+        <span class="skeleton w-full rounded-md">&nbsp;</span>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="events?.length > 0 && !(areEventsLoading$ | async)">
+    <div *ngFor="let event of events"
+         class="flex flex-col rounded-md border event-wrapper"
+         [routerLink]="'details/' + event?.id"
+         [style.width.px]="250">
+      <div class="px-5 py-3 text-xs">
+        <span>{{event?.eventDetails?.dateFrom | date}}</span>
+        <span *ngIf="event?.eventDetails?.hourFrom && event?.eventDetails?.minuteTo">
+            {{event?.eventDetails?.hourFrom || '00'}}:{{event?.eventDetails?.minuteFrom || '00'}}
+          </span>
+      </div>
+
+      <div *ngIf="event?.imageInfo?.imageId"
+           [id]="'image-wrapper-'+event?.id"
+           [style.height.px]="175"
+           [class.skeleton]="isImageLoaderVisible(event?.id)">
+      </div>
+
+      <div *ngIf="!event?.imageInfo?.imageId"
+           class="default-image-wrapper"
+           [style.height.px]="175">
+        <img src="assets/images/event-default.jpg" alt="default-image">
+      </div>
+
+      <div class="p-5">
+        <span class="font-semibold">
+            {{event?.eventDetails?.name}}
+        </span>
+      </div>
+    </div>
+  </ng-container>
+
+
+  <ng-container *ngIf="events?.length === 0 && !(areEventsLoading$ | async)">
+    <div class="flex w-full justify-center pt-24 px-5">
+      <div class="flex flex-col gap-3 items-center">
+        <img src="assets/images/no-events-yet.gif"
+             alt="brak-wydarzen"
+             [style.width.rem]="30"
+             class="grayscale"/>
+
+        <div class="text-center text-2xl font-medium">Oops</div>
+        <div class="text-center">Obecnie nie ma żadnych zaplanowanych wydarzeń.</div>
+      </div>
+
+    </div>
+  </ng-container>
 </div>
+
+
+<!--<div class="min-w-full overflow-x-auto rounded-md border">-->
+<!--  <table class="border-collapse table-fixed min-w-full rounded-md">-->
+<!--    <thead>-->
+<!--    <tr class="bg-gray-100">-->
+<!--      <th>-->
+<!--        <app-list-header icon="star" label="Nazwa wydarzenia"></app-list-header>-->
+<!--      </th>-->
+
+<!--      <th>-->
+<!--        <app-list-header icon="place" label="Miejsce"></app-list-header>-->
+<!--      </th>-->
+
+<!--      <th>-->
+<!--        <app-list-header icon="event" label="Data rozpoczęcia"></app-list-header>-->
+<!--      </th>-->
+
+<!--      <th>-->
+<!--        <app-list-header icon="schedule" label="Godzina rozpoczęcia"></app-list-header>-->
+<!--      </th>-->
+
+<!--      <th>-->
+<!--        <app-list-header icon="event" label="Data zakończenia"></app-list-header>-->
+<!--      </th>-->
+
+<!--      <th>-->
+<!--        <app-list-header icon="schedule" label="Godzina zakończenia"></app-list-header>-->
+<!--      </th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <ng-container *ngIf="events?.length > 0">-->
+<!--      <tr *ngFor="let event of events"-->
+<!--          [routerLink]="'details/' + event?.id"-->
+<!--          class="event-item text-left">-->
+<!--        <th>-->
+<!--          <app-list-cell [value]="event?.eventDetails?.name">-->
+<!--          </app-list-cell>-->
+<!--        </th>-->
+<!--        <th>-->
+<!--          <app-list-cell [value]="event?.eventLocation?.placeName">-->
+<!--          </app-list-cell>-->
+<!--        </th>-->
+<!--        <th>-->
+<!--          <app-list-cell [value]="event?.eventDetails?.dateFrom | date">-->
+<!--          </app-list-cell>-->
+<!--        </th>-->
+<!--        <th>-->
+<!--          <app-list-cell [value]="event?.eventDetails?.hourFrom + ' : ' + event?.eventDetails?.minuteFrom">-->
+<!--          </app-list-cell>-->
+<!--        </th>-->
+<!--        <th>-->
+<!--          <app-list-cell [value]="event?.eventDetails?.dateTo | date">-->
+<!--          </app-list-cell>-->
+<!--        </th>-->
+<!--        <th>-->
+<!--          <app-list-cell [value]="event?.eventDetails?.hourTo + ' : ' + event?.eventDetails?.minuteTo">-->
+<!--          </app-list-cell>-->
+<!--        </th>-->
+<!--      </tr>-->
+<!--    </ng-container>-->
+
+<!--    <tr *ngIf="events?.length === 0 && !(areEventsLoading$ | async)">-->
+<!--      <td colspan="6">-->
+<!--        <div class="flex p-3 items-center">-->
+<!--          Obecnie nie istnieje żadne wydarzenie.-->
+<!--        </div>-->
+<!--      </td>-->
+<!--    </tr>-->
+
+<!--    </tbody>-->
+<!--  </table>-->
+
+<!--  <div class="flex justify-between items-center px-3 py-1 text-xs border-t text-gray-400">-->
+<!--    <div>Liczba wszystkich wydarzeń: {{pagination?.total}}</div>-->
+
+<!--    <div class="flex">-->
+<!--      <div class="flex items-center gap-1">-->
+<!--        Liczba elementów na stronie: {{pagination?.pageSize}}-->
+<!--        <button mat-icon-button>-->
+<!--          <i class="material-icons">-->
+<!--            chevron_left-->
+<!--          </i>-->
+<!--        </button>-->
+
+<!--        <span>Strona</span>-->
+<!--        <span>{{pagination?.page}}</span>-->
+<!--        <span>z</span>-->
+<!--        <span>0</span>-->
+
+<!--        <button mat-icon-button>-->
+<!--          <i class="material-icons">-->
+<!--            chevron_right-->
+<!--          </i>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
