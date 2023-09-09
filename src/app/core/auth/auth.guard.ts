@@ -1,12 +1,12 @@
 import {Injectable, OnInit} from '@angular/core';
-import {CanActivate, Router} from '@angular/router';
+import { Router } from '@angular/router';
 import {AuthService} from "./services/auth.service";
 import {firstValueFrom} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate, OnInit {
+export class AuthGuard  implements OnInit {
 
   constructor(private authService: AuthService,
               private router: Router) {
