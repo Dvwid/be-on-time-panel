@@ -1,0 +1,11 @@
+@import 'src/assets/styles/variables';
+
+ngx-mat-datepicker-content {
+  background: white !important;
+  filter: drop-shadow(1px 1px 3px #444);
+}
+
+.mat-calendar-body-selected {
+  background: $primary-color !important;
+  color: $secondary-color !important;
+}

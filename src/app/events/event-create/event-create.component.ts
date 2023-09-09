@@ -36,7 +36,6 @@ export class EventCreateComponent {
           description: new FormControl<string | null>('', Validators.required),
           dateFrom: new FormControl<Date | null>(null, Validators.required),
           hourFrom: new FormControl<string | null>(null),
-          minuteFrom: new FormControl<string | null>(null),
           dateTo: new FormControl<Date | null>(null),
           hourTo: new FormControl<string | null>(null),
           minuteTo: new FormControl<string | null>(null)
@@ -105,10 +104,6 @@ export class EventCreateComponent {
       description: this.eventForm?.controls?.eventDetails?.controls?.description?.value,
       dateFrom: this.eventForm?.controls?.eventDetails?.controls?.dateFrom?.value?.getTime(),
       dateTo: this.eventForm?.controls?.eventDetails?.controls?.dateTo?.value?.getTime(),
-      hourFrom: this.eventForm?.controls?.eventDetails?.controls?.hourFrom?.value,
-      hourTo: this.eventForm?.controls?.eventDetails?.controls?.hourTo?.value,
-      minuteFrom: this.eventForm?.controls?.eventDetails?.controls?.minuteFrom?.value,
-      minuteTo: this.eventForm?.controls?.eventDetails?.controls?.minuteTo?.value
     };
   }
 

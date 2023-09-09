@@ -1,11 +1,3 @@
-<!--<div class="mb-5">-->
-<!--  <button class="rounded-md border flex items-center px-3 py-2 gap-2 font-medium"-->
-<!--          matRipple>-->
-<!--    <i class="material-icons text-md">add</i>-->
-<!--    <span class="text-sm">Dodaj filtr</span>-->
-<!--  </button>-->
-<!--</div>-->
-
 <div class="flex gap-14 w-full flex-wrap">
   <ng-container *ngIf="areEventsLoading$ | async">
     <div *ngFor="let event of events"
@@ -53,10 +45,7 @@
          [routerLink]="'details/' + event?.id"
          [style.width.px]="250">
       <div class="px-5 py-3 text-xs">
-        <span>{{event?.eventDetails?.dateFrom | date}}</span>
-        <span *ngIf="event?.eventDetails?.hourFrom && event?.eventDetails?.minuteTo">
-            {{event?.eventDetails?.hourFrom || '00'}}:{{event?.eventDetails?.minuteFrom || '00'}}
-          </span>
+        <span>{{event?.eventDetails?.dateFrom | date: 'dd-MM-YYYY hh:mm'}}</span>
       </div>
 
       <div *ngIf="event?.imageInfo?.imageId"

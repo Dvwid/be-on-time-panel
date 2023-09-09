@@ -1,23 +1,27 @@
 <div [formGroup]="formGroup"
      class="w-full">
-  <mat-form-field appearance="outline"
-                  class="w-full">
-    <mat-label>{{label}}</mat-label>
-
+  <mat-form-field appearance="outline">
     <input matInput
-           (focus)="picker.open()"
-           [formControlName]="controlName"
-           [matDatepicker]="picker">
-
-    <mat-datepicker-toggle matIconSuffix
-                           [for]="picker">
-    </mat-datepicker-toggle>
-
-    <mat-datepicker #picker></mat-datepicker>
+           [ngxMatDatetimePicker]="picker"
+           [placeholder]="label"
+           [formControlName]="controlName">
+    <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
+    <ngx-mat-datetime-picker #picker
+                             [showSpinners]="true"
+                             [showSeconds]="false"
+                             [stepHour]="1"
+                             [stepMinute]="1"
+                             [stepSecond]="1"
+                             [touchUi]="false"
+                             [enableMeridian]="false"
+                             [disableMinute]="false"
+                             [hideTime]="false">
+    </ngx-mat-datetime-picker>
 
     <mat-error *ngIf="form.submitted && formGroup?.controls?.[controlName]?.invalid">
       {{showError()}}
     </mat-error>
   </mat-form-field>
 </div>
+
 

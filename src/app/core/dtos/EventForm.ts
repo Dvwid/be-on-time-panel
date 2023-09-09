@@ -31,7 +31,6 @@ export type EventDetailsFormGroup = {
   description: FormControl<string | null>;
   dateFrom: FormControl<Date>;
   hourFrom: FormControl<string | null>;
-  minuteFrom: FormControl<string | null>;
   dateTo: FormControl<Date | null>;
   hourTo: FormControl<string | null>;
   minuteTo: FormControl<string | null>;

@@ -2,11 +2,7 @@ export interface EventDetailsDto {
   name: string;
   description: string;
   dateFrom: number;
-  hourFrom: string;
-  minuteFrom: string;
   dateTo: number;
-  hourTo: string;
-  minuteTo: string;
 }
 
 export interface EventLocationDto {

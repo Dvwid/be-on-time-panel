@@ -14,12 +14,6 @@
                       class="w-full sm:w-8/12"
                       label="Data rozpoczęcia">
       </app-datepicker>
-
-      <app-timepicker class="w-full sm:w-4/12"
-                      hourControlName="hourFrom"
-                      minutesControlName="minuteFrom"
-                      [formGroup]="formGroup">
-      </app-timepicker>
     </div>
 
     <div class="flex flex-col sm:flex-row sm:gap-3 w-full">
@@ -29,12 +23,6 @@
                       class="w-full sm:w-8/12"
                       label="Data zakończenia">
       </app-datepicker>
-
-      <app-timepicker class="w-full sm:w-4/12"
-                      hourControlName="hourTo"
-                      minutesControlName="minuteTo"
-                      [formGroup]="formGroup">
-      </app-timepicker>
     </div>
 
     <app-textarea controlName="description"
