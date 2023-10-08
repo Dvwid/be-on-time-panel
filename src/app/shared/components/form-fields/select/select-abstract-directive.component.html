@@ -1,0 +1,26 @@
+<mat-form-field [formGroup]="formGroup"
+                class="w-full"
+                appearance="outline">
+  <mat-label>{{label}}</mat-label>
+  <mat-select [formControlName]="controlName"
+              [multiple]="multiple">
+    <ng-container *ngIf="!showSpinner">
+      <mat-option *ngFor="let value of options"
+                  [disabled]="disabled"
+                  [value]="valueKey ? value[valueKey] : value">
+        <mat-icon *ngIf="value?.icon && showOptionIcons"
+                  [style.opacity]=".8">
+          {{value.icon}}
+        </mat-icon>
+        {{displayNameKey ? value[displayNameKey] : value}}
+      </mat-option>
+    </ng-container>
+
+    <ng-container *ngIf="showSpinner">
+      <mat-option [disabled]="true">
+        <mat-spinner diameter="20"></mat-spinner>
+      </mat-option>
+    </ng-container>
+  </mat-select>
+  <mat-icon matSuffix *ngIf="suffixIcon">{{suffixIcon}}</mat-icon>
+</mat-form-field>

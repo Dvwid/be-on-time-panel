@@ -23,7 +23,7 @@
 
     </td>
     <td class="w-2/3">
-      <span>{{event?.eventDetails?.dateFrom | date}}</span>
+      <span>{{event?.eventDetails?.dateFrom | date: 'dd-MM-YYYY HH:mm'}}</span>
     </td>
   </tr>
 
@@ -35,7 +35,7 @@
       </div>
     </td>
     <td class="w-2/3">
-      <span>{{event?.eventDetails?.dateTo | date}}</span>
+      <span>{{event?.eventDetails?.dateTo | date: 'dd-MM-YYYY HH:mm'}}</span>
     </td>
   </tr>
 </table>

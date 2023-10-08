@@ -1,4 +1,5 @@
 import {FormControl, FormGroup} from "@angular/forms";
+import {EventCategoryDto} from "./EventCategoryDto";
 
 
 export type EventLocationFormGroup = {
@@ -30,10 +31,8 @@ export type EventDetailsFormGroup = {
   name: FormControl<string>;
   description: FormControl<string | null>;
   dateFrom: FormControl<Date>;
-  hourFrom: FormControl<string | null>;
   dateTo: FormControl<Date | null>;
-  hourTo: FormControl<string | null>;
-  minuteTo: FormControl<string | null>;
+  category: FormControl<EventCategoryDto | null>;
 }
 
 

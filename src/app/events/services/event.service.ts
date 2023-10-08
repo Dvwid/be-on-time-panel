@@ -5,13 +5,14 @@ import {EventPageDto} from "../../core/dtos/EventPageDto";
 import {PageInfoDto} from "../../core/dtos/PageInfoDto";
 import {EventDto} from "../../core/dtos/EventDto";
 import {JoinToEventRequestDto} from "../../core/dtos/JoinToEventRequestDto";
+import {EventCategoryDto} from "../../core/dtos/EventCategoryDto";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
 
-  #baseUrl = 'events';
+  #baseUrl = 'event';
   #ajaxService = inject(AjaxService)
 
   constructor() {
@@ -29,11 +30,15 @@ export class EventService {
     return this.#ajaxService.doGet(`${this.#baseUrl}`, pagination);
   }
 
+  getCategories(): Observable<EventCategoryDto[]> {
+    return this.#ajaxService.doGet(`${this.#baseUrl}/categories`);
+  }
+
   join(req: JoinToEventRequestDto): Observable<EventDto> {
     return this.#ajaxService.doPost(`${this.#baseUrl}/join`, req);
   }
 
-  leave(req: JoinToEventRequestDto): Observable<EventDto>  {
+  leave(req: JoinToEventRequestDto): Observable<EventDto> {
     return this.#ajaxService.doPost(`${this.#baseUrl}/leave`, req);
   }
 }

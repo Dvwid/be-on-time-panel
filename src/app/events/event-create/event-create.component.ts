@@ -14,6 +14,7 @@ import {BehaviorSubject, finalize} from "rxjs";
 import {NotificationService} from "../../core/notification/services/notification.service";
 import {Router} from "@angular/router";
 import {AuthService} from "../../core/auth/services/auth.service";
+import {EventCategoryDto} from "../../core/dtos/EventCategoryDto";
 
 @Component({
   selector: 'app-event-create',
@@ -33,12 +34,10 @@ export class EventCreateComponent {
       eventDetails: this.#formBuilder
         .group({
           name: new FormControl<string | null>('', Validators.required),
-          description: new FormControl<string | null>('', Validators.required),
+          description: new FormControl<string | null>(''),
           dateFrom: new FormControl<Date | null>(null, Validators.required),
-          hourFrom: new FormControl<string | null>(null),
           dateTo: new FormControl<Date | null>(null),
-          hourTo: new FormControl<string | null>(null),
-          minuteTo: new FormControl<string | null>(null)
+          category: new FormControl<EventCategoryDto | null>(null)
         }),
       eventLocation: this.#formBuilder
         .group({
@@ -103,7 +102,7 @@ export class EventCreateComponent {
       name: this.eventForm?.controls?.eventDetails?.controls?.name?.value,
       description: this.eventForm?.controls?.eventDetails?.controls?.description?.value,
       dateFrom: this.eventForm?.controls?.eventDetails?.controls?.dateFrom?.value?.getTime(),
-      dateTo: this.eventForm?.controls?.eventDetails?.controls?.dateTo?.value?.getTime(),
+      dateTo: this.eventForm?.controls?.eventDetails?.controls?.dateTo?.value?.getTime()
     };
   }
 

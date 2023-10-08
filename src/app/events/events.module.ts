@@ -33,32 +33,34 @@ import {SkeletonLoaderComponent} from "../shared/components/skeleton-loader/skel
 import {
   MiniFabSpinnerButtonComponent
 } from "../shared/components/mini-fab-spinner-button/mini-fab-spinner-button.component";
-import { ListHeaderComponent } from './event-list/list-header/list-header.component';
-import { ListCellComponent } from './event-list/list-cell/list-cell.component';
+import {ListHeaderComponent} from './event-list/list-header/list-header.component';
+import {ListCellComponent} from './event-list/list-cell/list-cell.component';
 import {IconButtonComponent} from "../shared/components/icon-button/icon-button.component";
-import { EventTimeComponent } from './event-details/event-time/event-time.component';
-import { EventInitiatorComponent } from './event-details/event-initiator/event-initiator.component';
-import { EventPlaceComponent } from './event-details/event-place/event-place.component';
+import {EventTimeComponent} from './event-details/event-time/event-time.component';
+import {EventInitiatorComponent} from './event-details/event-initiator/event-initiator.component';
+import {EventPlaceComponent} from './event-details/event-place/event-place.component';
+import {CategorySelectionComponent} from "./event-form/forms/details/category-selection/category-selection.component";
 
 
 @NgModule({
-    imports: [
-        CommonModule,
-        MaterialModule,
-        EventsRoutingModule,
-        GoogleMapWrapperModule,
-        TextInputComponent,
-        TextareaComponent,
-        DatepickerComponent,
-        TimepickerComponent,
-        ReactiveFormsModule,
-        ImagePickerComponent,
-        StepperNextButtonComponent,
-        StepperPreviousButtonComponent,
-        SkeletonLoaderComponent,
-        MiniFabSpinnerButtonComponent,
-        IconButtonComponent
-    ],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    EventsRoutingModule,
+    GoogleMapWrapperModule,
+    TextInputComponent,
+    TextareaComponent,
+    DatepickerComponent,
+    TimepickerComponent,
+    ReactiveFormsModule,
+    ImagePickerComponent,
+    StepperNextButtonComponent,
+    StepperPreviousButtonComponent,
+    SkeletonLoaderComponent,
+    MiniFabSpinnerButtonComponent,
+    IconButtonComponent,
+    CategorySelectionComponent
+  ],
   declarations: [
     EventsComponent,
     EventListComponent,
