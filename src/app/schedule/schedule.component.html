@@ -1,0 +1,34 @@
+<div class="min-h-screen">
+  <div class="flex gap-3 mb-5">
+    <div class="flex items-center">
+      <button mat-icon-button
+              (click)="selectedYear = selectedYear - 1"
+              [disabled]="currentYear === selectedYear">
+        <i class="material-icons">chevron_left</i>
+      </button>
+
+      {{selectedYear}}
+
+      <button mat-icon-button
+              (click)="selectedYear = selectedYear + 1">
+        <i class="material-icons">chevron_right</i>
+      </button>
+    </div>
+
+    <app-schedule-months [selectedMonth]="selectedMonth"
+                         (nextMonth)="nextMonth()"
+                         (previousMonth)="previousMonth()">
+    </app-schedule-months>
+  </div>
+
+  <div class="flex flex-col gap-3 overflow-x-auto"
+       [style.max-width.vw]="100">
+
+    <app-schedule-days *ngIf="selectedYear && selectedMonth"
+                       [selectedMonth]="selectedMonth"
+                       [selectedYear]="selectedYear"
+                       [events]="events">
+    </app-schedule-days>
+  </div>
+</div>
+

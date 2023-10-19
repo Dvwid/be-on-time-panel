@@ -13,7 +13,7 @@ import {ImagesService} from "../services/images.service";
 })
 export class EventListComponent implements OnInit {
 
-  @Input() events: EventDto[];
+  events: EventDto[];
 
   #eventService = inject(EventService);
   #imagesService = inject(ImagesService);

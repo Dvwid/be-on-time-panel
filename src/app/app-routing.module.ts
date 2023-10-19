@@ -16,8 +16,8 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'home'
-  }
+    redirectTo: 'events'
+  },
 ];
 
 @NgModule({

@@ -40,6 +40,7 @@ import {EventTimeComponent} from './event-details/event-time/event-time.componen
 import {EventInitiatorComponent} from './event-details/event-initiator/event-initiator.component';
 import {EventPlaceComponent} from './event-details/event-place/event-place.component';
 import {CategorySelectionComponent} from "./event-form/forms/details/category-selection/category-selection.component";
+import {ScheduleModule} from "../schedule/schedule.module";
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import {CategorySelectionComponent} from "./event-form/forms/details/category-se
     SkeletonLoaderComponent,
     MiniFabSpinnerButtonComponent,
     IconButtonComponent,
-    CategorySelectionComponent
+    CategorySelectionComponent,
+    ScheduleModule
   ],
   declarations: [
     EventsComponent,

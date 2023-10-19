@@ -58,6 +58,12 @@ html, body {
   color: $secondary-color;
 }
 
+.hover-primary:hover {
+  transition: .5s;
+  background-color: $primary-color;
+  color: $secondary-color;
+}
+
 
 .event-image {
   height: 250px;

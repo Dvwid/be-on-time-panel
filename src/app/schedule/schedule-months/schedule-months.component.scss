@@ -1,0 +1,25 @@
+@import 'src/assets/styles/variables';
+
+.month-element {
+  border-right: 1px solid #eeeeee;
+
+  &:hover {
+    background-color: lighten($primary-color, 40);
+  }
+}
+
+.month-element:nth-child(4n) {
+  border-right: none;
+}
+
+.month-element:nth-child(-n+4) {
+  border-bottom: 1px solid #eeeeee;
+}
+
+.month-element:nth-last-child(-n+4) {
+  border-top: 1px solid #eeeeee;
+}
+
+.current-month {
+  color: $primary-color;
+}

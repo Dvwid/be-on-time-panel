@@ -1,8 +1,11 @@
+import {EventCategoryDto} from "./EventCategoryDto";
+
 export interface EventDetailsDto {
   name: string;
   description: string;
   dateFrom: number;
   dateTo: number;
+  category: EventCategoryDto;
 }
 
 export interface EventLocationDto {

@@ -22,5 +22,6 @@ export class MiniFabSpinnerButtonComponent {
   @Input() icon = 'save';
   @Input() type: 'submit' | 'button' = 'submit';
   @Input() form: FormGroupDirective;
+  @Input() color: 'primary' | 'accent' | 'warn' = 'primary';
 
 }

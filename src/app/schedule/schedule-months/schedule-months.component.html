@@ -1,0 +1,13 @@
+<div class="flex items-center">
+  <button mat-icon-button
+          (click)="previousMonth.emit()">
+    <i class="material-icons">chevron_left</i>
+  </button>
+
+  {{selectedMonth | currentMonth}}
+
+  <button mat-icon-button
+          (click)="nextMonth.emit()">
+    <i class="material-icons">chevron_right</i>
+  </button>
+</div>

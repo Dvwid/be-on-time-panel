@@ -1,17 +1,13 @@
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CoreModule} from "./core/core.module";
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material/core";
-import {NGX_MAT_MOMENT_DATE_ADAPTER_OPTIONS, NgxMatMomentAdapter} from '@angular-material-components/moment-adapter';
-import {
-  NGX_MAT_DATE_FORMATS,
-  NgxMatDateAdapter,
-  NgxMatNativeDateModule
-} from "@angular-material-components/datetime-picker";
+import {MAT_DATE_LOCALE} from "@angular/material/core";
+import {NgxMatNativeDateModule} from "@angular-material-components/datetime-picker";
+import "@angular/common/locales/global/pl";
 
 @NgModule({
   imports: [
@@ -25,7 +21,8 @@ import {
     AppComponent,
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+    {provide: LOCALE_ID, useValue: 'pl'},
   ],
   bootstrap: [AppComponent]
 })

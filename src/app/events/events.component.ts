@@ -7,6 +7,7 @@ import {Component} from '@angular/core';
 })
 export class EventsComponent {
 
+  selectedView: 'list' | 'schedule' = 'schedule';
 
   constructor() {
   }

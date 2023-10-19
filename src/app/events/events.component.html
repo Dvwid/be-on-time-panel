@@ -1,18 +1,47 @@
 <div class="flex py-10 px-10 min-h-screen w-full">
   <div class="flex flex-col gap-4 w-full">
-    <div class="flex justify-between">
-      <h1>Lista nadchodzących wydarzeń</h1>
+    <div class="flex justify-between w-full">
+      <div>
+        <h1>Nadchodzące wydarzenia</h1>
+      </div>
 
-      <app-icon-button icon="add"
-                       label="Utwórz nowe"
-                       routerLink="/events/create">
-      </app-icon-button>
+      <div class="flex gap-3">
+        <app-icon-button [matMenuTriggerFor]="views"
+                         icon="grid_on"
+                         label="Widok">
+        </app-icon-button>
+
+        <app-icon-button icon="add"
+                         btnStyle="primary"
+                         label="Nowe wydarzenie"
+                         routerLink="/events/create">
+        </app-icon-button>
+      </div>
     </div>
 
     <div class="flex flex-col gap-4 w-full">
-      <div>
+      <div *ngIf="selectedView === 'list'">
         <app-event-list></app-event-list>
+      </div>
+
+      <div *ngIf="selectedView === 'schedule'">
+        <app-schedule></app-schedule>
       </div>
     </div>
   </div>
 </div>
+
+
+<mat-menu #views="matMenu">
+  <button mat-menu-item
+          (click)="selectedView = 'schedule'">
+    <mat-icon>calendar_today</mat-icon>
+    <span>Kalendarz</span>
+  </button>
+
+  <button mat-menu-item
+          (click)="selectedView = 'list'">
+    <mat-icon>list</mat-icon>
+    <span>Lista</span>
+  </button>
+</mat-menu>

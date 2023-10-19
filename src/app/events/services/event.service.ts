@@ -6,6 +6,7 @@ import {PageInfoDto} from "../../core/dtos/PageInfoDto";
 import {EventDto} from "../../core/dtos/EventDto";
 import {JoinToEventRequestDto} from "../../core/dtos/JoinToEventRequestDto";
 import {EventCategoryDto} from "../../core/dtos/EventCategoryDto";
+import {GetEventsListRequest} from "../../core/dtos/GetEventsListRequest";
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +27,8 @@ export class EventService {
     return this.#ajaxService.doPost(`${this.#baseUrl}`, req);
   }
 
-  getList(pagination: PageInfoDto): Observable<EventPageDto> {
-    return this.#ajaxService.doGet(`${this.#baseUrl}`, pagination);
+  getList(req: GetEventsListRequest): Observable<EventPageDto> {
+    return this.#ajaxService.doGet(`${this.#baseUrl}`, req);
   }
 
   getCategories(): Observable<EventCategoryDto[]> {

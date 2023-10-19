@@ -1,7 +1,10 @@
 <button class="rounded-md border flex items-center px-3 py-2 gap-2 font-medium"
         [disabled]="showSpinner"
+        [class.text-white]="btnStyle === 'primary'"
+        [class.bg-primary]="btnStyle === 'primary'"
+        (click)="afterClick.emit()"
         matRipple>
-  <i class="material-icons text-md" *ngIf="!showSpinner">{{icon}}</i>
+  <i class="material-icons text-md" *ngIf="!showSpinner && icon">{{icon}}</i>
   <mat-spinner class="my-0.5" *ngIf="showSpinner" [diameter]="20"></mat-spinner>
   <span class="text-sm">{{label}}</span>
 </button>

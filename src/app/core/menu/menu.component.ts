@@ -26,25 +26,13 @@ export class MenuComponent implements OnInit, OnDestroy {
       icon: 'home',
       routerLink: 'home'
     },
-  ];
-
-  eventMenuItems: MenuItem[] = [
     {
-      label: 'Nadchodzące',
+      label: 'Wydarzenia',
       icon: 'event_note',
       routerLink: 'events'
     },
-    {
-      label: 'W trakcie',
-      icon: 'pending_actions',
-      routerLink: 'events-in-progress'
-    },
-    {
-      label: 'Zakończone',
-      icon: 'event_available',
-      routerLink: 'event_available'
-    }
-  ]
+  ];
+
 
   preferencesMenuItems: MenuItem[] = [
     {

@@ -1,0 +1,60 @@
+<mat-drawer-container autosize
+                      class="drawer-container-bg"
+                      [hasBackdrop]="false">
+  <mat-drawer mode="side"
+              class="mat-drawer-bg"
+              position="end"
+              [opened]="opened">
+    <div [style.width.px]="300"
+         class="flex flex-col border-t border-b bg-white">
+      <div class="w-full flex justify-end">
+        <i (click)="opened = false"
+           matTooltip="Zamknij szczegóły"
+           class="material-icons p-3 cursor-pointer">
+          close
+        </i>
+      </div>
+
+      <div class="capitalize p-3 text-xl font-bold">
+        {{selectedDay?.day | date:'EEEE':'':'pl'}} {{selectedDay?.day | date: 'd'}} {{selectedDay?.day | date: 'MMMM': '': 'pl'}}
+      </div>
+      <div class="flex flex-col p-3 gap-1">
+        <div *ngFor="let event of selectedDay?.events"
+             [routerLink]="'details/' + event?.id"
+             class="p-3 border rounded-md hover-primary cursor-pointer">
+          <div class="flex items-center gap-1">
+            <div class="text-md">{{event?.eventDetails?.dateFrom | date: 'HH:mm'}}</div>
+          </div>
+          <div class="text-lg font-medium">{{event?.eventDetails?.name}}</div>
+          <div class="text-xs" *ngIf="event?.eventDetails?.dateTo > event?.eventDetails?.dateFrom">
+            Czas trwania: {{getTimeForEvent(event?.eventDetails?.dateTo, event?.eventDetails.dateFrom)}}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </mat-drawer>
+
+  <div class="flex flex-wrap rounded-xl border box-content overflow-hidden" [style.width.px]="1120">
+    <div class="w-full flex">
+      <div [style.width.px]="160" class="text-center py-3 border-b" *ngFor="let header of headers">{{header}}</div>
+    </div>
+    <div *ngFor="let dayWithEvent of daysWithEvents"
+         (click)="openDayInfo(dayWithEvent)"
+         class="flex p-2 day-element flex-col justify-between"
+         [class.over-month]="dayWithEvent?.day?.getUTCMonth() !== selectedMonth"
+         [style.width.px]="160"
+         [style.height.px]="100">
+      <div>
+        {{dayWithEvent?.day | date: 'd'}}
+      </div>
+      <div class="flex flex-wrap">
+        <i *ngFor="let event of dayWithEvent?.events"
+           [matTooltip]="event?.eventDetails?.name"
+           class="material-icons event-icon cursor-pointer">
+          {{event?.eventDetails?.category?.icon || 'help'}}
+        </i>
+      </div>
+    </div>
+  </div>
+</mat-drawer-container>

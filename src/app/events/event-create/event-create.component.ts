@@ -102,7 +102,8 @@ export class EventCreateComponent {
       name: this.eventForm?.controls?.eventDetails?.controls?.name?.value,
       description: this.eventForm?.controls?.eventDetails?.controls?.description?.value,
       dateFrom: this.eventForm?.controls?.eventDetails?.controls?.dateFrom?.value?.getTime(),
-      dateTo: this.eventForm?.controls?.eventDetails?.controls?.dateTo?.value?.getTime()
+      dateTo: this.eventForm?.controls?.eventDetails?.controls?.dateTo?.value?.getTime(),
+      category: this.eventForm?.controls?.eventDetails?.controls?.category?.value
     };
   }
 
