@@ -2,7 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {AjaxService} from "../../core/ajax.service";
 import {Observable} from "rxjs";
 import {EventPageDto} from "../../core/dtos/EventPageDto";
-import {EventDto} from "../../core/dtos/EventDto";
+import {EventDto, EventRatingDto} from "../../core/dtos/EventDto";
 import {JoinToEventRequestDto} from "../../core/dtos/JoinToEventRequestDto";
 import {EventCategoryDto} from "../../core/dtos/EventCategoryDto";
 import {GetEventsListRequest} from "../../core/dtos/GetEventsListRequest";
@@ -42,5 +42,9 @@ export class EventService {
 
   leave(req: LeaveFromEventRequestDto): Observable<EventDto> {
     return this.#ajaxService.doPost(`${this.#baseUrl}/leave`, req);
+  }
+
+  rate(req: EventRatingDto): Observable<EventDto> {
+    return this.#ajaxService.doPost(`${this.#baseUrl}/rate`, req);
   }
 }

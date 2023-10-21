@@ -41,6 +41,8 @@ import {EventInitiatorComponent} from './event-details/event-initiator/event-ini
 import {EventPlaceComponent} from './event-details/event-place/event-place.component';
 import {CategorySelectionComponent} from "./event-form/forms/details/category-selection/category-selection.component";
 import {ScheduleModule} from "../schedule/schedule.module";
+import {StarRatingComponent} from "../shared/components/star-rating/star-rating.component";
+import {EventRatingDialogComponent} from './event-details/event-rating-dialog/event-rating-dialog.component';
 
 
 @NgModule({
@@ -61,7 +63,8 @@ import {ScheduleModule} from "../schedule/schedule.module";
     MiniFabSpinnerButtonComponent,
     IconButtonComponent,
     CategorySelectionComponent,
-    ScheduleModule
+    ScheduleModule,
+    StarRatingComponent
   ],
   declarations: [
     EventsComponent,
@@ -80,6 +83,7 @@ import {ScheduleModule} from "../schedule/schedule.module";
     EventTimeComponent,
     EventInitiatorComponent,
     EventPlaceComponent,
+    EventRatingDialogComponent,
   ],
 })
 export class EventsModule {

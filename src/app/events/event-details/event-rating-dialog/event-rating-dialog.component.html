@@ -1,0 +1,48 @@
+<div class="flex flex-col gap-3 p-5">
+  <div class="text-xl">
+    Twoja ocena
+  </div>
+
+  <app-star-rating [rating]="rating"
+                   (ratingUpdated)="rating = $event"
+                   [starCount]="5">
+  </app-star-rating>
+
+  <div class="text-xl">
+    Czy masz uwagi lub sugestie dotyczące tego wydarzenia?
+  </div>
+
+  <form #form="ngForm"
+        [formGroup]="rateForm"
+        class="w-full">
+    <app-textarea [form]="form"
+                  [required]="false"
+                  [rows]="5"
+                  [formGroup]="rateForm"
+                  label="Opinia"
+                  class="w-full"
+                  placeholder="Wprowadź treść opinii"
+                  controlName="description">
+    </app-textarea>
+
+    <div class="text-xs mt-1">
+      Opinie będą widoczne tylko dla organizatora.
+    </div>
+  </form>
+
+  <div class="flex justify-end gap-1 w-full">
+    <app-icon-button label="Anuluj"
+                     [showSpinner]="isRatingPending$ | async"
+                     (afterClick)="close()"
+                     btnStyle="outlined">
+    </app-icon-button>
+
+    <app-icon-button label="Oceń wydarzenie"
+                     [showSpinner]="isRatingPending$ | async"
+                     (afterClick)="rateEvent()"
+                     btnStyle="primary">
+    </app-icon-button>
+  </div>
+</div>
+
+

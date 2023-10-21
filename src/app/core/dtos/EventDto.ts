@@ -43,8 +43,19 @@ export interface ParticipantsInfoDto {
   declinedParticipants: ParticipantInfoDto[];
 }
 
+export interface EventRatingDto {
+  rate: number;
+  userId: string;
+  description?: string;
+  eventId: string;
+}
+
 export interface EventDto {
   id?: string;
+  started?: boolean;
+  ended?: boolean;
+  rating?: number;
+  ratings?: EventRatingDto[];
   eventDetails: EventDetailsDto;
   eventLocation: EventLocationDto;
   imageInfo: EventImageInfoDto;

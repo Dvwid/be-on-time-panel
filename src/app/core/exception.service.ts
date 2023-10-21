@@ -47,8 +47,8 @@ export class ExceptionService {
       this.showError(message);
     }
 
-    if (err?.error?.error) {
-      message = err?.error?.error;
+    if (err?.error) {
+      message = err?.error?.message || 'Nieznany rodzaj błędu.';
       this.showError(ExceptionService.prepareMessage(message));
     }
     return throwError(ExceptionService.prepareMessage(message));

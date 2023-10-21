@@ -58,6 +58,10 @@ html, body {
   color: $secondary-color;
 }
 
+.text-primary {
+  color: $primary-color;
+}
+
 .hover-primary:hover {
   transition: .5s;
   background-color: $primary-color;

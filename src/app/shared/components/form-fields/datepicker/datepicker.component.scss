@@ -9,3 +9,13 @@ ngx-mat-datepicker-content {
   background: $primary-color !important;
   color: $secondary-color !important;
 }
+
+.mat-calendar-body-disabled {
+  .mat-calendar-body-cell-content {
+    background: #efefef !important;
+  }
+}
+
+.mat-calendar-body-today {
+  border: 1px solid $primary-color !important;
+}

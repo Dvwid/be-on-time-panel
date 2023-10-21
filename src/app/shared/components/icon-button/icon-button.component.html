@@ -5,6 +5,9 @@
         (click)="afterClick.emit()"
         matRipple>
   <i class="material-icons text-md" *ngIf="!showSpinner && icon">{{icon}}</i>
-  <mat-spinner class="my-0.5" *ngIf="showSpinner" [diameter]="20"></mat-spinner>
+  <mat-spinner class="my-0.5"
+               *ngIf="showSpinner"
+               [color]="btnStyle === 'primary' ? 'accent' : 'primary'"
+               [diameter]="20"></mat-spinner>
   <span class="text-sm">{{label}}</span>
 </button>

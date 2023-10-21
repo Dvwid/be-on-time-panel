@@ -21,6 +21,7 @@
       <app-datepicker controlName="dateFrom"
                       [formGroup]="formGroup"
                       [form]="form"
+                      [minDate]="minDate"
                       class="w-full sm:w-6/12"
                       label="Data rozpoczęcia">
       </app-datepicker>
@@ -38,6 +39,7 @@
       <app-datepicker *ngIf="showDateTo"
                       controlName="dateTo"
                       [formGroup]="formGroup"
+                      [minDate]="minDate"
                       [form]="form"
                       class="w-full sm:w-6/12"
                       label="Data zakończenia">

@@ -19,9 +19,11 @@ export class EventDetailsFormComponent extends EventFormAbstractComponent<EventD
 
   categories: EventCategoryDto[];
   showDateTo: boolean = false;
+  minDate: Date;
 
   ngOnInit() {
     this.getCategories();
+    this.minDate = new Date();
   }
 
   private getCategories() {

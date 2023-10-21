@@ -1,8 +1,16 @@
 <div class="w-full">
   <div class="flex justify-between px-10 py-8 w-full">
-    <span class="text-xl font-medium">{{event?.eventDetails?.name}}</span>
+    <div class="flex flex-col">
+      <span class="text-xl font-medium">{{event?.eventDetails?.name}}</span>
+      <span *ngIf="event?.ended && event?.eventDetails?.dateTo">To wydarzenie zakończyło się.</span>
+      <span *ngIf="(event?.started && !event?.ended) || (event?.started && !event?.eventDetails?.dateTo)">To wydarzenie rozpoczęło się.</span>
+      <span *ngIf="event?.ended" class="text-xs text-primary cursor-pointer mt-2">
+        Wyświetl opinie użytkowników
+      </span>
+    </div>
 
-    <div class="flex items-center gap-1">
+    <div class="flex items-center gap-1"
+         *ngIf="event && !event?.started">
       <app-icon-button (click)="changeDeclarationOfParticipation(userJoinDeclarationStatusEnum.CONFIRMED)"
                        [btnStyle]="currentUserJoinDeclarationStatus === userJoinDeclarationStatusEnum.CONFIRMED ? 'primary' : 'outlined'"
                        [showSpinner]="isJoining$ | async"
@@ -23,6 +31,18 @@
                        icon="close"
                        label="Nie wezmę udziału">
       </app-icon-button>
+    </div>
+
+    <div class="flex flex-col items-center justify-center gap-1 text-xs"
+         *ngIf="event?.ended">
+      <div>Ocena wydarzenia: {{rating}} / {{starCount}}</div>
+
+      <app-star-rating [rating]="rating"
+                       [disabled]="isRatingDisabled"
+                       [starCount]="starCount"
+                       [color]="starColor"
+                       (ratingUpdated)="onRatingChanged($event)">
+      </app-star-rating>
     </div>
   </div>
 </div>
@@ -46,7 +66,7 @@
     </div>
 
     <div class="w-full">
-      <span class="font-bold menu-section-label">Wezmą udział</span>
+      <span class="font-bold menu-section-label">{{event?.ended ? 'Wzieli udział' : 'Wezmą udział'}}</span>
       <div class="flex flex-wrap gap-3 items-center"
            [style.min-height.px]="30">
         <img src="assets/images/user-icon.png"

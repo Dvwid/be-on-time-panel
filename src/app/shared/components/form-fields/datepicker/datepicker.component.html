@@ -4,6 +4,7 @@
                   class="w-full">
     <input matInput
            [ngxMatDatetimePicker]="picker"
+           [min]="minDate"
            [placeholder]="label"
            [formControlName]="controlName">
     <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>

@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {EventDto} from 'src/app/core/dtos/EventDto';
+import {EventDto, EventRatingDto} from 'src/app/core/dtos/EventDto';
 import {ActivatedRoute} from "@angular/router";
 import {ImagesService} from "../services/images.service";
 import {convertBase64ToImage} from "../../core/utilities";
@@ -10,6 +10,9 @@ import {BehaviorSubject, finalize} from "rxjs";
 import {NotificationService} from "../../core/notification/services/notification.service";
 import {UserJoinDeclarationStatusEnum} from "../../core/dtos/UserJoinDeclarationStatusEnum";
 import {LeaveFromEventRequestDto} from "../../core/dtos/LeaveFromEventRequestDto";
+import {StarRatingColor} from "../../shared/components/star-rating/star-rating.component";
+import {MatDialog} from "@angular/material/dialog";
+import {EventRatingDialogComponent, EventRatingDialogData} from "./event-rating-dialog/event-rating-dialog.component";
 
 @Component({
   selector: 'app-event-details',
@@ -31,11 +34,38 @@ export class EventDetailsComponent implements OnInit {
 
   userJoinDeclarationStatusEnum = UserJoinDeclarationStatusEnum;
 
-  constructor() {
+  rating: number = 0;
+  userRating: EventRatingDto;
+  starCount: number = 5;
+  starColor: StarRatingColor = StarRatingColor.accent;
+  isRatingDisabled = false;
+
+  constructor(private dialog: MatDialog) {
   }
 
   ngOnInit() {
     this.getEventDetails();
+  }
+
+  onRatingChanged(rating: number) {
+    const dialogRef = this.dialog.open(EventRatingDialogComponent, {
+      data: {
+        rating: rating,
+        userId: this.#authService?.currentUser$?.value?.id,
+        eventId: this.event?.id
+      } as EventRatingDialogData
+    });
+
+    dialogRef
+      .afterClosed()
+      .subscribe((data: EventDto) => {
+        if (!data) {
+          return;
+        }
+        this.event = data;
+        this.setCurrentUserJoinDeclarationStatus();
+        this.setUserRateIfExist();
+      });
   }
 
   changeDeclarationOfParticipation(declaration: UserJoinDeclarationStatusEnum) {
@@ -86,6 +116,8 @@ export class EventDetailsComponent implements OnInit {
       .subscribe((data) => {
         this.event = data;
         this.setCurrentUserJoinDeclarationStatus();
+        this.setUserRateIfExist();
+
         if (data?.imageInfo?.imageId) {
           this.getImage(data?.imageInfo?.imageId);
         }
@@ -126,5 +158,14 @@ export class EventDetailsComponent implements OnInit {
       userId: this.#authService.currentUser$.value?.id,
       declaration
     }
+  }
+
+  private setUserRateIfExist() {
+    const userRating = this.event
+      ?.ratings
+      ?.find((rating) => rating?.userId === this.#authService.currentUser$.value.id);
+
+    this.userRating = userRating;
+    this.rating = userRating?.rate || this.event?.rating;
   }
 }

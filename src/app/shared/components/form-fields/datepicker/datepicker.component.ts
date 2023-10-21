@@ -1,10 +1,11 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, Input, ViewEncapsulation} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MaterialModule} from 'src/app/core/material/material.module';
 import {ControlContainer, FormControl, FormGroupDirective, ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
 import {FormFieldAbstractComponent} from "../form-field-abstract.component";
 import {NgxMatDatetimePickerModule, NgxMatTimepickerModule} from "@angular-material-components/datetime-picker";
+import {min} from "rxjs";
 
 @Component({
   selector: 'app-datepicker',
@@ -23,6 +24,9 @@ import {NgxMatDatetimePickerModule, NgxMatTimepickerModule} from "@angular-mater
   viewProviders: [{provide: ControlContainer, useExisting: FormGroupDirective}]
 })
 export class DatepickerComponent extends FormFieldAbstractComponent {
+
+  @Input() minDate: Date;
+
   date: Date;
   control: FormControl;
 
@@ -30,4 +34,6 @@ export class DatepickerComponent extends FormFieldAbstractComponent {
     super();
     this.control = new FormControl();
   }
+
+  protected readonly min = min;
 }
