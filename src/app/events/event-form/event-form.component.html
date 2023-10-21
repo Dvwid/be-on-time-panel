@@ -28,14 +28,4 @@
       </app-event-image-form>
     </ng-template>
   </mat-step>
-
-  <mat-step [stepControl]="formGroup.controls.additionalInfo">
-    <ng-template matStepLabel>Dodatkowe informacje</ng-template>
-
-    <ng-template matStepContent>
-      <app-event-additional-information-form [formGroup]="formGroup.controls.additionalInfo"
-                                             [form]="form">
-      </app-event-additional-information-form>
-    </ng-template>
-  </mat-step>
 </mat-stepper>

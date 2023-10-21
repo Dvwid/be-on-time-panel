@@ -23,7 +23,6 @@ export type EventAdditionalInfoFormGroup = {
 export type EventForm = {
   eventDetails: FormGroup<EventDetailsFormGroup>;
   eventLocation: FormGroup<EventLocationFormGroup>;
-  additionalInfo: FormGroup<EventAdditionalInfoFormGroup>;
   eventImage: FormGroup<EventImageFormGroup>
 }
 

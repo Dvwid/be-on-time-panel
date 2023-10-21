@@ -19,6 +19,12 @@
                          (nextMonth)="nextMonth()"
                          (previousMonth)="previousMonth()">
     </app-schedule-months>
+
+    <div class="flex gap-1 items-center"
+         *ngIf="areEventsLoading$ | async">
+      <mat-spinner color="primary" diameter="20"></mat-spinner>
+      <span>Trwa pobieranie wydarzeń</span>
+    </div>
   </div>
 
   <div class="flex flex-col gap-3 overflow-x-auto"

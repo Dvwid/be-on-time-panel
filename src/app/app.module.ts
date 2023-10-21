@@ -21,7 +21,7 @@ import "@angular/common/locales/global/pl";
     AppComponent,
   ],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+    {provide: MAT_DATE_LOCALE, useValue: 'pl'},
     {provide: LOCALE_ID, useValue: 'pl'},
   ],
   bootstrap: [AppComponent]

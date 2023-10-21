@@ -38,14 +38,15 @@ export interface ParticipantInfoDto {
 }
 
 export interface ParticipantsInfoDto {
-  participants: ParticipantInfoDto[];
+  confirmedParticipants: ParticipantInfoDto[];
+  tentativeParticipants: ParticipantInfoDto[];
+  declinedParticipants: ParticipantInfoDto[];
 }
 
 export interface EventDto {
   id?: string;
   eventDetails: EventDetailsDto;
   eventLocation: EventLocationDto;
-  additionalInfo: EventAdditionalInfoDto;
   imageInfo: EventImageInfoDto;
   initiatorInfo: InitiatorInfoDto;
   participantsInfo?: ParticipantsInfoDto;

@@ -8,6 +8,8 @@ import {JoinToEventRequestDto} from "../../core/dtos/JoinToEventRequestDto";
 import {AuthService} from "../../core/auth/services/auth.service";
 import {BehaviorSubject, finalize} from "rxjs";
 import {NotificationService} from "../../core/notification/services/notification.service";
+import {UserJoinDeclarationStatusEnum} from "../../core/dtos/UserJoinDeclarationStatusEnum";
+import {LeaveFromEventRequestDto} from "../../core/dtos/LeaveFromEventRequestDto";
 
 @Component({
   selector: 'app-event-details',
@@ -24,12 +26,10 @@ export class EventDetailsComponent implements OnInit {
 
   eventId = this.#activatedRoute.snapshot.paramMap.get('eventId');
   event: EventDto;
-
   isJoining$ = new BehaviorSubject(false);
+  currentUserJoinDeclarationStatus: UserJoinDeclarationStatusEnum;
 
-  get currentUserJoinedToEvent(): boolean {
-    return this.event?.participantsInfo?.participants?.some(participant => participant?.participantId === this.#authService?.currentUser$?.value?.id);
-  };
+  userJoinDeclarationStatusEnum = UserJoinDeclarationStatusEnum;
 
   constructor() {
   }
@@ -38,38 +38,54 @@ export class EventDetailsComponent implements OnInit {
     this.getEventDetails();
   }
 
-  joinToEvent() {
-    const req = this.prepareJoinToEventRequestDto();
+  changeDeclarationOfParticipation(declaration: UserJoinDeclarationStatusEnum) {
+    if (this.currentUserJoinDeclarationStatus === declaration) {
+      this.leave(declaration);
+      return;
+    }
+
+    const req = this.prepareJoinToEventRequestDto(declaration);
     this.isJoining$.next(true);
 
     this.#eventService
       .join(req)
       .pipe(finalize(() => this.isJoining$.next(false)))
       .subscribe((data: EventDto) => {
-        this.#notificationService.success('Sukces!', 'Dołączyłeś do wydarzenia');
+        this.#notificationService.success('Sukces!', 'Zmieniono deklarację udziału');
         this.event.participantsInfo = data?.participantsInfo;
+        this.setCurrentUserJoinDeclarationStatus();
       });
   }
 
-  leaveEvent() {
-    const req = this.prepareJoinToEventRequestDto();
-    this.isJoining$.next(true);
+  setCurrentUserJoinDeclarationStatus(): UserJoinDeclarationStatusEnum {
+    const statusesToCheck = [
+      UserJoinDeclarationStatusEnum.DECLINED,
+      UserJoinDeclarationStatusEnum.CONFIRMED,
+      UserJoinDeclarationStatusEnum.TENTATIVE,
+    ];
 
-    this.#eventService
-      .leave(req)
-      .pipe(finalize(() => this.isJoining$.next(false)))
-      .subscribe((data: EventDto) => {
-        this.#notificationService.success('Sukces!', 'Zrezygnowałeś z wydarzenia');
-        this.event.participantsInfo = data?.participantsInfo;
-      });
+    for (const status of statusesToCheck) {
+      if (this.checkHasParticipantByKey(status)) {
+        return this.currentUserJoinDeclarationStatus = status;
+      }
+    }
+
+    return this.currentUserJoinDeclarationStatus = undefined;
+  };
+
+  checkHasParticipantByKey(type: UserJoinDeclarationStatusEnum) {
+    return this.event
+      ?.participantsInfo
+      ?.[type]
+      ?.some(participant => participant?.participantId === this.#authService?.currentUser$?.value?.id);
   }
-
 
   private getEventDetails() {
     this.#eventService
       .getEventById(this.eventId)
       .subscribe((data) => {
         this.event = data;
+        this.setCurrentUserJoinDeclarationStatus();
         if (data?.imageInfo?.imageId) {
           this.getImage(data?.imageInfo?.imageId);
         }
@@ -82,10 +98,33 @@ export class EventDetailsComponent implements OnInit {
       .subscribe(data => convertBase64ToImage(data, 'preview-event-image', 'image-wrapper'));
   }
 
-  private prepareJoinToEventRequestDto(): JoinToEventRequestDto {
+  private prepareJoinToEventRequestDto(declaration: UserJoinDeclarationStatusEnum): JoinToEventRequestDto {
     return {
       eventId: this.event?.id,
-      user: this.#authService.currentUser$.value
+      user: this.#authService.currentUser$.value,
+      declaration
+    }
+  }
+
+  private leave(declaration: UserJoinDeclarationStatusEnum) {
+    const req = this.prepareLeaveFromEventRequestDto(declaration);
+    this.isJoining$.next(true);
+
+    this.#eventService
+      .leave(req)
+      .pipe(finalize(() => this.isJoining$.next(false)))
+      .subscribe((data: EventDto) => {
+        this.#notificationService.success('Sukces!', 'Zmieniłeś deklarację udziału');
+        this.event.participantsInfo = data?.participantsInfo;
+        this.setCurrentUserJoinDeclarationStatus();
+      });
+  }
+
+  private prepareLeaveFromEventRequestDto(declaration: UserJoinDeclarationStatusEnum): LeaveFromEventRequestDto {
+    return {
+      eventId: this.event?.id,
+      userId: this.#authService.currentUser$.value?.id,
+      declaration
     }
   }
 }

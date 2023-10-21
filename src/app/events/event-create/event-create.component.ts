@@ -3,7 +3,6 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {EventForm} from "../../core/dtos/EventForm";
 import {EventService} from "../services/event.service";
 import {
-  EventAdditionalInfoDto,
   EventDetailsDto,
   EventDto,
   EventImageInfoDto,
@@ -15,6 +14,7 @@ import {NotificationService} from "../../core/notification/services/notification
 import {Router} from "@angular/router";
 import {AuthService} from "../../core/auth/services/auth.service";
 import {EventCategoryDto} from "../../core/dtos/EventCategoryDto";
+import {CreateEventResponse} from "../../core/dtos/CreateEventResponse";
 
 @Component({
   selector: 'app-event-create',
@@ -49,10 +49,6 @@ export class EventCreateComponent {
           lng: new FormControl<number | null>(null),
           lat: new FormControl<number | null>(null),
         }),
-      additionalInfo: this.#formBuilder
-        .group({
-          additionalInfo: new FormControl<string | null>(null)
-        }),
       eventImage: this.#formBuilder
         .group({
           imageId: new FormControl<string | null>(null)
@@ -79,7 +75,6 @@ export class EventCreateComponent {
     return {
       eventLocation: this.prepareEventLocationDto(),
       eventDetails: this.prepareEventDetailsDto(),
-      additionalInfo: this.prepareEventAdditionalInfoDto(),
       imageInfo: this.prepareEventImageInfoDto(),
       initiatorInfo: this.prepareInitiatorInfo()
     }
@@ -107,12 +102,6 @@ export class EventCreateComponent {
     };
   }
 
-  private prepareEventAdditionalInfoDto(): EventAdditionalInfoDto {
-    return {
-      additionalInfo: this.eventForm?.controls?.additionalInfo?.controls?.additionalInfo?.value
-    };
-  }
-
   private createEvent() {
     const req = this.prepareCreateEventRequest();
     this.isEventCreating$.next(true)
@@ -123,9 +112,9 @@ export class EventCreateComponent {
       .subscribe((data) => this.doAfterCreateEvent(data));
   }
 
-  private doAfterCreateEvent(event: EventDto) {
+  private doAfterCreateEvent(res: CreateEventResponse) {
     this.#notificationService.success('Sukces!', 'Utworzono nowe wydarzenie');
-    this.#router.navigate([`/details/${event?.id}`]);
+    this.#router.navigate([`/events/details/${res?.id}`]);
   }
 
   private prepareEventImageInfoDto(): EventImageInfoDto {
