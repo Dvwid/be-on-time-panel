@@ -8,7 +8,7 @@ import {JoinToEventRequestDto} from "../../core/dtos/JoinToEventRequestDto";
 import {AuthService} from "../../core/auth/services/auth.service";
 import {BehaviorSubject, finalize} from "rxjs";
 import {NotificationService} from "../../core/notification/services/notification.service";
-import {UserJoinDeclarationStatusEnum} from "../../core/dtos/UserJoinDeclarationStatusEnum";
+import {ParticipationTypeEnum} from "../../core/dtos/ParticipationTypeEnum";
 import {LeaveFromEventRequestDto} from "../../core/dtos/LeaveFromEventRequestDto";
 import {StarRatingColor} from "../../shared/components/star-rating/star-rating.component";
 import {MatDialog} from "@angular/material/dialog";
@@ -30,15 +30,15 @@ export class EventDetailsComponent implements OnInit {
   eventId = this.#activatedRoute.snapshot.paramMap.get('eventId');
   event: EventDto;
   isJoining$ = new BehaviorSubject(false);
-  currentUserJoinDeclarationStatus: UserJoinDeclarationStatusEnum;
+  currentUserJoinDeclarationStatus: ParticipationTypeEnum;
 
-  userJoinDeclarationStatusEnum = UserJoinDeclarationStatusEnum;
+  participationTypeEnum = ParticipationTypeEnum;
 
   rating: number = 0;
   userRating: EventRatingDto;
   starCount: number = 5;
   starColor: StarRatingColor = StarRatingColor.accent;
-  isRatingDisabled = false;
+  isRatingEnabled = false;
 
   constructor(private dialog: MatDialog) {
   }
@@ -68,7 +68,7 @@ export class EventDetailsComponent implements OnInit {
       });
   }
 
-  changeDeclarationOfParticipation(declaration: UserJoinDeclarationStatusEnum) {
+  changeDeclarationOfParticipation(declaration: ParticipationTypeEnum) {
     if (this.currentUserJoinDeclarationStatus === declaration) {
       this.leave(declaration);
       return;
@@ -87,11 +87,11 @@ export class EventDetailsComponent implements OnInit {
       });
   }
 
-  setCurrentUserJoinDeclarationStatus(): UserJoinDeclarationStatusEnum {
+  setCurrentUserJoinDeclarationStatus(): ParticipationTypeEnum {
     const statusesToCheck = [
-      UserJoinDeclarationStatusEnum.DECLINED,
-      UserJoinDeclarationStatusEnum.CONFIRMED,
-      UserJoinDeclarationStatusEnum.TENTATIVE,
+      ParticipationTypeEnum.DECLINED,
+      ParticipationTypeEnum.CONFIRMED,
+      ParticipationTypeEnum.TENTATIVE,
     ];
 
     for (const status of statusesToCheck) {
@@ -103,7 +103,7 @@ export class EventDetailsComponent implements OnInit {
     return this.currentUserJoinDeclarationStatus = undefined;
   };
 
-  checkHasParticipantByKey(type: UserJoinDeclarationStatusEnum) {
+  checkHasParticipantByKey(type: ParticipationTypeEnum) {
     return this.event
       ?.participantsInfo
       ?.[type]
@@ -117,6 +117,7 @@ export class EventDetailsComponent implements OnInit {
         this.event = data;
         this.setCurrentUserJoinDeclarationStatus();
         this.setUserRateIfExist();
+        this.checkUserCanRateEvent();
 
         if (data?.imageInfo?.imageId) {
           this.getImage(data?.imageInfo?.imageId);
@@ -130,7 +131,7 @@ export class EventDetailsComponent implements OnInit {
       .subscribe(data => convertBase64ToImage(data, 'preview-event-image', 'image-wrapper'));
   }
 
-  private prepareJoinToEventRequestDto(declaration: UserJoinDeclarationStatusEnum): JoinToEventRequestDto {
+  private prepareJoinToEventRequestDto(declaration: ParticipationTypeEnum): JoinToEventRequestDto {
     return {
       eventId: this.event?.id,
       user: this.#authService.currentUser$.value,
@@ -138,7 +139,7 @@ export class EventDetailsComponent implements OnInit {
     }
   }
 
-  private leave(declaration: UserJoinDeclarationStatusEnum) {
+  private leave(declaration: ParticipationTypeEnum) {
     const req = this.prepareLeaveFromEventRequestDto(declaration);
     this.isJoining$.next(true);
 
@@ -152,7 +153,7 @@ export class EventDetailsComponent implements OnInit {
       });
   }
 
-  private prepareLeaveFromEventRequestDto(declaration: UserJoinDeclarationStatusEnum): LeaveFromEventRequestDto {
+  private prepareLeaveFromEventRequestDto(declaration: ParticipationTypeEnum): LeaveFromEventRequestDto {
     return {
       eventId: this.event?.id,
       userId: this.#authService.currentUser$.value?.id,
@@ -167,5 +168,18 @@ export class EventDetailsComponent implements OnInit {
 
     this.userRating = userRating;
     this.rating = userRating?.rate || this.event?.rating;
+  }
+
+  private checkUserCanRateEvent() {
+    this.isRatingEnabled = this.currentUserParticipate(ParticipationTypeEnum.TENTATIVE)
+      || this.currentUserParticipate(ParticipationTypeEnum.CONFIRMED)
+
+  }
+
+  private currentUserParticipate(participateType: ParticipationTypeEnum): boolean {
+    return this.event
+      ?.participantsInfo
+      ?.[participateType]
+      .some(participant => participant.participantId === this.#authService?.currentUser$?.value?.id);
   }
 }

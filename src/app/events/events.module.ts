@@ -43,6 +43,7 @@ import {CategorySelectionComponent} from "./event-form/forms/details/category-se
 import {ScheduleModule} from "../schedule/schedule.module";
 import {StarRatingComponent} from "../shared/components/star-rating/star-rating.component";
 import {EventRatingDialogComponent} from './event-details/event-rating-dialog/event-rating-dialog.component';
+import { EventParticipationInfoComponent } from './event-details/event-participation-info/event-participation-info.component';
 
 
 @NgModule({
@@ -84,6 +85,7 @@ import {EventRatingDialogComponent} from './event-details/event-rating-dialog/ev
     EventInitiatorComponent,
     EventPlaceComponent,
     EventRatingDialogComponent,
+    EventParticipationInfoComponent,
   ],
 })
 export class EventsModule {

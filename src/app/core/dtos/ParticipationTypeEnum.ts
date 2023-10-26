@@ -1,4 +1,4 @@
-export enum UserJoinDeclarationStatusEnum {
+export enum ParticipationTypeEnum {
   CONFIRMED = 'confirmedParticipants',
   DECLINED = 'declinedParticipants',
   TENTATIVE = 'tentativeParticipants',

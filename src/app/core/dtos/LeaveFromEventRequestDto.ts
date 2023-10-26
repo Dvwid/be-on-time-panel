@@ -1,7 +1,7 @@
-import {UserJoinDeclarationStatusEnum} from "./UserJoinDeclarationStatusEnum";
+import {ParticipationTypeEnum} from "./ParticipationTypeEnum";
 
 export interface LeaveFromEventRequestDto {
   eventId: string;
   userId: string;
-  declaration: UserJoinDeclarationStatusEnum;
+  declaration: ParticipationTypeEnum;
 }

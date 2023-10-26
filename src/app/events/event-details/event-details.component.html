@@ -11,34 +11,35 @@
 
     <div class="flex items-center gap-1"
          *ngIf="event && !event?.started">
-      <app-icon-button (click)="changeDeclarationOfParticipation(userJoinDeclarationStatusEnum.CONFIRMED)"
-                       [btnStyle]="currentUserJoinDeclarationStatus === userJoinDeclarationStatusEnum.CONFIRMED ? 'primary' : 'outlined'"
+      <app-icon-button (click)="changeDeclarationOfParticipation(participationTypeEnum.CONFIRMED)"
+                       [btnStyle]="currentUserJoinDeclarationStatus === participationTypeEnum.CONFIRMED ? 'primary' : 'outlined'"
                        [showSpinner]="isJoining$ | async"
                        icon="check"
                        label="Wezmę udział">
       </app-icon-button>
 
-      <app-icon-button (click)="changeDeclarationOfParticipation(userJoinDeclarationStatusEnum.TENTATIVE)"
+      <app-icon-button (click)="changeDeclarationOfParticipation(participationTypeEnum.TENTATIVE)"
                        [showSpinner]="isJoining$ | async"
-                       [btnStyle]="currentUserJoinDeclarationStatus === userJoinDeclarationStatusEnum.TENTATIVE ? 'primary' : 'outlined'"
+                       [btnStyle]="currentUserJoinDeclarationStatus === participationTypeEnum.TENTATIVE ? 'primary' : 'outlined'"
                        icon="question_mark"
                        label="Może">
       </app-icon-button>
 
-      <app-icon-button (click)="changeDeclarationOfParticipation(userJoinDeclarationStatusEnum.DECLINED)"
+      <app-icon-button (click)="changeDeclarationOfParticipation(participationTypeEnum.DECLINED)"
                        [showSpinner]="isJoining$ | async"
-                       [btnStyle]="currentUserJoinDeclarationStatus === userJoinDeclarationStatusEnum.DECLINED ? 'primary' : 'outlined'"
+                       [btnStyle]="currentUserJoinDeclarationStatus === participationTypeEnum.DECLINED ? 'primary' : 'outlined'"
                        icon="close"
                        label="Nie wezmę udziału">
       </app-icon-button>
+
     </div>
 
     <div class="flex flex-col items-center justify-center gap-1 text-xs"
          *ngIf="event?.ended">
-      <div>Ocena wydarzenia: {{rating}} / {{starCount}}</div>
+      <div>Ocena wydarzenia: {{rating || 0}} / {{starCount}}</div>
 
       <app-star-rating [rating]="rating"
-                       [disabled]="isRatingDisabled"
+                       [disabled]="!isRatingEnabled"
                        [starCount]="starCount"
                        [color]="starColor"
                        (ratingUpdated)="onRatingChanged($event)">
@@ -65,63 +66,20 @@
       <app-event-initiator [initiatorInfo]="event?.initiatorInfo"></app-event-initiator>
     </div>
 
-    <div class="w-full">
-      <span class="font-bold menu-section-label">{{event?.ended ? 'Wzieli udział' : 'Wezmą udział'}}</span>
-      <div class="flex flex-wrap gap-3 items-center"
-           [style.min-height.px]="30">
-        <img src="assets/images/user-icon.png"
-             alt="participant"
-             *ngFor="let participant of event?.participantsInfo?.confirmedParticipants.slice(0, 5)"
-             [matTooltip]="participant.participantName"
-             [style.width.px]="30"
-             [style.height.px]="30"/>
-        <div *ngIf="event?.participantsInfo?.confirmedParticipants?.length > 5"
-             class="bg-gray-300 rounded-full flex items-center justify-center"
-             [style.width.px]="30"
-             [style.height.px]="30">
-          + {{event?.participantsInfo?.declinedParticipants.slice(5).length}}
-        </div>
-      </div>
-    </div>
+    <app-event-participation-info [label]="event?.ended ? 'Wzieli udział' : 'Wezmą udział'"
+                                  [participationType]="participationTypeEnum.CONFIRMED"
+                                  [event]="event">
+    </app-event-participation-info>
 
-    <div class="w-full">
-      <span class="font-bold menu-section-label">Może</span>
-      <div class="flex flex-wrap gap-3 items-center"
-           [style.min-height.px]="30">
-        <img src="assets/images/user-icon.png"
-             alt="participant"
-             *ngFor="let participant of event?.participantsInfo?.tentativeParticipants.slice(0, 5)"
-             [matTooltip]="participant.participantName"
-             [style.width.px]="30"
-             [style.height.px]="30"/>
-        <div *ngIf="event?.participantsInfo?.tentativeParticipants?.length > 5"
-             class="bg-gray-300 rounded-full flex items-center justify-center"
-             [style.width.px]="30"
-             [style.height.px]="30">
-          + {{event?.participantsInfo?.declinedParticipants.slice(5).length}}
-        </div>
-      </div>
-    </div>
+    <app-event-participation-info label="Może"
+                                  [participationType]="participationTypeEnum.TENTATIVE"
+                                  [event]="event">
+    </app-event-participation-info>
 
-    <div class="w-full">
-      <span class="font-bold menu-section-label">Niezainteresowani</span>
-      <div class="flex flex-wrap gap-3 items-center"
-           [style.min-height.px]="30">
-        <img src="assets/images/user-icon.png"
-             alt="participant"
-             *ngFor="let participant of event?.participantsInfo?.declinedParticipants.slice(0, 5)"
-             [matTooltip]="participant.participantName"
-             [style.width.px]="30"
-             [style.height.px]="30"/>
-
-        <div *ngIf="event?.participantsInfo?.declinedParticipants?.length > 5"
-             class="bg-gray-300 rounded-full flex items-center justify-center"
-             [style.width.px]="30"
-             [style.height.px]="30">
-          + {{event?.participantsInfo?.declinedParticipants.slice(5).length}}
-        </div>
-      </div>
-    </div>
+    <app-event-participation-info label="Niezainteresowani"
+                                  [participationType]="participationTypeEnum.DECLINED"
+                                  [event]="event">
+    </app-event-participation-info>
   </div>
 </div>
 

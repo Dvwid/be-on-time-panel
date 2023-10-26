@@ -3,7 +3,7 @@ import {Notification, NotificationService, NotificationType} from "./services/no
 import {Subject} from "rxjs";
 
 @Component({
-  selector: 'exam-testing-notification',
+  selector: 'app-notification',
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.scss'],
 })
