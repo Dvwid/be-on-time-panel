@@ -45,9 +45,10 @@ export interface ParticipantsInfoDto {
 
 export interface EventRatingDto {
   rate: number;
-  userId: string;
+  userName: string;
   description?: string;
   eventId: string;
+  userId: string;
 }
 
 export interface EventDto {

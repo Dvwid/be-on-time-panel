@@ -1,18 +1,22 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {EventDto, EventRatingDto} from 'src/app/core/dtos/EventDto';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ImagesService} from "../services/images.service";
 import {convertBase64ToImage} from "../../core/utilities";
 import {EventService} from "../services/event.service";
 import {JoinToEventRequestDto} from "../../core/dtos/JoinToEventRequestDto";
 import {AuthService} from "../../core/auth/services/auth.service";
-import {BehaviorSubject, finalize} from "rxjs";
+import {BehaviorSubject, finalize, Observable} from "rxjs";
 import {NotificationService} from "../../core/notification/services/notification.service";
 import {ParticipationTypeEnum} from "../../core/dtos/ParticipationTypeEnum";
 import {LeaveFromEventRequestDto} from "../../core/dtos/LeaveFromEventRequestDto";
 import {StarRatingColor} from "../../shared/components/star-rating/star-rating.component";
 import {MatDialog} from "@angular/material/dialog";
 import {EventRatingDialogComponent, EventRatingDialogData} from "./event-rating-dialog/event-rating-dialog.component";
+import {EventRatingsComponent} from "../event-ratings/event-ratings.component";
+import {RatingsDialogData} from "../../core/dtos/RatingsDialogData";
+import {ConfirmationDialogService} from "../../shared/components/confirmation-dialog/confirmation-dialog.service";
+import {Empty} from "../../core/dtos/Empty";
 
 @Component({
   selector: 'app-event-details',
@@ -40,7 +44,13 @@ export class EventDetailsComponent implements OnInit {
   starColor: StarRatingColor = StarRatingColor.accent;
   isRatingEnabled = false;
 
-  constructor(private dialog: MatDialog) {
+  get userIsInitiator(): boolean {
+    return this.event?.initiatorInfo?.initiatorId === this.#authService.currentUser$?.value?.id;
+  };
+
+  constructor(private dialog: MatDialog,
+              private confirmationDialogService: ConfirmationDialogService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -53,7 +63,8 @@ export class EventDetailsComponent implements OnInit {
         rating: rating,
         userId: this.#authService?.currentUser$?.value?.id,
         eventId: this.event?.id
-      } as EventRatingDialogData
+      } as EventRatingDialogData,
+      autoFocus: false
     });
 
     dialogRef
@@ -66,6 +77,15 @@ export class EventDetailsComponent implements OnInit {
         this.setCurrentUserJoinDeclarationStatus();
         this.setUserRateIfExist();
       });
+  }
+
+  showRatings() {
+    this.dialog.open(EventRatingsComponent, {
+      data: {
+        ratings: this.event?.ratings
+      } as RatingsDialogData,
+      autoFocus: false
+    });
   }
 
   changeDeclarationOfParticipation(declaration: ParticipationTypeEnum) {
@@ -108,6 +128,16 @@ export class EventDetailsComponent implements OnInit {
       ?.participantsInfo
       ?.[type]
       ?.some(participant => participant?.participantId === this.#authService?.currentUser$?.value?.id);
+  }
+
+  openDeleteConfirmation() {
+    this.confirmationDialogService
+      .open({
+        title: 'Czy na pewno chcesz usunąć wydarzenie?',
+        content: 'Tej operacji nie da się cofnąć!',
+        doAfterConfirmation: () => this.deleteEvent(),
+        doOnSuccess: () => this.doAfterDelete()
+      });
   }
 
   private getEventDetails() {
@@ -180,6 +210,15 @@ export class EventDetailsComponent implements OnInit {
     return this.event
       ?.participantsInfo
       ?.[participateType]
-      .some(participant => participant.participantId === this.#authService?.currentUser$?.value?.id);
+      .some(participant => participant?.participantId === this.#authService?.currentUser$?.value?.id);
+  }
+
+  private deleteEvent(): Observable<Empty> {
+    return this.#eventService.delete(this.event?.id);
+  }
+
+  private doAfterDelete() {
+    this.#notificationService.success('Sukces!', 'Pomyślnie usunięto wydarzenie');
+    this.router.navigate(['/events/']);
   }
 }

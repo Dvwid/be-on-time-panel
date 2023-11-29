@@ -44,6 +44,8 @@ import {ScheduleModule} from "../schedule/schedule.module";
 import {StarRatingComponent} from "../shared/components/star-rating/star-rating.component";
 import {EventRatingDialogComponent} from './event-details/event-rating-dialog/event-rating-dialog.component';
 import { EventParticipationInfoComponent } from './event-details/event-participation-info/event-participation-info.component';
+import { EventRatingsComponent } from './event-ratings/event-ratings.component';
+import { ParticipantsDialogComponent } from './event-details/event-participation-info/participants-dialog/participants-dialog.component';
 
 
 @NgModule({
@@ -86,6 +88,8 @@ import { EventParticipationInfoComponent } from './event-details/event-participa
     EventPlaceComponent,
     EventRatingDialogComponent,
     EventParticipationInfoComponent,
+    EventRatingsComponent,
+    ParticipantsDialogComponent,
   ],
 })
 export class EventsModule {

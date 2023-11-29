@@ -43,8 +43,6 @@ export class ExceptionService {
     }
     if (ExceptionService.is403Response(err?.status)) {
       this.logout();
-      message = 'Brak uprawnień';
-      this.showError(message);
     }
 
     if (err?.error) {

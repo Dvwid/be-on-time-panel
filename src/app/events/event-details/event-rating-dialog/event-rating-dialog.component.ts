@@ -5,16 +5,17 @@ import {EventDto, EventRatingDto} from "../../../core/dtos/EventDto";
 import {EventService} from "../../services/event.service";
 import {BehaviorSubject, finalize} from "rxjs";
 import {NotificationService} from "../../../core/notification/services/notification.service";
+import {AuthService} from "../../../core/auth/services/auth.service";
 
 @Component({
   selector: 'app-event-rating-dialog',
-  templateUrl: './event-rating-dialog.component.html',
-  styleUrls: ['./event-rating-dialog.component.scss']
+  templateUrl: './event-rating-dialog.component.html'
 })
 export class EventRatingDialogComponent implements OnInit {
 
   #eventService = inject(EventService);
   #notificationService = inject(NotificationService);
+  #authService = inject(AuthService);
 
   rateForm: FormGroup<RateFormGroup>;
   rating: number;
@@ -59,7 +60,8 @@ export class EventRatingDialogComponent implements OnInit {
     return {
       eventId: this.data.eventId,
       rate: this.rating,
-      userId: this.data.userId,
+      userName: this.#authService.currentUser$.value?.name,
+      userId: this.#authService.currentUser$.value?.id,
       description: this.rateForm.controls.description.value
     }
   }

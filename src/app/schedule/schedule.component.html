@@ -2,7 +2,7 @@
   <div class="flex gap-3 mb-5">
     <div class="flex items-center">
       <button mat-icon-button
-              (click)="selectedYear = selectedYear - 1"
+              (click)="selectedYear = selectedYear - 1; changeYear()"
               [disabled]="currentYear === selectedYear">
         <i class="material-icons">chevron_left</i>
       </button>
@@ -10,7 +10,7 @@
       {{selectedYear}}
 
       <button mat-icon-button
-              (click)="selectedYear = selectedYear + 1">
+              (click)="selectedYear = selectedYear + 1; changeYear()">
         <i class="material-icons">chevron_right</i>
       </button>
     </div>
@@ -30,7 +30,7 @@
   <div class="flex flex-col gap-3 overflow-x-auto"
        [style.max-width.vw]="100">
 
-    <app-schedule-days *ngIf="selectedYear && selectedMonth"
+    <app-schedule-days *ngIf="selectedYear && (selectedMonth || selectedMonth === 0)"
                        [selectedMonth]="selectedMonth"
                        [selectedYear]="selectedYear"
                        [events]="events">

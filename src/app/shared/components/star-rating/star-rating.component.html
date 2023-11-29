@@ -1,6 +1,7 @@
-<div class="flex flex-col items-center">
-  <div>
+<div class="flex flex-col">
+  <div [matTooltip]="disabled ? disabledMsg : ''">
     <button mat-icon-button [color]="color" *ngFor="let ratingId of ratingArr;index as i" [id]="'star_'+i"
+            [disabled]="disabled"
             (click)="onClick(i+1)">
       <mat-icon>
         {{showIcon(i)}}
@@ -8,8 +9,8 @@
     </button>
   </div>
 
-  <p class="body-2">
-    Twoja ocena <span class="body-2">{{rating || 0}}</span> / <span class="body-2">{{starCount}}</span>
+  <p class="body-2 text-center" *ngIf="showUserRate && userRate">
+    Twoja ocena <span class="body-2">{{userRate}}</span>
   </p>
 </div>
 

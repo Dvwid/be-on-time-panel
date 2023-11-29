@@ -5,7 +5,10 @@
         <h1>Wszystkie wydarzenia</h1>
       </div>
 
-      <div class="flex gap-3">
+      <div class="flex gap-3 items-center"
+           [formGroup]="additionalOptionsForm">
+        <mat-slide-toggle formControlName="showPersonalizedEvents">Wyświetlaj tylko wydarzenia w których biorę udział</mat-slide-toggle>
+
         <app-icon-button [matMenuTriggerFor]="views"
                          icon="grid_on"
                          label="Widok">
@@ -21,11 +24,11 @@
 
     <div class="flex flex-col gap-4 w-full">
       <div *ngIf="selectedView === 'list'">
-        <app-event-list></app-event-list>
+        <app-event-list [additionalOptionsForm]="additionalOptionsForm"></app-event-list>
       </div>
 
       <div *ngIf="selectedView === 'schedule'">
-        <app-schedule></app-schedule>
+        <app-schedule [additionalOptionsForm]="additionalOptionsForm"></app-schedule>
       </div>
     </div>
   </div>

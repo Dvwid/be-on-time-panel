@@ -1,0 +1,33 @@
+<div class="w-full">
+  <div class="p-3 font-bold">
+    {{data?.header}}
+  </div>
+
+  <div class="flex flex-col gap-2 p-4 overflow-y-auto"
+       [style.min-width.vw]="30"
+       [style.max-height.vh]="70">
+    <div *ngFor="let participant of data?.participants"
+         [style.min-width.vw]="30"
+         class="flex gap-1 items-center pb-3"
+         [class.border-b]="data?.participants?.length > 1">
+      <img src="assets/images/user-icon.png"
+           alt="user"
+           [style.width.px]="30"
+           [style.height.px]="30"/>
+      <div class="flex-col gap-1 text-gray-600 flex-grow">
+        <div class="flex justify-between items-end">
+          <span class="font-bold text-md ml-3">{{participant?.participantName}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex w-full justify-end">
+    <button mat-button (click)="closeDialog()"
+            [style.padding.rem]="1"
+            [style.margin]="'0 1rem 1rem 0'">
+      Anuluj
+    </button>
+  </div>
+</div>
+

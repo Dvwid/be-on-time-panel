@@ -19,6 +19,9 @@ export class StarRatingComponent {
   @Input() starCount: number;
   @Input() color: string = 'accent';
   @Input() disabled: boolean;
+  @Input() showUserRate: boolean;
+  @Input() disabledMsg: string;
+  @Input() userRate: number;
 
   @Output() ratingUpdated = new EventEmitter();
 
@@ -38,7 +41,6 @@ export class StarRatingComponent {
 
   onClick(rating: number) {
     if (this.disabled) {
-      this.#notificationService.warning('Uwaga', 'Nie możesz ocenić tego wydarzenia ponieważ nie brałeś w nim udziału.');
       return;
     }
 

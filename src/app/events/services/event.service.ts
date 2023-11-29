@@ -8,6 +8,7 @@ import {EventCategoryDto} from "../../core/dtos/EventCategoryDto";
 import {GetEventsListRequest} from "../../core/dtos/GetEventsListRequest";
 import {CreateEventResponse} from "../../core/dtos/CreateEventResponse";
 import {LeaveFromEventRequestDto} from "../../core/dtos/LeaveFromEventRequestDto";
+import {Empty} from "../../core/dtos/Empty";
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +47,9 @@ export class EventService {
 
   rate(req: EventRatingDto): Observable<EventDto> {
     return this.#ajaxService.doPost(`${this.#baseUrl}/rate`, req);
+  }
+
+  delete(id: string): Observable<Empty> {
+    return this.#ajaxService.doDelete(`${this.#baseUrl}/${id}`);
   }
 }

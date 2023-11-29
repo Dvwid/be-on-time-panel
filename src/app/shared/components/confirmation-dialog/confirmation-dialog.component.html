@@ -1,0 +1,14 @@
+<div class="flex flex-col p-3 justify-between"
+     [style.min-width.px]="400">
+  <div class="flex flex-col">
+    <h1>{{title}}</h1>
+    <div>
+      {{content}}
+    </div>
+  </div>
+
+  <div class="flex justify-end gap-3">
+    <button mat-button (click)="close(false)">Anuluj</button>
+    <button mat-button (click)="close(true)">Potwierdź</button>
+  </div>
+</div>

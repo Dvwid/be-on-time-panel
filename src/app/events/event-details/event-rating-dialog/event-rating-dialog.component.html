@@ -3,10 +3,12 @@
     Twoja ocena
   </div>
 
-  <app-star-rating [rating]="rating"
-                   (ratingUpdated)="rating = $event"
-                   [starCount]="5">
-  </app-star-rating>
+  <div class="flex justify-center w-full">
+    <app-star-rating [rating]="rating"
+                     (ratingUpdated)="rating = $event"
+                     [starCount]="5">
+    </app-star-rating>
+  </div>
 
   <div class="text-xl">
     Czy masz uwagi lub sugestie dotyczące tego wydarzenia?
@@ -23,10 +25,6 @@
                   class="w-full"
                   controlName="description">
     </app-textarea>
-
-    <div class="text-xs mt-1">
-      Opinie będą widoczne tylko dla organizatora.
-    </div>
   </form>
 
   <div class="flex justify-end gap-1 w-full">
@@ -36,10 +34,11 @@
                      btnStyle="outlined">
     </app-icon-button>
 
-    <app-icon-button label="Oceń wydarzenie"
-                     [showSpinner]="isRatingPending$ | async"
-                     (afterClick)="rateEvent()"
-                     btnStyle="primary">
+    <app-icon-button
+      [label]="rateForm?.controls?.description?.value?.length > 0 ? 'Oceń wydarzenie' : 'Oceń bez komentarza'"
+      [showSpinner]="isRatingPending$ | async"
+      (afterClick)="rateEvent()"
+      [btnStyle]="rateForm?.controls?.description?.value?.length > 0 ? 'primary' : 'outlined'">
     </app-icon-button>
   </div>
 </div>

@@ -1,10 +1,13 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {BehaviorSubject, finalize} from "rxjs";
 import {EventService} from "../events/services/event.service";
 import {initializePagination} from "../core/utilities";
 import {EventPageDto} from "../core/dtos/EventPageDto";
 import {EventDto} from "../core/dtos/EventDto";
 import {GetEventsListRequest} from "../core/dtos/GetEventsListRequest";
+import {FormGroup} from "@angular/forms";
+import {AdditionalOptionsForm} from "../core/dtos/AdditionalOptionsForm";
+import {AuthService} from "../core/auth/services/auth.service";
 
 export interface Month {
   displayName: string;
@@ -18,20 +21,28 @@ export interface Month {
 })
 export class ScheduleComponent implements OnInit {
 
+  @Input() additionalOptionsForm: FormGroup<AdditionalOptionsForm>;
+
+  #eventService = inject(EventService);
+  #authService = inject(AuthService);
+
   events: EventDto[] = [];
 
   selectedYear: number;
   selectedMonth: number;
-
   currentYear: number;
   currentMonth: number;
 
-  #eventService = inject(EventService);
   areEventsLoading$ = new BehaviorSubject(false);
   pagination = initializePagination();
 
   ngOnInit() {
     this.setInitialCalendarData();
+    this.getEvents();
+    this.listenOnShowPersonalizedEventChange();
+  }
+
+  changeYear() {
     this.getEvents();
   }
 
@@ -55,6 +66,14 @@ export class ScheduleComponent implements OnInit {
 
     this.selectedMonth -= 1;
     this.getEvents();
+  }
+
+  private listenOnShowPersonalizedEventChange() {
+    this.additionalOptionsForm
+      .controls
+      .showPersonalizedEvents
+      .valueChanges
+      .subscribe(_ => this.getEvents());
   }
 
   private getEvents() {
@@ -86,7 +105,11 @@ export class ScheduleComponent implements OnInit {
     return {
       ...this.pagination,
       year: this.selectedYear,
-      month: this.selectedMonth
+      month: this.selectedMonth,
+      id: this.additionalOptionsForm
+        .controls
+        .showPersonalizedEvents
+        .value ? this.#authService.currentUser$.value.id : null
     }
   }
 }

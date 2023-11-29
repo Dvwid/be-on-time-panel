@@ -5,6 +5,9 @@ import {convertBase64ToImage, initializePagination} from "../../core/utilities";
 import {BehaviorSubject, finalize} from "rxjs";
 import {EventPageDto} from "../../core/dtos/EventPageDto";
 import {ImagesService} from "../services/images.service";
+import {FormGroup} from "@angular/forms";
+import {AdditionalOptionsForm} from "../../core/dtos/AdditionalOptionsForm";
+import {AuthService} from "../../core/auth/services/auth.service";
 
 @Component({
   selector: 'app-event-list',
@@ -13,10 +16,13 @@ import {ImagesService} from "../services/images.service";
 })
 export class EventListComponent implements OnInit {
 
+  @Input() additionalOptionsForm: FormGroup<AdditionalOptionsForm>;
+
   events: EventDto[];
 
   #eventService = inject(EventService);
   #imagesService = inject(ImagesService);
+  #authService = inject(AuthService);
 
   pagination = initializePagination();
   areEventsLoading$ = new BehaviorSubject(false);
@@ -25,18 +31,31 @@ export class EventListComponent implements OnInit {
 
   ngOnInit() {
     this.getEventsList();
+    this.listenOnShowPersonalizedEventChange();
   }
-
 
   isImageLoaderVisible(id: string) {
     return this.imageLoaderVisibleForEventsId.some(eventId => eventId === id);
   }
 
+  private listenOnShowPersonalizedEventChange() {
+    this.additionalOptionsForm
+      .controls
+      .showPersonalizedEvents
+      .valueChanges
+      .subscribe(_ => this.getEventsList());
+  }
+
   private getEventsList() {
     this.areEventsLoading$.next(true);
 
+    const personalized = this.additionalOptionsForm
+      .controls
+      .showPersonalizedEvents
+      .value
+
     this.#eventService
-      .getList(this.pagination)
+      .getList({...this.pagination, id: personalized ? this.#authService?.currentUser$?.value?.id : null})
       .pipe(
         finalize(() => this.areEventsLoading$.next(false))
       )

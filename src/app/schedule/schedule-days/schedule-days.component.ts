@@ -24,7 +24,10 @@ export class ScheduleDaysComponent implements OnChanges {
   selectedDay: DayWithEventsDto;
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes?.['selectedMonth']?.currentValue || changes?.['selectedMonth']?.currentValue === 0) {
+    const wasSelectedMonthChanged = changes?.['selectedMonth']?.currentValue || changes?.['selectedMonth']?.currentValue === 0;
+    const wasSelectedYearChanged = !!changes?.['selectedYear']?.currentValue;
+
+    if (wasSelectedMonthChanged || wasSelectedYearChanged) {
       this.getDaysInMonthAndNeighboringMonthsUTC(this.selectedMonth, this.selectedYear);
     }
 
@@ -34,7 +37,7 @@ export class ScheduleDaysComponent implements OnChanges {
   }
 
   openDayInfo(dayWithEvent: DayWithEventsDto) {
-    if(dayWithEvent?.day?.getUTCMonth() !== this.selectedMonth) {
+    if (dayWithEvent?.day?.getUTCMonth() !== this.selectedMonth) {
       return;
     }
 
