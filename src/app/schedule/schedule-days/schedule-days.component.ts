@@ -1,7 +1,8 @@
-import {Component, Input, OnChanges, Output, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {Component, inject, Input, OnChanges, Output, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {Subject} from "rxjs";
 import {DayWithEventsDto} from "../../core/dtos/DayWithEventsDto";
 import {EventDto} from "../../core/dtos/EventDto";
+import {GlobalService} from "../../core/global.service";
 
 @Component({
   selector: 'app-schedule-days',
@@ -19,9 +20,15 @@ export class ScheduleDaysComponent implements OnChanges {
 
   daysWithEvents: DayWithEventsDto[]
   days: Date[];
-  headers = ['Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota', 'Niedziela'];
+  headers = ['Pn', 'Wt', 'Śr', 'Czw', 'Pt', 'Sb', 'Nd'];
   opened = false;
   selectedDay: DayWithEventsDto;
+
+  #globalService = inject(GlobalService);
+
+  get isMobileView(): boolean {
+    return this.#globalService.mobileViewActive$.value;
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     const wasSelectedMonthChanged = changes?.['selectedMonth']?.currentValue || changes?.['selectedMonth']?.currentValue === 0;

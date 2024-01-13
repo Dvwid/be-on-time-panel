@@ -1,5 +1,6 @@
 .menu-btn {
-  position: absolute;
+  position: fixed;
+  z-index: 99999;
   top: 1rem;
   right: 2.2rem;
 }

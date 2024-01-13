@@ -1,5 +1,7 @@
 @import 'src/assets/styles/variables';
 
+$wrapper-width: 100%;
+
 .day-element {
   border-right: 1px solid #eeeeee;
   border-bottom: 1px solid #eeeeee;
@@ -29,10 +31,38 @@ app-schedule-days {
   }
 
   .mat-drawer-inner-container {
-    border-radius: .5rem;
+    //border-radius: .5rem;
     background-color: white !important;
-    border-bottom: 1px solid #e8e8e8;
-    border-left: 1px solid #e8e8e8;
+    //border-bottom: 1px solid #e8e8e8;
+    //border-left: 1px solid #e8e8e8;
   }
 }
+
+.day-wrapper {
+}
+
+.day-header {
+  width: 14.28571428571429%;
+}
+
+.day-with-event {
+  height: 75px;
+  width: 14.28571428571429%;
+  overflow: hidden;
+}
+
+.day-drawer {
+  width: 300px;
+}
+
+@media (min-width: 640px) {
+  .day-drawer {
+    width: 300px;
+  }
+
+  .day-with-event {
+    height: 100px;
+  }
+}
+
 

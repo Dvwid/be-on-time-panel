@@ -137,6 +137,25 @@ html, body {
   opacity: .5;
 }
 
+.mat-horizontal-content-container {
+  padding: 0 !important;
+}
+
+.mat-horizontal-stepper-header-container {
+  .mat-step-header:last-of-type {
+    padding-right: 0 !important;
+  }
+
+  .mat-step-header:first-of-type {
+    padding-left: 0 !important;
+  }
+
+  .mat-stepper-horizontal-line {
+    min-width: 0 !important;
+  }
+}
+
+
 @keyframes skeleton-loading {
   0% {
     background-color: hsl(200, 20%, 80%);

@@ -1,12 +1,11 @@
 <mat-drawer-container autosize
                       class="drawer-container-bg"
                       [hasBackdrop]="false">
-  <mat-drawer mode="side"
+  <mat-drawer mode="over"
               class="mat-drawer-bg"
               position="end"
               [opened]="opened">
-    <div [style.width.px]="300"
-         class="flex flex-col border-t border-b bg-white">
+    <div class="flex flex-col border-t border-b bg-white day-drawer">
       <div class="w-full flex justify-end">
         <i (click)="opened = false"
            matTooltip="Zamknij szczegóły"
@@ -35,16 +34,15 @@
     </div>
   </mat-drawer>
 
-  <div class="flex flex-wrap rounded-xl border box-content overflow-hidden" [style.width.px]="1120">
+  <div class="flex flex-wrap rounded-xl border box-content overflow-hidden day-wrapper">
     <div class="w-full flex">
-      <div [style.width.px]="160" class="text-center py-3 border-b" *ngFor="let header of headers">{{header}}</div>
+      <div class="text-center py-3 border-b day-header" *ngFor="let header of headers">{{header}}</div>
     </div>
+
     <div *ngFor="let dayWithEvent of daysWithEvents"
          (click)="openDayInfo(dayWithEvent)"
-         class="flex p-2 day-element flex-col justify-between"
-         [class.over-month]="dayWithEvent?.day?.getUTCMonth() !== selectedMonth"
-         [style.width.px]="160"
-         [style.height.px]="100">
+         class="flex p-2 day-element flex-col justify-between day-with-event"
+         [class.over-month]="dayWithEvent?.day?.getUTCMonth() !== selectedMonth">
       <div>
         {{dayWithEvent?.day | date: 'd'}}
       </div>

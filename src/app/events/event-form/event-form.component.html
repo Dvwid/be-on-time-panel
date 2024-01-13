@@ -1,7 +1,8 @@
 <mat-stepper orientation="horizontal" [linear]="false" #stepper>
   <mat-step [stepControl]="formGroup.controls.eventDetails">
-    <ng-template matStepLabel>Dane podstawowe</ng-template>
+    <ng-template matStepLabel>Podstawowe informacje</ng-template>
     <ng-template matStepContent>
+      Podstawowe informacje dotyczące wydarzenia
       <app-event-details-form [formGroup]="formGroup.controls.eventDetails"
                               [form]="form">
       </app-event-details-form>
@@ -13,6 +14,7 @@
     <ng-template matStepLabel>Miejsce wydarzenia</ng-template>
 
     <ng-template matStepContent>
+      Miejsce w którym odbędzie się wydarzenie
       <app-event-place-form [formGroup]="formGroup.controls.eventLocation"
                             [form]="form">
       </app-event-place-form>
@@ -23,6 +25,7 @@
     <ng-template matStepLabel>Zdjęcie wydarzenia</ng-template>
 
     <ng-template matStepContent>
+      Zdjęcie reprezentujące wydarzenie
       <app-event-image-form [formGroup]="formGroup.controls.eventImage"
                             [form]="form">
       </app-event-image-form>
