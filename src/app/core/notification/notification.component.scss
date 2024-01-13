@@ -5,8 +5,10 @@
   bottom: 0;
   right: 0;
   z-index: 10000;
-  min-width: 25vw;
-  max-width: 25vw;
+  min-width: 100vw;
+  max-width: 100vw;
+  padding-left: 10px;
+
 
   .notification {
     border-radius: 5px;
@@ -78,4 +80,11 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #afafaf;
+}
+
+@media (min-width: 640px) {
+  .notifications {
+    min-width: 25vw;
+    max-width: 25vw;
+  }
 }
