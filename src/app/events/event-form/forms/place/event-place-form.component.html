@@ -1,5 +1,5 @@
-<div class="flex w-full mt-3 gap-3">
-  <div class="w-1/2 gradient-test">
+<div class="flex flex-col sm:flex-row w-full mt-3 gap-3">
+  <div class="w-full sm:w-1/2 gradient-test">
     <app-mapbox-wrapper (geocoderSelectResult)="setSelectedResult($event)"
                         (changePointerPosition)="setPointer($event)"
                         (deleteMarker)="removePointer()"
@@ -8,7 +8,7 @@
     </app-mapbox-wrapper>
   </div>
 
-  <div class="flex flex-col justify-between w-1/2 ">
+  <div class="flex flex-col justify-between sm:w-1/2 w-full mt-4 sm:mt-0">
     <div class="flex flex-col px-3 w-full">
       <div class="bg-primary text-secondary px-3 py-3 rounded-md mb-3">
         <div class="flex gap-3">
@@ -25,7 +25,7 @@
                       label="Nazwa">
       </app-text-input>
 
-      <div class="flex gap-3 w-full">
+      <div class="flex flex-col sm:flex-row sm:gap-3 w-full">
         <app-text-input controlName="postCode"
                         [formGroup]="formGroup"
                         [form]="form"

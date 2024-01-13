@@ -1,10 +1,12 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {EventFormAbstractComponent} from "../../event-form-abstract.component";
 import {EventImageFormGroup} from "../../../../core/dtos/EventForm";
 import {ImagesService} from "../../../services/images.service";
 import {ImageDto} from "../../../../core/dtos/ImageDto";
 import {NotificationService} from "../../../../core/notification/services/notification.service";
 import {BehaviorSubject, finalize} from "rxjs";
+import {MatDialog} from "@angular/material/dialog";
+import {GalleryDialogComponent} from "./gallery-dialog/gallery-dialog.component";
 import {convertBase64ToImage} from "../../../../core/utilities";
 
 @Component({
@@ -12,27 +14,15 @@ import {convertBase64ToImage} from "../../../../core/utilities";
   templateUrl: './event-image-form.component.html',
   styleUrls: ['./event-image-form.component.scss']
 })
-export class EventImageFormComponent extends EventFormAbstractComponent<EventImageFormGroup> implements OnInit {
-
-  images: ImageDto[] = [];
+export class EventImageFormComponent extends EventFormAbstractComponent<EventImageFormGroup> {
 
   isImageUploading$ = new BehaviorSubject(false);
-  areImagesLoading$ = new BehaviorSubject(false);
-
-  @HostListener('click', ['$event.target'])
-  onImageClick(target: HTMLElement) {
-    if (target?.tagName?.toLowerCase() === 'img' && target?.title) {
-      this.setSelectedImage(target);
-    }
-  }
+  selectedImage: ImageDto;
 
   constructor(private _storageService: ImagesService,
-              private _notificationService: NotificationService) {
+              private _notificationService: NotificationService,
+              private _matDialog: MatDialog) {
     super();
-  }
-
-  ngOnInit() {
-    this.getImages();
   }
 
   uploadFile(file: File) {
@@ -44,41 +34,31 @@ export class EventImageFormComponent extends EventFormAbstractComponent<EventIma
       .subscribe(data => this.doAfterUploadImage(data));
   }
 
-  private getImages() {
-    this.areImagesLoading$.next(true);
+  private doAfterUploadImage(image: ImageDto) {
+    this._notificationService.success('Sukces!', 'Dodano nowe zdjęcie');
+    this.selectedImage = image;
+    setTimeout(() => convertBase64ToImage(image, 'event-selected-image', 'image-wrapper'))
+    this.formGroup.controls.imageId.setValue(image?.id);
+  }
 
-    this._storageService
-      .getImages()
-      .pipe(finalize(() => this.areImagesLoading$.next(false)))
-      .subscribe(data => {
-        this.images = data || [];
-        if (!data) {
+  openGallery() {
+    const matDialogRef = this._matDialog.open(GalleryDialogComponent);
+
+    matDialogRef
+      .afterClosed()
+      .subscribe((image: ImageDto) => {
+        if (!image) {
           return;
         }
-        setTimeout(() => data?.forEach((img) => convertBase64ToImage(img, 'event-image', 'image-wrapper')));
-      });
+
+        this.selectedImage = image;
+        setTimeout(() => convertBase64ToImage(image, 'event-selected-image', 'image-wrapper'));
+        this.formGroup.controls.imageId.setValue(image?.id);
+      })
   }
 
-  private doAfterUploadImage(image: ImageDto) {
-    if (this.images.length === 5) {
-      this.images.splice(4, 1);
-    }
-    convertBase64ToImage(image, 'event-image', 'image-wrapper');
-    this._notificationService.success('Sukces!', 'Dodano nowe zdjęcie');
-  }
-
-  private setSelectedImage(target: HTMLElement) {
-    document
-      .querySelectorAll('img')
-      .forEach((img) => img.classList.remove('selected'));
-
-    if (target?.title === this.formGroup.controls.imageId.value) {
-      this.formGroup?.controls?.imageId?.setValue(null);
-      return;
-    }
-
-    target.classList.add('selected');
-
-    this.formGroup.controls.imageId.setValue(target?.title);
+  clearSelectedImage() {
+    this.selectedImage = undefined;
+    this.formGroup.controls.imageId.setValue(null);
   }
 }

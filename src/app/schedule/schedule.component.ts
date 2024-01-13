@@ -34,7 +34,7 @@ export class ScheduleComponent implements OnInit {
   currentMonth: number;
 
   areEventsLoading$ = new BehaviorSubject(false);
-  pagination = initializePagination();
+  pagination = initializePagination(10);
 
   ngOnInit() {
     this.setInitialCalendarData();

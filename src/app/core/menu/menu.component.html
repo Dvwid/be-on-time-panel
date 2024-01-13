@@ -5,6 +5,7 @@
                       [label]="item.label"
                       [icon]="item.icon"
                       [routerLink]="item.routerLink"
+                      (click)="changeRoute.emit()"
                       routerLinkActive="active-menu-item"
                       class="rounded-lg">
     </app-menu-element>
@@ -14,6 +15,7 @@
                       [label]="item.label"
                       [icon]="item.icon"
                       [routerLink]="item.routerLink"
+                      (click)="changeRoute.emit()"
                       routerLinkActive="active-menu-item"
                       class="rounded-lg">
     </app-menu-element>

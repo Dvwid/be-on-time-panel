@@ -24,7 +24,7 @@ export class EventListComponent implements OnInit {
   #imagesService = inject(ImagesService);
   #authService = inject(AuthService);
 
-  pagination = initializePagination();
+  pagination = initializePagination(10);
   areEventsLoading$ = new BehaviorSubject(false);
   imageLoaderVisibleForEventsId: string[] = [];
 

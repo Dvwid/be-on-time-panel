@@ -5,6 +5,8 @@
 }
 
 .image-wrapper {
+  height: 110px;
+
   img {
     transition: .4s;
     transform: rotate(0) translateY(0) translateX(0);
@@ -56,11 +58,26 @@
   }
 }
 
+.image-picker-text {
+  height: 90px;
+}
+
 .progress {
   transition: .4s;
   top: 100%;
 
   &.show {
     top: 0;
+  }
+}
+
+
+@media (max-width: 640px) {
+  .image-picker-text {
+    height: 90px;
+  }
+
+  .image-wrapper {
+    height: 200px;
   }
 }

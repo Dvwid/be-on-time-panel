@@ -36,10 +36,10 @@ export function convertObjectToParams(obj: any): HttpParams {
   return params;
 }
 
-export function initializePagination(): PageInfoDto {
+export function initializePagination(pageSize: number): PageInfoDto {
   return {
     page: 1,
-    pageSize: 10,
+    pageSize,
     total: 0
   }
 }

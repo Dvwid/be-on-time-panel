@@ -1,14 +1,18 @@
 <form #form="ngForm"
       [formGroup]="eventForm"
       (submit)="submit()"
-      class="flex flex-col py-10 px-10 min-h-screen">
-  <div class="flex justify-between">
+      class="flex flex-col py-20 sm:py-10 px-10 min-h-screen">
+  <div class="flex flex-col sm:flex-row justify-between">
     <h1>Tworzenie nowego wydarzenia</h1>
 
-    <app-mini-fab-spinner-button [isSpinnerVisible]="isEventCreating$ | async"
-                                 [form]="form"
-                                 label="Zapisz">
-    </app-mini-fab-spinner-button>
+    <app-icon-button
+      [showSpinner]="isEventCreating$ | async"
+      btnStyle="primary"
+      [disabled]="!form.form.valid"
+      [form]="form"
+      icon="check"
+      label="Utwórz wydarzenie">
+    </app-icon-button>
   </div>
 
   <app-event-form [formGroup]="eventForm"

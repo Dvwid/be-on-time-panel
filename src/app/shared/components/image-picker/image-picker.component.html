@@ -14,8 +14,7 @@
            name="selectedFile"
            type="file"
            class="hidden"/>
-    <div [style.height.px]="110"
-         #imagesWrapperRef
+    <div  #imagesWrapperRef
          class="flex justify-center items-center relative image-wrapper w-full">
       <img src="assets/images/image-icon-color.png"
            alt="image"
@@ -30,8 +29,7 @@
            class="image-picker-icon absolute shadow-md"/>
     </div>
 
-    <div class="flex flex-col justify-center items-center gap-1"
-         [style.height.px]="90">
+    <div class="flex flex-col justify-center items-center gap-1 text-center image-picker-textr">
       <span class="text-gray-800 font-semibold text-lg">Upuść plik tutaj, lub kliknij żeby wyszukać</span>
       <span class="text-gray-400">Dostępne formaty: JPEG, PNG (Maksymalny rozmiar 0,5MB)</span>
     </div>

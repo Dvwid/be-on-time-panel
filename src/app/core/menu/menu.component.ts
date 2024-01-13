@@ -1,4 +1,4 @@
-import {Component, inject, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, inject, OnDestroy, OnInit, Output} from '@angular/core';
 import {AuthService} from "../auth/services/auth.service";
 import {UserDto} from "../dtos/UserDto";
 import {Subject, takeUntil} from "rxjs";
@@ -15,6 +15,8 @@ interface MenuItem {
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit, OnDestroy {
+
+  @Output() changeRoute = new EventEmitter();
 
   #authService = inject(AuthService);
 

@@ -1,20 +1,23 @@
-<div class="flex py-10 px-10 min-h-screen w-full">
+<div class="flex px-10 py-20 sm:py-10 min-h-screen w-full">
   <div class="flex flex-col gap-4 w-full">
-    <div class="flex justify-between w-full">
+    <div class="flex flex-col sm:flex-row justify-between w-full">
       <div>
         <h1>Wszystkie wydarzenia</h1>
       </div>
 
-      <div class="flex gap-3 items-center"
+      <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center"
            [formGroup]="additionalOptionsForm">
-        <mat-slide-toggle formControlName="showPersonalizedEvents">Wyświetlaj tylko wydarzenia w których biorę udział</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showPersonalizedEvents">Wyświetlaj tylko wydarzenia w których biorę udział
+        </mat-slide-toggle>
 
         <app-icon-button [matMenuTriggerFor]="views"
                          icon="grid_on"
-                         label="Widok">
+                         label="Widok"
+                         class="w-full sm:w-auto">
         </app-icon-button>
 
-        <app-icon-button icon="add"
+        <app-icon-button class="w-full sm:w-auto"
+                         icon="add"
                          btnStyle="primary"
                          label="Nowe wydarzenie"
                          routerLink="/events/create">

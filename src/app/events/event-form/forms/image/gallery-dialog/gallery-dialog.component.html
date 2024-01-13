@@ -1,0 +1,47 @@
+<div [style.min-width.vw]="80">
+  <div class="p-5">
+    <div class="flex justify-between items-center">
+      <h1 class="p-0 m-0">Galeria dostępnych zdjęć</h1>
+      <mat-icon (click)="closeDialog()" class="cursor-pointer"
+                matTooltip="Zamknij galerie">close
+      </mat-icon>
+    </div>
+  </div>
+
+  <div mat-dialog-content>
+    <span class="font-bold text-gray-400 text-xs">OSTATNIO DODANE</span>
+
+    <div *ngIf="!(areImagesLoading$ | async)"
+         id="image-wrapper"
+         class="w-full flex flex-col sm:flex-row rounded-xl overflow-hidden">
+    </div>
+
+    <div *ngIf="areImagesLoading$ | async"
+         class="flex flex-col sm:flex-row gap-3 rounded-xl w-full">
+      <app-skeleton-loader class="w-full sm:w-1/5"></app-skeleton-loader>
+      <app-skeleton-loader class="w-full sm:w-1/5"></app-skeleton-loader>
+      <app-skeleton-loader class="w-full sm:w-1/5"></app-skeleton-loader>
+      <app-skeleton-loader class="w-full sm:w-1/5"></app-skeleton-loader>
+      <app-skeleton-loader class="w-full sm:w-1/5"></app-skeleton-loader>
+    </div>
+
+    <div mat-dialog-actions>
+      <div class="flex justify-end items-center mt-3 gap-3 w-full">
+        <div class="flex gap-1 items-center cursor-pointer hover:text-black text-gray-600"
+             [class.opacity-50]="pagination?.page === 1"
+             (click)="previousPage()">
+          <mat-icon>navigate_before</mat-icon>
+          <span>Wcześniejsze</span>
+        </div>
+
+        <div class="flex gap-1 items-center cursor-pointer hover:text-black text-gray-600"
+             [class.opacity-50]="pagination?.page === totalPages"
+             (click)="nextPage()">
+          <span>Kolejne</span>
+          <mat-icon>navigate_next</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -46,6 +46,7 @@ import {EventRatingDialogComponent} from './event-details/event-rating-dialog/ev
 import { EventParticipationInfoComponent } from './event-details/event-participation-info/event-participation-info.component';
 import { EventRatingsComponent } from './event-ratings/event-ratings.component';
 import { ParticipantsDialogComponent } from './event-details/event-participation-info/participants-dialog/participants-dialog.component';
+import { GalleryDialogComponent } from './event-form/forms/image/gallery-dialog/gallery-dialog.component';
 
 
 @NgModule({
@@ -90,6 +91,7 @@ import { ParticipantsDialogComponent } from './event-details/event-participation
     EventParticipationInfoComponent,
     EventRatingsComponent,
     ParticipantsDialogComponent,
+    GalleryDialogComponent,
   ],
 })
 export class EventsModule {

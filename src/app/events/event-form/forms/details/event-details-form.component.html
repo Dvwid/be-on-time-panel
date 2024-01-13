@@ -26,11 +26,11 @@
                       label="Data rozpoczęcia">
       </app-datepicker>
 
-      <div class="pt-2.5" *ngIf="!showDateTo">
+      <div *ngIf="!showDateTo">
         <button mat-button
                 (click)="showDateTo = true"
                 type="button">
-          <div class="flex">
+          <div class="mb-5 sm:mb-0 sm:mt-2.5">
             Dodaj datę zakończenia
           </div>
         </button>

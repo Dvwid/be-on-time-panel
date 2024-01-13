@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {AjaxService} from "../../core/ajax.service";
 import {Observable} from "rxjs";
 import {ImageDto} from "../../core/dtos/ImageDto";
+import {PageInfoDto} from "../../core/dtos/PageInfoDto";
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class ImagesService {
     return this._ajaxService.postFileStream(`${this.#baseUrl}`, file);
   }
 
-  getImages(): Observable<ImageDto[]> {
-    return this._ajaxService.doGet(`${this.#baseUrl}`);
+  getImages(pagination: PageInfoDto): Observable<ImageDto[]> {
+    return this._ajaxService.doGet(`${this.#baseUrl}`, pagination);
   }
 
   getImage(id: string): Observable<ImageDto> {
