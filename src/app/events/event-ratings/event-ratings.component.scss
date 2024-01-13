@@ -1,0 +1,9 @@
+.ratings-container {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .ratings-container {
+    width: 30vw;
+  }
+}

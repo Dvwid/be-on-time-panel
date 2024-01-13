@@ -2,8 +2,7 @@
   <div class="flex flex-col gap-2 p-4 overflow-y-auto"
        [style.max-height.vh]="70">
     <div *ngFor="let rating of ratings"
-         [style.width.vw]="30"
-         class="flex gap-1 items-center pb-3"
+         class="flex gap-1 items-center pb-3 ratings-container"
          [class.border-b]="ratings?.length > 1">
       <img src="assets/images/user-icon.png"
            alt="user"

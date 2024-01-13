@@ -81,10 +81,11 @@ export class EventDetailsComponent implements OnInit {
 
   showRatings() {
     this.dialog.open(EventRatingsComponent, {
+      minWidth: '300px',
       data: {
         ratings: this.event?.ratings
       } as RatingsDialogData,
-      autoFocus: false
+      autoFocus: false,
     });
   }
 
