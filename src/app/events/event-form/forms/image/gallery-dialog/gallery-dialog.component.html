@@ -24,22 +24,22 @@
       <app-skeleton-loader class="w-full sm:w-1/5"></app-skeleton-loader>
       <app-skeleton-loader class="w-full sm:w-1/5"></app-skeleton-loader>
     </div>
+  </div>
 
-    <div mat-dialog-actions>
-      <div class="flex justify-end items-center mt-3 gap-3 w-full">
-        <div class="flex gap-1 items-center cursor-pointer hover:text-black text-gray-600"
-             [class.opacity-50]="pagination?.page === 1"
-             (click)="previousPage()">
-          <mat-icon>navigate_before</mat-icon>
-          <span>Wcześniejsze</span>
-        </div>
+  <div mat-dialog-actions>
+    <div class="flex justify-end items-center mt-3 gap-3 w-full pb-3">
+      <div class="flex gap-1 items-center cursor-pointer hover:text-black text-gray-600"
+           [class.opacity-50]="pagination?.page === 1"
+           (click)="previousPage()">
+        <mat-icon>navigate_before</mat-icon>
+        <span>Wcześniejsze</span>
+      </div>
 
-        <div class="flex gap-1 items-center cursor-pointer hover:text-black text-gray-600"
-             [class.opacity-50]="pagination?.page === totalPages"
-             (click)="nextPage()">
-          <span>Kolejne</span>
-          <mat-icon>navigate_next</mat-icon>
-        </div>
+      <div class="flex gap-1 items-center cursor-pointer hover:text-black text-gray-600"
+           [class.opacity-50]="pagination?.page === totalPages"
+           (click)="nextPage()">
+        <span>Kolejne</span>
+        <mat-icon>navigate_next</mat-icon>
       </div>
     </div>
   </div>
