@@ -1,4 +1,4 @@
-import {Component, HostListener, inject} from '@angular/core';
+import {Component, HostListener, inject, ViewEncapsulation} from '@angular/core';
 import {BehaviorSubject, finalize} from "rxjs";
 import {convertBase64ToImage, initializePagination} from "../../../../../core/utilities";
 import {ImagesService} from "../../../../services/images.service";
@@ -8,7 +8,8 @@ import {MatDialogRef} from "@angular/material/dialog";
 @Component({
   selector: 'app-gallery-dialog',
   templateUrl: './gallery-dialog.component.html',
-  styleUrls: ['./gallery-dialog.component.scss']
+  styleUrls: ['./gallery-dialog.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class GalleryDialogComponent {
 
