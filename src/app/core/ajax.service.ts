@@ -9,8 +9,9 @@ import {convertObjectToParams} from "./utilities";
 })
 export class AjaxService {
 
-  // private readonly baseApiUrl: string = 'https://be-on-time-69912afc73d0.herokuapp.com/api/';
-  private readonly baseApiUrl = 'http://localhost:3333/api/';
+  private readonly baseApiUrl: string = 'https://be-on-time-69912afc73d0.herokuapp.com/api/';
+
+  // private readonly baseApiUrl = 'http://localhost:3333/api/';
 
   constructor(private http: HttpClient,
               private exceptionService: ExceptionService) {
