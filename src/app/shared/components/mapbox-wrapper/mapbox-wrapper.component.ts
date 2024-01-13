@@ -111,6 +111,8 @@ export class MapboxWrapperComponent implements AfterViewInit {
         this.marker.remove();
       }
 
+      this.changePointerPosition.next(lngLat);
+
       this.marker = new mapboxgl.Marker({
         color: "#3f51b5",
         draggable: false,
