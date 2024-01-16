@@ -1,8 +1,9 @@
-<button class="rounded-md border flex items-center px-3 py-2 gap-2 font-medium w-full sm:w-auto"
+<button class="rounded-md flex items-center px-3 py-2 gap-2 font-medium w-full sm:w-auto"
         [class.opacity-50]="showSpinner || disabled"
         [disabled]="showSpinner || disabled"
         [class.text-white]="btnStyle === 'primary'"
         [class.bg-primary]="btnStyle === 'primary'"
+        [class.border]="btnStyle !== 'standard'"
         (click)="afterClick.emit()"
         matRipple>
   <i class="material-icons text-md" *ngIf="!showSpinner && icon">{{icon}}</i>
