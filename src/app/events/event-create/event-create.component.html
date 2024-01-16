@@ -1,9 +1,9 @@
 <form #form="ngForm"
       [formGroup]="eventForm"
       (submit)="submit()"
-      class="flex flex-col py-20 sm:py-10 px-5 sm:px-10 min-h-screen">
+      class="flex flex-col py-10 px-5 sm:px-10 min-h-screen">
   <div class="flex flex-col sm:flex-row justify-between">
-    <h1>Tworzenie nowego wydarzenia</h1>
+    <h1>Tworzenie wydarzenia</h1>
 
     <app-icon-button
       [showSpinner]="isEventCreating$ | async"
