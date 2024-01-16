@@ -23,7 +23,7 @@ export class IconButtonComponent {
   @Input() icon: string;
   @Input() label: string;
   @Input() showSpinner: boolean;
-  @Input() btnStyle: 'outlined' | 'primary';
+  @Input() btnStyle: 'outlined' | 'primary' | 'standard';
   @Input() form: FormGroupDirective;
   @Input() disabled: boolean;
 
