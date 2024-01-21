@@ -68,7 +68,7 @@ test('Core functionalities', async ({page}) => {
 
   await test.step('Submit form and create event', async () => {
     await page.getByRole('button', {name: 'Utwórz wydarzenie'}).click({delay: 500});
-    await page.waitForLoadState('networkidle');
+    await page.waitForSelector('.message.text-gray-500');
     expect(await page.getByText('Utworzono nowe wydarzenie').isVisible());
   })
 
@@ -87,6 +87,7 @@ test('Core functionalities', async ({page}) => {
 
   await test.step('Join to event', async () => {
     await page.getByRole('button', {name: 'check Wezmę udział'}).click({delay: 500});
+    await page.waitForSelector('.message.text-gray-500');
     expect(page.getByText('Zmieniono deklarację udziału').isVisible());
   })
 
