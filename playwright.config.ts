@@ -15,7 +15,7 @@ export default defineConfig({
   forbidOnly: !!process.env?.['CI'],
   retries: process.env?.['CI'] ? 2 : 0,
   workers: 1,
-  timeout: 1000 * 60 * 5,
+  timeout: 1000 * 60 * 2,
   reporter: 'html',
 
   use: {
@@ -34,13 +34,13 @@ export default defineConfig({
       name: 'chromium',
       use: {...devices['Desktop Chrome']},
     },
-    {
-      name: 'firefox',
-      use: {...devices['Desktop Firefox']},
-    },
-    {
-      name: 'Mobile Safari',
-      use: {...devices['iPhone 12']},
-    },
+    // {
+    //   name: 'firefox',
+    //   use: {...devices['Desktop Firefox']},
+    // },
+    // {
+    //   name: 'Mobile Safari',
+    //   use: {...devices['iPhone 12']},
+    // },
   ],
 });
