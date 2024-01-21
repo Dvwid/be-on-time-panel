@@ -24,7 +24,7 @@
           <div class="flex items-center gap-1">
             <div class="text-md">{{event?.eventDetails?.dateFrom | date: 'HH:mm'}}</div>
           </div>
-          <div class="text-lg font-medium">{{event?.eventDetails?.name}}</div>
+          <div data-testid="selectedDayEventName" class="text-lg font-medium">{{event?.eventDetails?.name}}</div>
           <div class="text-xs" *ngIf="event?.eventDetails?.dateTo > event?.eventDetails?.dateFrom">
             Czas trwania: {{getTimeForEvent(event?.eventDetails?.dateTo, event?.eventDetails.dateFrom)}}
           </div>
