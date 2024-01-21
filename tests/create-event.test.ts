@@ -51,6 +51,7 @@ test('Core functionalities', async ({page}) => {
 
   await test.step('Go to location tab and set place info', async () => {
     await page.getByRole('tab', {name: 'Miejsce wydarzenia'}).click({delay: 500});
+    await page.waitForSelector('.mapboxgl-ctrl-geocoder--input');
     await page.locator('.mapboxgl-ctrl-geocoder--input').click({delay: 500});
     await page.locator('.mapboxgl-ctrl-geocoder--input').pressSequentially('Jana kasprowicza 5', {delay: 100});
     await page.locator('a').filter({hasText: 'Jana Kasprowicza 5 43-300'}).click({delay: 500});
