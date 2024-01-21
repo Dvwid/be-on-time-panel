@@ -80,7 +80,7 @@ test('Core functionalities', async ({page}) => {
     }
 
     await page.getByText('Wydarzenia', {exact: true}).click({delay: 500});
-    await page.getByText(eventStartDay, {exact: true}).click({delay: 2000});
+    await page.locator('.current-day').click();
     await page.getByTestId('selectedDayEventName').getByText(UID).click({delay: 2000});
     await page.waitForLoadState('networkidle');
     expect(await page.getByText(UID).isVisible())

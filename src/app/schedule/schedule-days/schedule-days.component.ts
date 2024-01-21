@@ -30,6 +30,9 @@ export class ScheduleDaysComponent implements OnChanges {
     return this.#globalService.mobileViewActive$.value;
   }
 
+  currentDay = new Date().getUTCDate();
+  currentMonth = new Date().getUTCMonth();
+
   ngOnChanges(changes: SimpleChanges) {
     const wasSelectedMonthChanged = changes?.['selectedMonth']?.currentValue || changes?.['selectedMonth']?.currentValue === 0;
     const wasSelectedYearChanged = !!changes?.['selectedYear']?.currentValue;
