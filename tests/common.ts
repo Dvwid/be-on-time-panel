@@ -24,7 +24,7 @@ export const userEmail = 'test1234@example.com';
 export const userPwd = 'test123456';
 
 export const login = async (page: Page) => {
-  await page.goto('http://localhost:4200/');
+  await page.goto('https://master--fluffy-selkie-445ec1.netlify.app/');
   await page.getByLabel('E-mail').click({delay: 500});
   await page.getByLabel('E-mail').pressSequentially(userEmail, {delay: 100});
   await page.getByLabel('Hasło').click({delay: 500});
