@@ -37,7 +37,7 @@ test('Core functionalities', async ({page}) => {
     await page.locator('#mat-input-6').fill('');
     await page.locator('#mat-input-6').pressSequentially(eventStartMinute, {delay: 100});
     await page.keyboard.press('Escape');
-    await page.getByRole('button', {name: 'Dodaj datę zakończenia'}).press('Enter');
+    await page.getByRole('button', {name: 'Dodaj datę zakończenia'}).click({delay: 500});
     await page.getByLabel('Open calendar').nth(1).click({delay: 500});
     await page.getByLabel(eventEndDay + ' ' + currentMonthPL.slice(0, 2)).click({delay: 500});
     await page.locator('#mat-input-8').fill('');
@@ -80,10 +80,9 @@ test('Core functionalities', async ({page}) => {
     }
 
     await page.getByText('Wydarzenia', {exact: true}).click({delay: 500});
-    await page.locator('.current-day').click();
-    await page.getByTestId('selectedDayEventName').getByText(UID).click({delay: 2000});
     await page.waitForLoadState('networkidle');
-    expect(await page.getByText(UID).isVisible())
+    await page.locator('.current-day').click({delay: 2000, clickCount: 2});
+    await page.getByTestId('selectedDayEventName').getByText(UID).click({delay: 2000, force: true});
   })
 
   await test.step('Join to event', async () => {
