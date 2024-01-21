@@ -19,7 +19,7 @@ export class GalleryDialogComponent {
 
   #imagesService = inject(ImagesService);
   #dialogRef = inject(MatDialogRef<GalleryDialogComponent>);
-  pagination = initializePagination(5);
+  pagination = initializePagination(999);
 
   get totalPages(): number {
     return Math.ceil(this.images?.length / this.pagination?.pageSize) || 1;
