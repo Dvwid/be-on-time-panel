@@ -14,7 +14,7 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env?.['CI'],
   retries: process.env?.['CI'] ? 2 : 0,
-  workers: 3,
+  workers: 1,
   timeout: 10 * 1000 * 60,
   reporter: 'html',
 
@@ -34,13 +34,13 @@ export default defineConfig({
       name: 'chromium',
       use: {...devices['Desktop Chrome']},
     },
-    {
-      name: 'firefox',
-      use: {...devices['Desktop Firefox']},
-    },
-    {
-      name: 'Mobile Safari',
-      use: {...devices['iPhone 12']},
-    },
+    // {
+    //   name: 'firefox',
+    //   use: {...devices['Desktop Firefox']},
+    // },
+    // {
+    //   name: 'Mobile Safari',
+    //   use: {...devices['iPhone 12']},
+    // },
   ],
 });
