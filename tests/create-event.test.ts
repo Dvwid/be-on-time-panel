@@ -55,15 +55,11 @@ test('Core functionalities', async ({page}) => {
     await page.locator('.mapboxgl-ctrl-geocoder--input').click({delay: 500});
     await page.locator('.mapboxgl-ctrl-geocoder--input').pressSequentially('Jana kasprowicza 5', {delay: 100});
     await page.locator('a').filter({hasText: 'Jana Kasprowicza 5 43-300'}).click({delay: 500});
-    await page.getByLabel('Nazwa', {exact: true}).click({delay: 500});
-    await page.getByLabel('Nazwa', {exact: true}).press('Control+a');
-    await page.getByLabel('Nazwa', {exact: true}).fill('');
-    await page.getByLabel('Nazwa', {exact: true}).pressSequentially('Centrum Badawczo Rozwojowe, Rekord SI', {delay: 100});
   })
 
   await test.step('Go to event image tab and select first from gallery', async () => {
     await page.getByRole('tab', {name: 'Zdjęcie wydarzenia'}).click({delay: 500});
-    await page.getByText('Kliknij tutaj i wybierz dostę').click({delay: 500});
+    await page.getByText('Kliknij tutaj').click({delay: 500});
     await page.getByRole('img').first().click({delay: 500});
   })
 
