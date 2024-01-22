@@ -5,6 +5,7 @@
     <mat-label>{{label}}</mat-label>
 
     <input matInput
+           [attr.data-testid]="dataTestId"
            [formControlName]="controlName"
            [autocomplete]="controlName"
            [placeholder]="placeholder">

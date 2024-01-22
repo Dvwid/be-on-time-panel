@@ -15,6 +15,7 @@ export class FormFieldAbstractComponent {
   @Input() placeholder: string;
   @Input() required: boolean;
   @Input() form: FormGroupDirective;
+  @Input() dataTestId: string;
 
   showError(): string {
     return getErrorMessage(this.formGroup?.controls?.[this.controlName]?.errors);

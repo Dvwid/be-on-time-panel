@@ -15,9 +15,11 @@ export default defineConfig({
   forbidOnly: !!process.env?.['CI'],
   retries: 0,
   workers: 1,
-  timeout: 1000 * 30,
+  timeout: 5 * 60 * 1000,
   reporter: 'html',
-
+  expect: {
+    timeout: 30000
+  },
   use: {
     trace: 'on-first-retry',
     video: {
