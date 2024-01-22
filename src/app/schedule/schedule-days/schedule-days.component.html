@@ -42,6 +42,7 @@
 
     <div *ngFor="let dayWithEvent of daysWithEvents"
          [class.current-day]="(dayWithEvent?.day?.getUTCMonth() === currentMonth) && (dayWithEvent?.day?.getUTCDate() === currentDay)"
+         [attr.data-testid]="(dayWithEvent?.day?.getUTCMonth() === currentMonth) && (dayWithEvent?.day?.getUTCDate() === currentDay) ? 'current-day' : 'other-day'"
          (click)="openDayInfo(dayWithEvent)"
          class="flex p-2 day-element flex-col justify-between day-with-event"
          [class.over-month]="dayWithEvent?.day?.getUTCMonth() !== selectedMonth">

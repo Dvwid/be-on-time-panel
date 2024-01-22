@@ -21,8 +21,8 @@ test('Core functionalities', async ({page}) => {
   const UID = UUID.v4();
   await test.step('Open create event form', async () => {
     await page.getByRole('button', {name: 'add Nowe wydarzenie'}).click();
-    const heading = page.getByRole('heading', {name: 'Tworzenie wydarzenia'});
-    expect(heading.isVisible());
+    const heading = await page.getByRole('heading', {name: 'Tworzenie wydarzenia'});
+    await expect(heading).toBeVisible();
   });
 
   await test.step('Fill base info tab', async () => {
@@ -66,7 +66,8 @@ test('Core functionalities', async ({page}) => {
   await test.step('Submit form and create event', async () => {
     await page.getByRole('button', {name: 'Utwórz wydarzenie'}).click({delay: 500});
     await page.waitForSelector('.message.text-gray-500');
-    expect(await page.getByText('Utworzono nowe wydarzenie').isVisible());
+    const notification = await page.getByText('Utworzono nowe wydarzenie');
+    await expect(notification).toBeVisible();
   })
 
   await test.step('Open event details from schedule', async () => {
@@ -77,20 +78,22 @@ test('Core functionalities', async ({page}) => {
 
     await page.getByText('Wydarzenia', {exact: true}).click({delay: 500});
     await page.waitForLoadState('networkidle');
-    await page.locator('.current-day').click({delay: 2000, clickCount: 2});
+    await page.getByTestId('current-day').click({delay: 2000, clickCount: 2});
     await page.getByTestId('selectedDayEventName').getByText(UID).click({delay: 2000, force: true});
   })
 
   await test.step('Join to event', async () => {
     await page.getByRole('button', {name: 'check Wezmę udział'}).click({delay: 500});
     await page.waitForSelector('.message.text-gray-500');
-    expect(page.getByText('Zmieniono deklarację udziału').isVisible());
+    const notification = await page.getByText('Zmieniono deklarację udziału');
+    await expect(notification).toBeVisible();
   })
 
   await test.step('Check user is on participant list', async () => {
     await page.getByText('Wezmą udział').click({delay: 500});
     await page.getByRole('img', {name: 'participant'}).click({delay: 500});
-    expect(await page.locator('#mat-mdc-dialog-1').getByText(userName).isVisible());
+    const participantDialogUser = await page.locator('#mat-mdc-dialog-1').getByText(userName);
+    await expect(participantDialogUser).toBeVisible();
     await page.getByRole('button', {name: 'Anuluj'}).click({delay: 500});
   })
 
