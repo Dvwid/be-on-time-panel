@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && npm run move-files",
+    "move-files": "powershell -Command \"Get-ChildItem .\\dist\\exam-panel -Recurse | Move-Item -Destination ..\\exam-api\\exam-panel -Force\"",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
