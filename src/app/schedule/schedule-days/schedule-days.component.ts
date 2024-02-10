@@ -32,6 +32,7 @@ export class ScheduleDaysComponent implements OnChanges {
 
   currentDay = new Date().getUTCDate();
   currentMonth = new Date().getUTCMonth();
+  currentYear = new Date().getFullYear();
 
   ngOnChanges(changes: SimpleChanges) {
     const wasSelectedMonthChanged = changes?.['selectedMonth']?.currentValue || changes?.['selectedMonth']?.currentValue === 0;

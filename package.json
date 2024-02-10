@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build && npm run move-files",
-    "move-files": "powershell -Command \"Get-ChildItem .\\dist\\exam-panel -Recurse | Move-Item -Destination ..\\BeActivePanel\\exam-panel -Force\"",
+    "move-files": "robocopy .\\dist\\exam-panel ..\\BeActiveApi\\dist\\exam-panel /E /MOVE",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
